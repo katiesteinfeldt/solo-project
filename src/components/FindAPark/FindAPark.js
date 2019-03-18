@@ -1,16 +1,38 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import axios from 'axios';
 
-// This is one of our simplest components
-// It doesn't have local state, so it can be a function component.
-// It doesn't dispatch any redux actions or display any part of redux state
-// or even care what the redux state is, so it doesn't need 'connect()'
+class FindAPark extends Component {
+  // Renders the entire app on the DOM
 
-const FindAPark = () => (
-  <div>
-    <p>
-      Find A Park
-    </p>
-  </div>
-);
+  componentDidMount = () => {
+    this.getParks();
+  }
 
-export default FindAPark;
+  getParks = () => {
+    axios.get('/parks')
+      .then((response) => {
+        console.log('back from server');
+        //this.props.dispatch({ type: 'SET_PARKS', payload: response.data })
+      }).catch(error => {
+        console.log('error in parks client get request', error);
+      });
+  }
+
+
+
+  render() {
+    return (
+      <div>
+      Hi
+      </div>
+    );
+  }
+}
+
+const mapReduxStateToProps = (reduxState) => {
+  return reduxState;
+}
+
+export default connect(mapReduxStateToProps)(FindAPark);
+
