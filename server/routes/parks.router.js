@@ -6,7 +6,11 @@ const axios = require('axios');
 /**
  * GET route template
  */
-let parksData 
+let parksData
+let parksList = [];
+function Park() {
+    this.fullName
+}
 
 router.get('/', (req, res) => {
     axios({
@@ -25,19 +29,26 @@ router.get('/', (req, res) => {
 });
 
 cleanData = () => {
-    console.log('in clean data', parksData);
-    let parksList = [];
     for (let i = 0; i < parksData.length; i++) {
-        const park = parksData[i];
-        if (park.designation === 'National Park' || park.designation === 'National Park & Preserve' || 
+        let park = parksData[i];
+        if (park.designation === 'National Park' || park.designation === 'National Park & Preserve' ||
             park.designation === 'National and State Parks' || park.designation === 'National Parks' || park.fullName === 'National Park of American Samoa') {
-            parksList.push(park);
+            if (park.fullName, park.name, park.description, park.latLong, park.images) {
+                parksList.push({
+                    park_full_name: park.fullName,
+                    park_name: park.name,
+                    park_description: park.description,
+                    latLong: park.latLong,
+                    image_path_1: park.images[0].url
+                })
+            }
         }
         else {
-            console.log(park.fullName);
+            console.log(parksList);
         }
     }
 }
+
 
 /**
  * POST route template

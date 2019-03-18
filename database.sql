@@ -16,7 +16,8 @@ CREATE TABLE "parks_visited" (
 
 CREATE TABLE "all_parks" (
 "id" SERIAL PRIMARY KEY,
-"park_name" VARCHAR(200),
+"park_full_name" VARCHAR(200),
+"park_name" VARCHAR(50),
 "park_description" VARCHAR(2000),
 "latLong" VARCHAR(500),
 "image_path_1" VARCHAR(200),
@@ -24,4 +25,4 @@ CREATE TABLE "all_parks" (
 "image_path_3" VARCHAR(200),
 "image_path_4" VARCHAR(200),
 "image_path_5" VARCHAR(200)
-);
+)
