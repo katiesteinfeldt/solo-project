@@ -12,8 +12,7 @@ import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
-
-import AboutPage from '../AboutPage/AboutPage';
+import ParksProfile from '../ParksProfile/ParksProfile';
 import MyParks from '../MyParks/MyParks';
 import FindAPark from '../FindAPark/FindAPark';
 
@@ -36,8 +35,8 @@ class App extends Component {
             This is a route anyone can see, no login necessary */}
             <Route
               exact
-              path="/about"
-              component={AboutPage}
+              path="/profile"
+              component={ParksProfile}
             />
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
