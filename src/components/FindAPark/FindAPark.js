@@ -13,7 +13,7 @@ class FindAPark extends Component {
     axios.get('/parks')
       .then((response) => {
         console.log('back from server');
-        //this.props.dispatch({ type: 'SET_PARKS', payload: response.data })
+        this.props.dispatch({ type: 'SET_PARKS', payload: response.data })
       }).catch(error => {
         console.log('error in parks client get request', error);
       });
