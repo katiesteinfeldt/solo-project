@@ -11,6 +11,8 @@ let parksList = [];
 let dataFetched = false;
 
 router.get('/', (req, res) => {
+    if (!dataFetched){
+        console.log('getting data from API');
     axios({
         method: 'GET',
         url: `https://developer.nps.gov/api/v1/parks?parkCode=&limit=200&q=National%20Park&fields=images`,
@@ -22,56 +24,23 @@ router.get('/', (req, res) => {
         dataFetched = true;
         cleanData(parksData);
         res.sendStatus(200);
-        if (dataFetched) {
-            postData(parksList);
-        }
+        postData(parksList);
     }).catch(error => {
         console.log('error in parks get request', error);
     });
+    }
+    else {
+        console.log('getting info from database');
+        const queryText = 'SELECT * FROM "all_parks"';
+        pool.query(queryText)
+            .then((result) => { res.send(result.rows); })
+            .catch((err) => {
+                console.log('Error completing SELECT all_parks query', err);
+                res.sendStatus(500);
+            })
+    }
 });
 
-
-// router.post('/', (req, res) => {
-//     console.log(req.body);
-//     const newProject = req.body;
-//     if (newProject.tag_id === 'React') {
-//         newProject.tag_id = 1;
-//     }
-//     else if (newProject.tag_id === 'jQuery') {
-//         newProject.tag_id = 2;
-//     }
-//     else if (newProject.tag_id === 'Node') {
-//         newProject.tag_id = 3;
-//     }
-//     else if (newProject.tag_id === 'SQL') {
-//         newProject.tag_id = 4;
-//     }
-//     else if (newProject.tag_id === 'Redux') {
-//         newProject.tag_id = 5;
-//     }
-//     else if (newProject.tag_id === 'HTML') {
-//         newProject.tag_id = 6;
-//     }
-//     else {
-//         newProject.tag_id = null;
-//     }
-//     //QUERY TEXT INTO PROJECTS DATABASE
-//     const queryText = `INSERT INTO "projects" ("name", "description", "thumbnail", "website", "github", "date_completed", "tag_id")
-//                     VALUES ($1, $2, $3, $4, $5, $6, $7)`;
-//     const queryValues = [
-//         parksList[i].park_full_name,
-//         parksList[i].park_name,
-//         parksList[i].park_description,
-//         parksList[i].latLong,
-//         parksList[i].image_path_1,
-//     ];
-//     pool.query(queryText, queryValues)
-//         .then(() => { res.sendStatus(201); })
-//         .catch((err) => {
-//             console.log('Error completing POST project query', err);
-//             res.sendStatus(500);
-//         });
-// });
 
 postData = () => {
     router.post('/', (req, res) => {
@@ -93,7 +62,6 @@ postData = () => {
             });
     })
 }
-
 
 cleanData = () => {
     for (let i = 0; i < parksData.length; i++) {
