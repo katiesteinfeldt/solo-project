@@ -31,7 +31,7 @@ router.get('/', (req, res) => {
     }
     else {
         console.log('getting info from database');
-        const queryText = 'SELECT * FROM "all_parks"';
+        const queryText = 'SELECT * FROM "all_parks" ORDER BY "park_full_name"';
         pool.query(queryText)
             .then((result) => { res.send(result.rows); })
             .catch((err) => {

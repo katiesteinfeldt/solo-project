@@ -1,4 +1,4 @@
-const parksReducer = (state = {}, action) => {
+const parksReducer = (state = [], action) => {
     switch (action.type) {
         case 'SET_PARKS':
             return action.payload;

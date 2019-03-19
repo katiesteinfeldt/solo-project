@@ -4,6 +4,15 @@ import axios from 'axios';
 
 class FindAPark extends Component {
   // Renders the entire app on the DOM
+  // state = {
+  //   park: {
+  //     park_full_name: '',
+  //     park_name: '',
+  //     park_description: '',
+  //     latLong: '',
+  //     image_path_1: ''
+  //   }
+  // }
 
   componentDidMount = () => {
     this.getParks();
@@ -12,7 +21,7 @@ class FindAPark extends Component {
   getParks = () => {
     axios.get('/parks')
       .then((response) => {
-        console.log(response);
+        this.props.dispatch({type: 'SET_PARKS', payload: response.data})
       }).catch(error => {
         console.log('error in parks client get request', error);
       });
@@ -22,12 +31,11 @@ class FindAPark extends Component {
     return (
       <div>
         <h1>Find A Park</h1>
-      <select>
-        <option>--Select Park --</option>
-        <option>Park 1</option>
-        <option>Park 2</option>
-        <option>Park 3</option>
-      </select>
+        <select>
+          {this.props.parks.map(park =>
+            <option key={park.id}>{park.park_full_name}</option>
+          )}
+        </select>
       </div>
     );
   }
