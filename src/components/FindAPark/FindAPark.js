@@ -12,19 +12,22 @@ class FindAPark extends Component {
   getParks = () => {
     axios.get('/parks')
       .then((response) => {
-        console.log('back from server');
-        this.props.dispatch({ type: 'SET_PARKS', payload: response.data })
+        console.log(response);
       }).catch(error => {
         console.log('error in parks client get request', error);
       });
   }
 
-
-
   render() {
     return (
       <div>
-      Hi
+        <h1>Find A Park</h1>
+      <select>
+        <option>--Select Park --</option>
+        <option>Park 1</option>
+        <option>Park 2</option>
+        <option>Park 3</option>
+      </select>
       </div>
     );
   }

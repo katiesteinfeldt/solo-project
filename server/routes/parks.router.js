@@ -8,9 +8,7 @@ const axios = require('axios');
  */
 let parksData
 let parksList = [];
-function Park() {
-    this.fullName
-}
+let dataFetched = false;
 
 router.get('/', (req, res) => {
     axios({
@@ -20,33 +18,37 @@ router.get('/', (req, res) => {
             api_key: process.env.NPS_API_KEY,
         }
     }).then((response) => {
-        res.send(response.data.data);
         parksData = response.data.data;
+        dataFetched = true;
         cleanData(parksData);
+        res.sendStatus(200);
+        if (dataFetched) {postData(parksList);
+        }
     }).catch(error => {
         console.log('error in parks get request', error);
     });
 });
+
+postData = () => {
+    console.log('post data is running');
+}
+
 
 cleanData = () => {
     for (let i = 0; i < parksData.length; i++) {
         let park = parksData[i];
         if (park.designation === 'National Park' || park.designation === 'National Park & Preserve' ||
             park.designation === 'National and State Parks' || park.designation === 'National Parks' || park.fullName === 'National Park of American Samoa') {
-            if (park.fullName, park.name, park.description, park.latLong, park.images) {
-                parksList.push({
-                    park_full_name: park.fullName,
-                    park_name: park.name,
-                    park_description: park.description,
-                    latLong: park.latLong,
-                    image_path_1: park.images[0].url
-                })
-            }
-        }
-        else {
-            console.log(parksList);
+            parksList.push({
+                park_full_name: park.fullName,
+                park_name: park.name,
+                park_description: park.description,
+                latLong: park.latLong,
+                image_path_1: park.images[0].url
+            })
         }
     }
+    console.log(parksList);
 }
 
 
