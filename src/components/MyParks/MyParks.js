@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import './MyParks.css';
 // LogOutButton from '../LogOutButton/LogOutButton';
 
 // this could also be written with destructuring parameters as:
@@ -33,8 +34,9 @@ class MyParks extends Component {
         {/* <LogOutButton className="log-in" /> */}
         <div>
           {this.props.parks.map(park =>
-            <div key={park.id}>
-              <div>{park.id}</div>
+            <div key={park.all_parks_id}>
+              <div>{park.park_full_name}</div>
+              <img className="parkImage" alt={park.park_description} src={park.image_path_1}/>
               <div>{park.date_visited_1}</div>
               <div>{park.date_visited_2}</div>
               <div>{park.date_visited_3}</div>
