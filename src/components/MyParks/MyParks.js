@@ -24,12 +24,14 @@ class MyParks extends Component {
 
 
   render() {
+    console.log(this.props.parks)
     return (
       <div>
         <h1 id="welcome">
           My Parks
       </h1>
         {/* <LogOutButton className="log-in" /> */}
+        {JSON.stringify(this.props.parks[0])}
       </div>
     )
   }
@@ -40,6 +42,7 @@ class MyParks extends Component {
 // const mapStateToProps = ({user}) => ({ user });
 const mapStateToProps = state => ({
   user: state.user,
+  parks: state.parks,
 });
 
 // this allows us to use <App /> in index.js
