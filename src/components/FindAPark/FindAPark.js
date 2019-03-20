@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import './FindAPark.css'
 
 class FindAPark extends Component {
 state = {
@@ -29,6 +30,9 @@ state = {
       }
     }).then((response) => {
       this.props.dispatch({ type: 'SET_CURRENT_PARK', payload: response.data})
+      this.setState({
+        parkDisplay: true,
+      })
     }).catch(error => {
       console.log('error in current park get request', error);
     });
@@ -39,6 +43,19 @@ state = {
   }
 
   render() {
+    let parkDOMDisplay
+    if (this.state.parkDisplay){
+      parkDOMDisplay = 
+      <div>
+        <h2>{this.props.currentpark[0].park_full_name}</h2>
+        <img className="parkImages" alt={this.props.currentpark[0].park_description} src={this.props.currentpark[0].image_path_1}/>
+      <div>{this.props.currentpark[0].park_description}</div>
+      </div>
+    }
+    else {
+      parkDOMDisplay = null;
+    }
+
     return (
       <div>
         <h1>Find A Park</h1>
@@ -50,7 +67,7 @@ state = {
         </select>
         <br/>
         <br />
-        {JSON.stringify(this.props.currentpark)}
+        <div>{parkDOMDisplay}</div>
       </div>
     );
   }
