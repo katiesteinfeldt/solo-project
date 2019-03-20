@@ -6,14 +6,13 @@ const axios = require('axios');
 
 router.get('/', (req, res) => {
     console.log('at server - current park', req.query.id);
-    res.sendStatus(200);
-    // pool.query(`SELECT FROM "all_parks" WHERE "id"= $1;`, [req.params.id])        
-    //         .then((result) => {
-    //         res.send(result.rows);
-    //     }).catch((error) => {
-    //         console.log('error with current park select', error);
-    //         res.sendStatus(500);
-    //     });
+    pool.query(`SELECT * FROM "all_parks" WHERE "id"= $1;`, [req.query.id])        
+            .then((result) => {
+            res.send(result.rows);
+        }).catch((error) => {
+            console.log('error with current park select', error);
+            res.sendStatus(500);
+        });
 });
 
 // app.get('/getCst/:id', function (req, res, next) {
