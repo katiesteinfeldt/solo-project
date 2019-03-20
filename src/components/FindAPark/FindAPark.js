@@ -3,16 +3,9 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 
 class FindAPark extends Component {
-  // Renders the entire app on the DOM
-  // state = {
-  //   park: {
-  //     park_full_name: '',
-  //     park_name: '',
-  //     park_description: '',
-  //     latLong: '',
-  //     image_path_1: ''
-  //   }
-  // }
+state = {
+  currentPark: '',
+}
 
   componentDidMount = () => {
     this.getParks();
@@ -27,15 +20,26 @@ class FindAPark extends Component {
       });
   }
 
+  handleParkChange = event => {
+    console.log('handle park change running', event.target.value);
+    this.setState({
+      currentPark: event.target.value,
+    })
+  }
+
   render() {
     return (
       <div>
         <h1>Find A Park</h1>
-        <select>
+        <select onChange={this.handleParkChange}>
+          <option>--Find A Park--</option>
           {this.props.parks.map(park =>
             <option key={park.id}>{park.park_full_name}</option>
           )}
         </select>
+        <br/>
+        <pre></pre>
+        {this.state.currentPark}
       </div>
     );
   }
