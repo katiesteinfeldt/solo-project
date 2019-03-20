@@ -5,6 +5,7 @@ import axios from 'axios';
 class FindAPark extends Component {
 state = {
   currentPark: '',
+  parkDisplay: false,
 }
 
   componentDidMount = () => {
@@ -22,9 +23,19 @@ state = {
 
   handleParkChange = event => {
     console.log('handle park change running', event.target.value);
-    this.setState({
-      currentPark: event.target.value,
-    })
+    axios.get('/currentpark/', {
+      params: {
+        id: event.target.value,
+      }
+    }).then((response) => {
+      console.log(response);
+    }).catch(error => {
+      console.log('error in current park get request', error);
+    });
+    // this.setState({
+    //   currentPark: event.target.value,
+    //   parkDisplay: true,
+    // })
   }
 
   render() {
