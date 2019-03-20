@@ -42,6 +42,10 @@ state = {
     // })
   }
 
+  addToMyParks = () => {
+    console.log('button clicked');
+  }
+
   render() {
     let parkDOMDisplay
     if (this.state.parkDisplay){
@@ -50,6 +54,7 @@ state = {
         <h2>{this.props.currentpark[0].park_full_name}</h2>
         <img className="parkImages" alt={this.props.currentpark[0].park_description} src={this.props.currentpark[0].image_path_1}/>
       <div>{this.props.currentpark[0].park_description}</div>
+      <button onClick={this.addToMyParks}>Mark As Visited</button>
       </div>
     }
     else {
