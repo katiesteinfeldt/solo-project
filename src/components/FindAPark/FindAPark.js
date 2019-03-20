@@ -28,7 +28,7 @@ state = {
         id: event.target.value,
       }
     }).then((response) => {
-      console.log(response);
+      this.props.dispatch({ type: 'SET_CURRENT_PARK', payload: response.data})
     }).catch(error => {
       console.log('error in current park get request', error);
     });
@@ -49,8 +49,8 @@ state = {
           )}
         </select>
         <br/>
-        <pre></pre>
-        {this.state.currentPark}
+        <br />
+        {JSON.stringify(this.props.currentpark)}
       </div>
     );
   }

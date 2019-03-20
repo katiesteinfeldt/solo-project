@@ -15,8 +15,4 @@ router.get('/', (req, res) => {
         });
 });
 
-// app.get('/getCst/:id', function (req, res, next) {
-
-//     var id = req.params.id;
-// });
 module.exports = router;
