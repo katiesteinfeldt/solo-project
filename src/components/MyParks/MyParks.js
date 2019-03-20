@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import axios from 'axios';
 // LogOutButton from '../LogOutButton/LogOutButton';
 
 // this could also be written with destructuring parameters as:
@@ -13,7 +14,12 @@ class MyParks extends Component {
   }
   
   getMyParks = () => {
-    console.log('getting parks');
+    axios.get('/myparks')
+      .then((response) => {
+        this.props.dispatch({ type: 'SET_MY_PARKS', payload: response.data })
+      }).catch(error => {
+        console.log('error in my parks client get request', error);
+      });
   }
 
 
