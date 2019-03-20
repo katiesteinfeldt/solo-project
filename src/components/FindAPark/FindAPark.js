@@ -4,15 +4,16 @@ import axios from 'axios';
 import './FindAPark.css'
 
 class FindAPark extends Component {
-state = {
-  currentPark: '',
-  parkDisplay: false,
-  addParkDisplay: false,
-  newPark: {
-    date_visited: '2019-03-01',
-    parkNotes: '',
+  state = {
+    currentPark: '',
+    parkDisplay: false,
+    addParkDisplay: false,
+    newPark: {
+      date_visited: '2019-03-01',
+      parkNotes: '',
+    },
+    parkSubmitted: false,
   }
-}
 
   componentDidMount = () => {
     this.getParks();
@@ -21,7 +22,7 @@ state = {
   getParks = () => {
     axios.get('/parks')
       .then((response) => {
-        this.props.dispatch({type: 'SET_PARKS', payload: response.data})
+        this.props.dispatch({ type: 'SET_PARKS', payload: response.data })
       }).catch(error => {
         console.log('error in parks client get request', error);
       });
@@ -34,7 +35,7 @@ state = {
         id: event.target.value,
       }
     }).then((response) => {
-      this.props.dispatch({ type: 'SET_CURRENT_PARK', payload: response.data})
+      this.props.dispatch({ type: 'SET_CURRENT_PARK', payload: response.data })
       this.setState({
         parkDisplay: true,
       })
@@ -57,35 +58,36 @@ state = {
   // sets local state to input values
   handleChangeFor = (propertyName) => (event) => {
     this.setState({
-      newPark:{
-      ...this.state.newPark,
-      [propertyName]: event.target.value,
+      newPark: {
+        ...this.state.newPark,
+        [propertyName]: event.target.value,
       }
     });
   }
 
-  savePark = () => {
+  addPark = () => {
     console.log('ADD SERVER STUFF HERE');
     this.setState({
-      //currentPark: '',
-      //parkDisplay: false,
       addParkDisplay: false,
-      dateVisited: '',
-      parkNotes: '',
+      parkSubmitted: true,
+      newPark: {
+        dateVisited: '2019-03-01',
+        parkNotes: '',
+      }
     })
   }
 
   render() {
     let parkDOMDisplay
     let addParkDOMDisplay
-    if (this.state.parkDisplay){
-      parkDOMDisplay = 
-      <div>
-        <h2>{this.props.currentpark[0].park_full_name}</h2>
-        <img className="parkImages" alt={this.props.currentpark[0].park_description} src={this.props.currentpark[0].image_path_1}/>
-      <div>{this.props.currentpark[0].park_description}</div>
-      <button onClick={this.addToMyParks}>Mark As Visited</button>
-      </div>
+    if (this.state.parkDisplay) {
+      parkDOMDisplay =
+        <div>
+          <h2>{this.props.currentpark[0].park_full_name}</h2>
+          <img className="parkImages" alt={this.props.currentpark[0].park_description} src={this.props.currentpark[0].image_path_1} />
+          <div>{this.props.currentpark[0].park_description}</div>
+          <button onClick={this.addToMyParks}>Add Visit</button>
+        </div>
     }
     else {
       parkDOMDisplay = null;
@@ -94,18 +96,30 @@ state = {
     if (this.state.addParkDisplay) {
       addParkDOMDisplay =
         <div>
-          <h2>Add New Park</h2>
-        <input value={this.state.newPark.date_visited} onChange={this.handleChangeFor('date_visited')} type="date"></input>
+          <h2>Add New Park Visit</h2>
+          <input value={this.state.newPark.date_visited} onChange={this.handleChangeFor('date_visited')} type="date"></input>
           <input value={this.state.newPark.parkNotes} onChange={this.handleChangeFor('parkNotes')} placeholder="notes"></input>
-          <button onClick={this.savePark}>Add Park</button>
+          <button onClick={this.addPark}>Add Park</button>
         </div>
     }
     else {
       addParkDOMDisplay = null;
     }
 
+    let parkSubmitted
+    if (this.state.parkSubmitted){
+      parkSubmitted = <h1>Success!</h1>
+    }
+    else {
+      parkSubmitted = null;
+    }
+
+
     return (
       <div>
+        <br />
+        <br />
+        <div>{parkSubmitted}</div>
         <h1>Find A Park</h1>
         <select onChange={this.handleParkChange}>
           <option>--Find A Park--</option>
@@ -113,7 +127,7 @@ state = {
             <option value={park.id} key={park.id}>{park.park_full_name}</option>
           )}
         </select>
-        <br/>
+        <br />
         <br />
         <div>{parkDOMDisplay}</div>
         <br />
