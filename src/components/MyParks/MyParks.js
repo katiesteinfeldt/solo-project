@@ -8,11 +8,11 @@ import axios from 'axios';
 // and then instead of `props.user.username` you could use `user.username`
 
 class MyParks extends Component {
-  
+
   componentDidMount = () => {
     this.getMyParks();
   }
-  
+
   getMyParks = () => {
     axios.get('/myparks')
       .then((response) => {
@@ -31,7 +31,17 @@ class MyParks extends Component {
           My Parks
       </h1>
         {/* <LogOutButton className="log-in" /> */}
-        {JSON.stringify(this.props.parks[0])}
+        <div>
+          {this.props.parks.map(park =>
+            <div key={park.id}>
+              <div>{park.id}</div>
+              <div>{park.date_visited_1}</div>
+              <div>{park.date_visited_2}</div>
+              <div>{park.date_visited_3}</div>
+              <div>{park.notes}</div>
+            </div>
+          )}
+        </div>
       </div>
     )
   }
