@@ -5,12 +5,12 @@ import './FindAPark.css'
 
 class FindAPark extends Component {
   state = {
-    currentPark: '',
     parkDisplay: false,
     addParkDisplay: false,
     newPark: {
       date_visited: '2019-03-01',
       parkNotes: '',
+      currentPark: this.props.currentpark.id,
     },
     parkSubmitted: false,
   }
