@@ -19,7 +19,8 @@ router.get('/', (req, res) => {
  * POST route template
  */
 router.post('/', (req, res) => {
-   
+   console.log('at current park post route', req.body);
+   res.sendStatus(200);
 });
 
 module.exports = router;

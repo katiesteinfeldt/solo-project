@@ -8,9 +8,12 @@ class FindAPark extends Component {
     parkDisplay: false,
     addParkDisplay: false,
     newPark: {
-      date_visited: '2019-03-01',
-      parkNotes: '',
-      currentPark: this.props.currentpark.id,
+      user_id: this.props.user.id,
+      park_id: 0,
+      date_visited_1: '2019-03-01',
+      date_visited_2: '',
+      date_visited_3: '',
+      notes: '',
     },
     parkSubmitted: false,
   }
@@ -37,6 +40,7 @@ class FindAPark extends Component {
     }).then((response) => {
       this.props.dispatch({ type: 'SET_CURRENT_PARK', payload: response.data })
       this.setState({
+        park_id: this.props.currentpark.id,
         parkDisplay: true,
       })
     }).catch(error => {
@@ -48,7 +52,8 @@ class FindAPark extends Component {
     // })
   }
 
-  addToMyParks = () => {
+  //displays new park fields on the DOM when the function runs
+  addVisit = () => {
     console.log('button clicked');
     this.setState({
       addParkDisplay: true,
@@ -65,15 +70,12 @@ class FindAPark extends Component {
     });
   }
 
+  //add park to parks_visited database 
   addPark = () => {
     console.log('ADD SERVER STUFF HERE');
-    this.setState({
-      addParkDisplay: false,
-      parkSubmitted: true,
-      newPark: {
-        dateVisited: '2019-03-01',
-        parkNotes: '',
-      }
+    axios.post('/currentpark', this.state.newPark)
+    .then((response) => {
+      console.log(response);
     })
   }
 
@@ -86,7 +88,7 @@ class FindAPark extends Component {
           <h2>{this.props.currentpark[0].park_full_name}</h2>
           <img className="parkImages" alt={this.props.currentpark[0].park_description} src={this.props.currentpark[0].image_path_1} />
           <div>{this.props.currentpark[0].park_description}</div>
-          <button onClick={this.addToMyParks}>Add Visit</button>
+          <button onClick={this.addVisit}>Add Visit</button>
         </div>
     }
     else {
@@ -97,8 +99,8 @@ class FindAPark extends Component {
       addParkDOMDisplay =
         <div>
           <h2>Add New Park Visit</h2>
-          <input value={this.state.newPark.date_visited} onChange={this.handleChangeFor('date_visited')} type="date"></input>
-          <input value={this.state.newPark.parkNotes} onChange={this.handleChangeFor('parkNotes')} placeholder="notes"></input>
+          <input value={this.state.newPark.date_visited_1} onChange={this.handleChangeFor('date_visited_1')} type="date"></input>
+          <input value={this.state.newPark.notes} onChange={this.handleChangeFor('notes')} placeholder="notes"></input>
           <button onClick={this.addPark}>Add Park</button>
         </div>
     }
