@@ -81,11 +81,4 @@ cleanData = () => {
 }
 
 
-/**
- * POST route template
- */
-router.post('/', (req, res) => {
-
-});
-
 module.exports = router;

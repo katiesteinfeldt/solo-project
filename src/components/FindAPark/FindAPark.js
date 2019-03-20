@@ -7,6 +7,7 @@ class FindAPark extends Component {
 state = {
   currentPark: '',
   parkDisplay: false,
+  addParkDisplay: false,
 }
 
   componentDidMount = () => {
@@ -44,10 +45,14 @@ state = {
 
   addToMyParks = () => {
     console.log('button clicked');
+    this.setState({
+      addParkDisplay: true,
+    })
   }
 
   render() {
     let parkDOMDisplay
+    let addParkDOMDisplay
     if (this.state.parkDisplay){
       parkDOMDisplay = 
       <div>
@@ -59,6 +64,19 @@ state = {
     }
     else {
       parkDOMDisplay = null;
+    }
+
+    if (this.state.addParkDisplay) {
+      addParkDOMDisplay =
+        <div>
+          <h2>Add New Park</h2>
+          <input type="date"></input>
+          <input placeholder="notes"></input>
+          <button>Add Park</button>
+        </div>
+    }
+    else {
+      addParkDOMDisplay = null;
     }
 
     return (
@@ -73,6 +91,9 @@ state = {
         <br/>
         <br />
         <div>{parkDOMDisplay}</div>
+        <br />
+        <br />
+        <div>{addParkDOMDisplay}</div>
       </div>
     );
   }
