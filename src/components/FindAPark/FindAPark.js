@@ -8,6 +8,10 @@ state = {
   currentPark: '',
   parkDisplay: false,
   addParkDisplay: false,
+  newPark: {
+    date_visited: '2019-03-01',
+    parkNotes: '',
+  }
 }
 
   componentDidMount = () => {
@@ -50,6 +54,27 @@ state = {
     })
   }
 
+  // sets local state to input values
+  handleChangeFor = (propertyName) => (event) => {
+    this.setState({
+      newPark:{
+      ...this.state.newPark,
+      [propertyName]: event.target.value,
+      }
+    });
+  }
+
+  savePark = () => {
+    console.log('ADD SERVER STUFF HERE');
+    this.setState({
+      //currentPark: '',
+      //parkDisplay: false,
+      addParkDisplay: false,
+      dateVisited: '',
+      parkNotes: '',
+    })
+  }
+
   render() {
     let parkDOMDisplay
     let addParkDOMDisplay
@@ -70,9 +95,9 @@ state = {
       addParkDOMDisplay =
         <div>
           <h2>Add New Park</h2>
-          <input type="date"></input>
-          <input placeholder="notes"></input>
-          <button>Add Park</button>
+        <input value={this.state.newPark.date_visited} onChange={this.handleChangeFor('date_visited')} type="date"></input>
+          <input value={this.state.newPark.parkNotes} onChange={this.handleChangeFor('parkNotes')} placeholder="notes"></input>
+          <button onClick={this.savePark}>Add Park</button>
         </div>
     }
     else {
