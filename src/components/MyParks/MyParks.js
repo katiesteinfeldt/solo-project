@@ -32,6 +32,11 @@ class MyParks extends Component {
     })
   }
 
+  //this will delete park from the database 
+  deletePark = () => {
+    console.log('delete was clicked')
+  }
+
   render() {
     let parkDisplay;
     if (this.state.displayParkInfo) {
@@ -55,6 +60,9 @@ class MyParks extends Component {
               <div>{park.date_visited_2}</div>
               <div>{park.date_visited_3}</div>
               <div>{park.notes}</div>
+              <button>Update</button>
+              <button onClick={this.deletePark}>Delete</button>
+              {/* <button>Add Visit</button> */}
             </div>
           )}
         </div>
