@@ -7,6 +7,8 @@ import Grid from '@material-ui/core/Grid';
 import { CardContent, CardActions, Divider } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
+import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
 
 // LogOutButton from '../LogOutButton/LogOutButton';
 
@@ -24,8 +26,10 @@ const styles = theme => ({
     outline: 'none',
   },
   card: {
-    
-  }
+    minWidth: 275,
+    maxWidth: 350,
+    margin: 22,
+  },
 });
 
 function rand() {
@@ -93,18 +97,19 @@ class MyParks extends Component {
 
   createMyParks = () => {
     return this.props.parks.map(park =>
-      <Card className={this.props.classes.card} key={park.all_parks_id}><h3>{park.park_full_name}</h3>
+      <Card className={this.props.classes.card} key={park.all_parks_id}><Typography variant="h4">{park.park_full_name}</Typography>
         <Divider />
         <CardContent>
         <img onClick={this.displayParkInfo(park.all_parks_id)} alt={park.park_description} src={park.image_path_1} />
         <pre></pre>
-        Date Visited: {park.date_visited_1}
+          <Typography>Date Visited: {park.date_visited_1}</Typography>
         <pre></pre>
-        Notes: {park.notes}
+          <Typography>Notes: {park.notes}</Typography>
         </CardContent>
+        <Divider />
         <CardActions>
         {/* <button>Update</button> */}
-        <button onClick={this.deletePark(park.parks_visited_id)}>Delete</button>
+        <Button onClick={this.deletePark(park.parks_visited_id)}>Delete From My Parks</Button>
         <pre></pre>
         </CardActions>
       </Card>
@@ -130,9 +135,9 @@ closeParkDisplay = () => {
             open={this.state.open}
             onClose={this.closeParkDisplay}>
           <div style={getModalStyle()} className={classes.paper}>
-          <h3>{this.props.parkdisplay[0].park_full_name}</h3>
+          <Typography variant="h4" id="modal-title">{this.props.parkdisplay[0].park_full_name}</Typography>
           <pre></pre>
-          {this.props.parkdisplay[0].park_description}
+          <Typography>{this.props.parkdisplay[0].park_description}</Typography>
           <pre></pre>
           <img alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1}/>
           <pre></pre>
@@ -147,9 +152,9 @@ closeParkDisplay = () => {
     }
     return (
       <Grid>
-        <h1 id="welcome">
+        <Typography variant="h3">
           My Parks
-      </h1>
+      </Typography>
         {/* <LogOutButton className="log-in" /> */}
         <div>
           {this.createMyParks()}
