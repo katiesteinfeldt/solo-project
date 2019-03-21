@@ -74,15 +74,15 @@ class MyParks extends Component {
 
 
   render() {
-    let parkDisplay;
+    let currentParkDisplay;
     if (this.state.displayParkInfo) {
-      parkDisplay = <div>
+      currentParkDisplay = <div>
         <h2>Park To Display!</h2>
         {this.state.currentPark}
         </div>;
     }
     else {
-      parkDisplay = null;
+      currentParkDisplay = null;
     }
     return (
       <div>
@@ -93,7 +93,7 @@ class MyParks extends Component {
         <div>
           {this.createMyParks()}
         </div>
-        {parkDisplay}
+        {currentParkDisplay}
       </div>
     )
   }
