@@ -79,6 +79,11 @@ class FindAPark extends Component {
     })
   }
 
+  //view more information about park when image is clicked on
+  viewParkInfo = () => {
+    console.log('image clicked');
+  }
+
   render() {
     let parkDOMDisplay
     let addParkDOMDisplay
@@ -86,7 +91,7 @@ class FindAPark extends Component {
       parkDOMDisplay =
         <div>
           <h2>{this.props.currentpark[0].park_full_name}</h2>
-          <img className="parkImages" alt={this.props.currentpark[0].park_description} src={this.props.currentpark[0].image_path_1} />
+          <img onClick={this.viewParkInfo} className="parkImages" alt={this.props.currentpark[0].park_description} src={this.props.currentpark[0].image_path_1} />
           <div>{this.props.currentpark[0].park_description}</div>
           <button onClick={this.addVisit}>Add Visit</button>
         </div>
