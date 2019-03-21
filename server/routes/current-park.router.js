@@ -26,13 +26,23 @@ router.get('/:id', (req, res) => {
         });
 });
 
-
-/**
- * POST route template
- */
 router.post('/:id', (req, res) => {
    console.log('at current park post route', req.body);
-   res.sendStatus(200);
+    const newPark = req.body;
+    const queryText = `INSERT INTO "parks_visited" ("user_id", "park_id", "date_visited_1", "notes")
+                    VALUES ($1, $2, $3, $4)`;
+    const queryValues = [
+        newPark.user_id,
+        newPark.park_id,
+        newPark.date_visited_1,
+        newPark.notes,
+    ];
+    pool.query(queryText, queryValues)
+        .then(() => { res.sendStatus(201); })
+        .catch((err) => {
+            console.log('Error completing POST park query', err);
+            res.sendStatus(500);
+        });
 });
 
 module.exports = router;
