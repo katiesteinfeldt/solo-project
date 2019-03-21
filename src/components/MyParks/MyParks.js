@@ -11,6 +11,7 @@ import './MyParks.css';
 class MyParks extends Component {
   state = {
     displayParkInfo: false,
+    currentPark: 0
   }
 
   componentDidMount = () => {
@@ -26,11 +27,16 @@ class MyParks extends Component {
       });
   }
 
-  displayParkInfo = () => {
+  displayParkInfo = (parks_visited_id) => {
+    return () => {
+    console.log('displayParkInfo running', parks_visited_id)
     this.setState({
       displayParkInfo: true,
+      currentPark: parks_visited_id,
     })
   }
+  }
+
 
   //this will delete park from the database 
   deletePark = (parks_visited_id) => {
@@ -54,12 +60,12 @@ class MyParks extends Component {
   createMyParks = () => {
     return this.props.parks.map(park =>
       <div key={park.all_parks_id}><h3>{park.park_full_name}</h3>
-        <img onClick={this.displayParkInfo} className="parkImage" alt={park.park_description} src={park.image_path_1} />
+        <img onClick={this.displayParkInfo(park.all_parks_id)} className="parkImage" alt={park.park_description} src={park.image_path_1} />
         <pre></pre>
         Date Visited: {park.date_visited_1}
         <pre></pre>
         Notes: {park.notes}
-        <button>Update</button>
+        {/* <button>Update</button> */}
         <button onClick={this.deletePark(park.parks_visited_id)}>Delete</button>
         <pre></pre>
       </div>
@@ -70,7 +76,10 @@ class MyParks extends Component {
   render() {
     let parkDisplay;
     if (this.state.displayParkInfo) {
-      parkDisplay = <div><h2>Park To Display!</h2></div>;
+      parkDisplay = <div>
+        <h2>Park To Display!</h2>
+        {this.state.currentPark}
+        </div>;
     }
     else {
       parkDisplay = null;
