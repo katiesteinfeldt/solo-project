@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import './MyParks.css';
 import Card from '@material-ui/core/Card';
-import Grid from '@material-ui/core/Grid';
 import { CardContent, CardActions, Divider } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
@@ -29,6 +28,10 @@ const styles = theme => ({
     minWidth: 275,
     maxWidth: 350,
     margin: 22,
+  },
+  cardTitle: {
+    padding: 15,
+    textAlign: 'center',
   },
 });
 
@@ -97,7 +100,7 @@ class MyParks extends Component {
 
   createMyParks = () => {
     return this.props.parks.map(park =>
-      <Card className={this.props.classes.card} key={park.all_parks_id}><Typography variant="h4">{park.park_full_name}</Typography>
+      <Card className={this.props.classes.card} key={park.all_parks_id}><Typography className={this.props.classes.cardTitle} variant="h4">{park.park_full_name}</Typography>
         <Divider />
         <CardContent>
         <img onClick={this.displayParkInfo(park.all_parks_id)} alt={park.park_description} src={park.image_path_1} />
@@ -141,7 +144,7 @@ closeParkDisplay = () => {
           <pre></pre>
           <img alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1}/>
           <pre></pre>
-          <button onClick={this.closeParkDisplay}>OK</button>
+          <Button onClick={this.closeParkDisplay}>OK</Button>
           </div>
         </Modal>
         }
@@ -151,7 +154,7 @@ closeParkDisplay = () => {
       currentParkDisplay = null;
     }
     return (
-      <Grid>
+      <div>
         <Typography variant="h3">
           My Parks
       </Typography>
@@ -160,7 +163,7 @@ closeParkDisplay = () => {
           {this.createMyParks()}
         </div>
         {currentParkDisplay}
-      </Grid>
+      </div>
     )
   }
 }
