@@ -53,14 +53,15 @@ class MyParks extends Component {
 
   createMyParks = () => {
     return this.props.parks.map(park =>
-      <div key={park.all_parks_id}><div>{park.park_full_name}</div>
+      <div key={park.all_parks_id}><h3>{park.park_full_name}</h3>
         <img onClick={this.displayParkInfo} className="parkImage" alt={park.park_description} src={park.image_path_1} />
-        <div>{park.date_visited_1}</div>
-        <div>{park.date_visited_2}</div>
-        <div>{park.date_visited_3}</div>
-        <div>{park.notes}</div>
+        <pre></pre>
+        Date Visited: {park.date_visited_1}
+        <pre></pre>
+        Notes: {park.notes}
         <button>Update</button>
-        <div><button onClick={this.deletePark(park.parks_visited_id)}>Delete</button></div>
+        <button onClick={this.deletePark(park.parks_visited_id)}>Delete</button>
+        <pre></pre>
       </div>
     )
   }
