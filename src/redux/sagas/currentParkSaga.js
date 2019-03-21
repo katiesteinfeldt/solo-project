@@ -4,7 +4,7 @@ import axios from 'axios';
 function* fetchCurrentPark(action) {
     try {
         const getParkResponse = yield axios.get('/currentpark/' + action.payload);
-        yield dispatch({ type: '', payload: getParkResponse.data });
+        yield dispatch({ type: 'DISPLAY_CURRENT_PARK', payload: getParkResponse.data });
     }
     catch (error) {
         console.log('error with fetching current park from the server', error);

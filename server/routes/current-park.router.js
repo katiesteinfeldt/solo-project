@@ -17,7 +17,13 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
     console.log('at current park get request/server', req.params.id);
-    res.sendStatus(200);
+    pool.query(`SELECT * FROM "all_parks" WHERE "id"= $1;`, [req.params.id])
+        .then((result) => {
+            res.send(result.rows);
+        }).catch((error) => {
+            console.log('error with current park select', error);
+            res.sendStatus(500);
+        });
 });
 
 

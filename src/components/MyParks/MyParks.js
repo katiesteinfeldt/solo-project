@@ -105,6 +105,7 @@ class MyParks extends Component {
 const mapStateToProps = state => ({
   user: state.user,
   parks: state.parks,
+  parkdisplay: state.parkdisplay,
 });
 
 // this allows us to use <App /> in index.js
