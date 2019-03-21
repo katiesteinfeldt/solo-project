@@ -3,3 +3,8 @@ img {
     max-width: 300px;
     max-height: 300px;
 }
+
+.container {
+  display: flex;
+  flex-flow: wrap;
+}

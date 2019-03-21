@@ -159,7 +159,7 @@ closeParkDisplay = () => {
           My Parks
       </Typography>
         {/* <LogOutButton className="log-in" /> */}
-        <div>
+        <div className="container">
           {this.createMyParks()}
         </div>
         {currentParkDisplay}
