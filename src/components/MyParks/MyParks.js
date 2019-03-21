@@ -33,11 +33,22 @@ class MyParks extends Component {
   }
 
   //this will delete park from the database 
-  deletePark = (all_parks_id) => {
+  deletePark = (parks_visited_id) => {
     return () => {
-      console.log('delete was clicked', all_parks_id);
+      console.log('delete was clicked', parks_visited_id);
+      const r = window.confirm("Are you sure you want to delete this park?");
+      if (r === true) {
+        axios({
+          method: 'DELETE',
+          url: '/myparks/' + parks_visited_id,
+        }).then((response) => {
+          this.getMyParks();
+        });
+      }
+      else {
+        window.alert("Feedback saved");
+      }
     }
-    
   }
 
   createMyParks = () => {
@@ -49,8 +60,7 @@ class MyParks extends Component {
         <div>{park.date_visited_3}</div>
         <div>{park.notes}</div>
         <button>Update</button>
-        <div><button onClick={this.deletePark(park.all_parks_id)}>Delete</button></div>
-        {/* <div><button onClick={this.deletePark(park.all_parks_id)}></button></div> */}
+        <div><button onClick={this.deletePark(park.parks_visited_id)}>Delete</button></div>
       </div>
     )
   }
@@ -71,19 +81,7 @@ class MyParks extends Component {
       </h1>
         {/* <LogOutButton className="log-in" /> */}
         <div>
-          {/* {this.props.parks.map(park =>
-            <div key={park.all_parks_id}>
-              <div>{park.park_full_name}</div>
-              <img onClick={this.displayParkInfo} className="parkImage" alt={park.park_description} src={park.image_path_1} />
-              <div>{park.date_visited_1}</div>
-              <div>{park.date_visited_2}</div>
-              <div>{park.date_visited_3}</div>
-              <div>{park.notes}</div>
-              <button>Update</button>
-              <button onClick={this.deletePark}>Delete</button>
-            </div>
-          )} */}
-        {this.createMyParks()}
+          {this.createMyParks()}
         </div>
         {parkDisplay}
       </div>
