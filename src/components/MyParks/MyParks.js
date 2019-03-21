@@ -33,9 +33,28 @@ class MyParks extends Component {
   }
 
   //this will delete park from the database 
-  deletePark = () => {
-    console.log('delete was clicked')
+  deletePark = (all_parks_id) => {
+    return () => {
+      console.log('delete was clicked', all_parks_id);
+    }
+    
   }
+
+  createMyParks = () => {
+    return this.props.parks.map(park =>
+      <div key={park.all_parks_id}><div>{park.park_full_name}</div>
+        <img onClick={this.displayParkInfo} className="parkImage" alt={park.park_description} src={park.image_path_1} />
+        <div>{park.date_visited_1}</div>
+        <div>{park.date_visited_2}</div>
+        <div>{park.date_visited_3}</div>
+        <div>{park.notes}</div>
+        <button>Update</button>
+        <div><button onClick={this.deletePark(park.all_parks_id)}>Delete</button></div>
+        {/* <div><button onClick={this.deletePark(park.all_parks_id)}></button></div> */}
+      </div>
+    )
+  }
+
 
   render() {
     let parkDisplay;
@@ -52,7 +71,7 @@ class MyParks extends Component {
       </h1>
         {/* <LogOutButton className="log-in" /> */}
         <div>
-          {this.props.parks.map(park =>
+          {/* {this.props.parks.map(park =>
             <div key={park.all_parks_id}>
               <div>{park.park_full_name}</div>
               <img onClick={this.displayParkInfo} className="parkImage" alt={park.park_description} src={park.image_path_1} />
@@ -62,9 +81,9 @@ class MyParks extends Component {
               <div>{park.notes}</div>
               <button>Update</button>
               <button onClick={this.deletePark}>Delete</button>
-              {/* <button>Add Visit</button> */}
             </div>
-          )}
+          )} */}
+        {this.createMyParks()}
         </div>
         {parkDisplay}
       </div>
