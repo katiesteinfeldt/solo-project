@@ -30,7 +30,7 @@ router.get('/:id', (req, res) => {
 /**
  * POST route template
  */
-router.post('/', (req, res) => {
+router.post('/:id', (req, res) => {
    console.log('at current park post route', req.body);
    res.sendStatus(200);
 });

@@ -8,8 +8,8 @@ class FindAPark extends Component {
     parkDisplay: false,
     addParkDisplay: false,
     newPark: {
-      user_id: this.props.user.id,
       park_id: 0,
+      user_id: this.props.user.id,
       date_visited_1: '2019-03-01',
       date_visited_2: '',
       date_visited_3: '',
@@ -54,7 +54,7 @@ class FindAPark extends Component {
 
   //displays new park fields on the DOM when the function runs
   addVisit = () => {
-    console.log('button clicked');
+    console.log('button clicked', this.props.currentpark[0].id);
     this.setState({
       addParkDisplay: true,
     })
@@ -72,8 +72,17 @@ class FindAPark extends Component {
 
   //add park to parks_visited database 
   addPark = () => {
-    console.log('ADD SERVER STUFF HERE');
-    axios.post('/currentpark', this.state.newPark)
+    console.log('ADD SERVER STUFF HERE', this.props.currentpark[0].id);
+    axios({
+      method: 'POST',
+      url: '/currentpark/' + this.props.currentpark[0].id,
+      data: {
+        user_id: this.state.newPark.user_id,
+        date_visited_1: this.state.newPark.date_visited_1,
+        notes: this.state.newPark.notes,
+        park_id: this.props.currentpark[0].id,
+      }
+    })
     .then((response) => {
       console.log(response);
     })
