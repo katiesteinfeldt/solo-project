@@ -6,13 +6,13 @@ import Card from '@material-ui/core/Card';
 import { CardContent, CardActions, Divider } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 //import Modal from '@material-ui/core/Modal';
-//import Typography from '@material-ui/core/Typography';
+import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
   card: {
     minWidth: 275,
-    maxWidth: 600,
+    maxWidth: 800,
     margin: 22,
   },
   cardTitle: {
@@ -129,10 +129,10 @@ class FindAPark extends Component {
       parkDOMDisplay =
         <Card className={this.props.classes.card}>
           <CardContent>
-          <h2>{this.props.currentpark[0].park_full_name}</h2>
+          <Typography className={this.props.classes.cardTitle} variant="h4">{this.props.currentpark[0].park_full_name}</Typography>
           <Divider />
           <img onClick={this.viewParkInfo} className="parkImages" alt={this.props.currentpark[0].park_description} src={this.props.currentpark[0].image_path_1} />
-          <div>{this.props.currentpark[0].park_description}</div>
+          <Typography variant="h6">{this.props.currentpark[0].park_description}</Typography>
         </CardContent>
         <CardActions>
           <Button onClick={this.addVisit}>Add Visit</Button>
