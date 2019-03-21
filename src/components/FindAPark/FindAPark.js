@@ -1,7 +1,25 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
-import './FindAPark.css'
+import './FindAPark.css';
+import Card from '@material-ui/core/Card';
+import { CardContent, CardActions, Divider } from '@material-ui/core';
+import { withStyles } from '@material-ui/core/styles';
+//import Modal from '@material-ui/core/Modal';
+//import Typography from '@material-ui/core/Typography';
+import Button from '@material-ui/core/Button';
+
+const styles = theme => ({
+  card: {
+    minWidth: 275,
+    maxWidth: 600,
+    margin: 22,
+  },
+  cardTitle: {
+    padding: 15,
+    textAlign: 'center',
+  },
+});
 
 class FindAPark extends Component {
   state = {
@@ -109,12 +127,17 @@ class FindAPark extends Component {
     let addParkDOMDisplay
     if (this.state.parkDisplay) {
       parkDOMDisplay =
-        <div>
+        <Card className={this.props.classes.card}>
+          <CardContent>
           <h2>{this.props.currentpark[0].park_full_name}</h2>
+          <Divider />
           <img onClick={this.viewParkInfo} className="parkImages" alt={this.props.currentpark[0].park_description} src={this.props.currentpark[0].image_path_1} />
           <div>{this.props.currentpark[0].park_description}</div>
-          <button onClick={this.addVisit}>Add Visit</button>
-        </div>
+        </CardContent>
+        <CardActions>
+          <Button onClick={this.addVisit}>Add Visit</Button>
+        </CardActions>
+        </Card>
     }
     else {
       parkDOMDisplay = null;
@@ -189,5 +212,4 @@ const mapReduxStateToProps = (reduxState) => {
   return reduxState;
 }
 
-export default connect(mapReduxStateToProps)(FindAPark);
-
+export default withStyles(styles)(connect(mapReduxStateToProps)(FindAPark));
