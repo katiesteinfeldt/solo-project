@@ -9,6 +9,9 @@ import './MyParks.css';
 // and then instead of `props.user.username` you could use `user.username`
 
 class MyParks extends Component {
+  state = {
+    displayParkInfo: false,
+  }
 
   componentDidMount = () => {
     this.getMyParks();
@@ -23,9 +26,20 @@ class MyParks extends Component {
       });
   }
 
+  displayParkInfo = () => {
+    this.setState({
+      displayParkInfo: true,
+    })
+  }
 
   render() {
-    console.log(this.props.parks)
+    let parkDisplay;
+    if (this.state.displayParkInfo) {
+      parkDisplay = <div><h2>Park To Display!</h2></div>;
+    }
+    else {
+      parkDisplay = null;
+    }
     return (
       <div>
         <h1 id="welcome">
@@ -36,7 +50,7 @@ class MyParks extends Component {
           {this.props.parks.map(park =>
             <div key={park.all_parks_id}>
               <div>{park.park_full_name}</div>
-              <img className="parkImage" alt={park.park_description} src={park.image_path_1}/>
+              <img onClick={this.displayParkInfo} className="parkImage" alt={park.park_description} src={park.image_path_1} />
               <div>{park.date_visited_1}</div>
               <div>{park.date_visited_2}</div>
               <div>{park.date_visited_3}</div>
@@ -44,6 +58,7 @@ class MyParks extends Component {
             </div>
           )}
         </div>
+        {parkDisplay}
       </div>
     )
   }
