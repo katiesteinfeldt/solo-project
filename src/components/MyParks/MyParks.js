@@ -78,7 +78,16 @@ class MyParks extends Component {
     let currentParkDisplay;
     if (this.state.displayParkInfo) {
       currentParkDisplay = <div>
-        {this.props.parkdisplay[0] && <h3>{this.props.parkdisplay[0].park_full_name}</h3>}
+        {this.props.parkdisplay[0] && 
+        <div>
+          <h3>{this.props.parkdisplay[0].park_full_name}</h3>
+          <pre></pre>
+          {this.props.parkdisplay[0].park_description}
+        
+        
+        
+        </div>
+        }
       </div>;
     }
     else {
