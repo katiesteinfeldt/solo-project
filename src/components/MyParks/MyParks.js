@@ -6,24 +6,47 @@ import Card from '@material-ui/core/Card';
 import Grid from '@material-ui/core/Grid';
 import { CardContent, CardActions, Divider } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
+import Modal from '@material-ui/core/Modal';
 
 // LogOutButton from '../LogOutButton/LogOutButton';
 
 // this could also be written with destructuring parameters as:
 // const UserPage = ({ user }) => (
 // and then instead of `props.user.username` you could use `user.username`
-const styles = {
+
+const styles = theme => ({
+  paper: {
+    position: 'absolute',
+    width: theme.spacing.unit * 50,
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing.unit * 4,
+    outline: 'none',
+  },
   card: {
-    minWidth: 275,
-    maxWidth: 350,
-    margin: 22,
+    
   }
+});
+
+function rand() {
+  return Math.round(Math.random() * 20) - 10;
+}
+
+function getModalStyle() {
+  const top = 50 + rand();
+  const left = 50 + rand();
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
 }
 
 class MyParks extends Component {
   state = {
-    displayParkInfo: false,
-    currentPark: 0
+    open: false,
+    currentPark: 0,
   }
 
   componentDidMount = () => {
@@ -43,7 +66,7 @@ class MyParks extends Component {
     return () => {
       this.props.dispatch({ type: 'FETCH_CURRENT_PARK', payload: parks_visited_id })
       this.setState({
-        displayParkInfo: true,
+        open: true,
         currentPark: parks_visited_id,
       })
     }
@@ -91,16 +114,22 @@ class MyParks extends Component {
 closeParkDisplay = () => {
   console.log('closing park display');
   this.setState({
-    displayParkInfo: false,
+    open: false,
   })
 }
 
   render() {
+    const { classes } = this.props;
     let currentParkDisplay;
-    if (this.state.displayParkInfo) {
+    if (this.state.open) {
       currentParkDisplay = <div>
         {this.props.parkdisplay[0] && 
-        <div>
+          <Modal 
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+            open={this.state.open}
+            onClose={this.closeParkDisplay}>
+          <div style={getModalStyle()} className={classes.paper}>
           <h3>{this.props.parkdisplay[0].park_full_name}</h3>
           <pre></pre>
           {this.props.parkdisplay[0].park_description}
@@ -108,7 +137,8 @@ closeParkDisplay = () => {
           <img alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1}/>
           <pre></pre>
           <button onClick={this.closeParkDisplay}>OK</button>
-        </div>
+          </div>
+        </Modal>
         }
       </div>;
     }
