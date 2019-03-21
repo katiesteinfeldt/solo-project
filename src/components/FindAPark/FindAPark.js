@@ -5,11 +5,19 @@ import './FindAPark.css';
 import Card from '@material-ui/core/Card';
 import { CardContent, CardActions, Divider } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-//import Modal from '@material-ui/core/Modal';
+import Modal from '@material-ui/core/Modal';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
+  paper: {
+    position: 'absolute',
+    width: theme.spacing.unit * 50,
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing.unit * 4,
+    outline: 'none',
+  },
   card: {
     minWidth: 275,
     maxWidth: 800,
@@ -21,10 +29,25 @@ const styles = theme => ({
   },
 });
 
+function rand() {
+  return Math.round(Math.random() * 20) - 10;
+}
+
+function getModalStyle() {
+  const top = 50 + rand();
+  const left = 50 + rand();
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
+
 class FindAPark extends Component {
   state = {
     parkDisplay: false,
-    addParkDisplay: false,
+    open: false,
     newPark: {
       park_id: 0,
       user_id: this.props.user.id,
@@ -71,7 +94,7 @@ class FindAPark extends Component {
   addVisit = () => {
     console.log('button clicked', this.props.currentpark[0].id);
     this.setState({
-      addParkDisplay: true,
+      open: true,
     })
   }
 
@@ -98,23 +121,23 @@ class FindAPark extends Component {
         park_id: this.props.currentpark[0].id,
       }
     })
-    .then((response) => {
-      console.log('back from server');
-      this.setState({
-        addParkDisplay: false,
-        parkSubmitted: true,
-        parkDisplay: true,
-        newPark: {
-          park_id: 0,
-          user_id: this.props.user.id,
-          date_visited_1: '2019-03-01',
-          date_visited_2: '',
-          date_visited_3: '',
-          notes: '',
-        },
+      .then((response) => {
+        console.log('back from server');
+        this.setState({
+          open: false,
+          parkSubmitted: true,
+          parkDisplay: true,
+          newPark: {
+            park_id: 0,
+            user_id: this.props.user.id,
+            date_visited_1: '2019-03-01',
+            date_visited_2: '',
+            date_visited_3: '',
+            notes: '',
+          },
+        })
+
       })
-      
-    })
   }
 
   //view more information about park when image is clicked on
@@ -123,61 +146,56 @@ class FindAPark extends Component {
   }
 
   render() {
+    const { classes } = this.props;
     let parkDOMDisplay
     let addParkDOMDisplay
     if (this.state.parkDisplay) {
       parkDOMDisplay =
         <Card className={this.props.classes.card}>
           <CardContent>
-          <Typography className={this.props.classes.cardTitle} variant="h4">{this.props.currentpark[0].park_full_name}</Typography>
-          <Divider />
-          <img onClick={this.viewParkInfo} className="parkImages" alt={this.props.currentpark[0].park_description} src={this.props.currentpark[0].image_path_1} />
-          <Typography variant="h6">{this.props.currentpark[0].park_description}</Typography>
-        </CardContent>
-        <CardActions>
-          <Button onClick={this.addVisit}>Add Visit</Button>
-        </CardActions>
+            <Typography className={this.props.classes.cardTitle} variant="h4">{this.props.currentpark[0].park_full_name}</Typography>
+            <Divider />
+            <img onClick={this.viewParkInfo} className="parkImages" alt={this.props.currentpark[0].park_description} src={this.props.currentpark[0].image_path_1} />
+            <Typography variant="h6">{this.props.currentpark[0].park_description}</Typography>
+          </CardContent>
+          <CardActions>
+            <Button onClick={this.addVisit}>Add Visit</Button>
+          </CardActions>
         </Card>
     }
     else {
       parkDOMDisplay = null;
     }
 
-    // currentParkDisplay = <div>
-    //   {this.props.parkdisplay[0] &&
-    //     <div>
-    //       <h3>{this.props.parkdisplay[0].park_full_name}</h3>
-    //       <pre></pre>
-    //       {this.props.parkdisplay[0].park_description}
-    //       <pre></pre>
-    //       <img alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1} />
-    //     </div>
-    //   }
-    // </div>;
-
-    if (this.state.addParkDisplay) {
+    if (this.state.open) {
       addParkDOMDisplay = <div>
         {this.props.currentpark[0] &&
-        <div>
-          <h2> Add Visit To {this.props.currentpark[0].park_full_name}</h2>
-          <pre></pre>
-          <input value={this.state.newPark.date_visited_1} onChange={this.handleChangeFor('date_visited_1')} type="date"></input>
-          <input value={this.state.newPark.notes} onChange={this.handleChangeFor('notes')} placeholder="notes"></input>
-          <button onClick={this.addPark}>Add Park</button>
-        </div>
+          <Modal
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+            open={this.state.open}
+            onClose={this.closeParkDisplay}>
+          <div style={getModalStyle()} className={classes.paper}>
+            <h2> Add Visit To {this.props.currentpark[0].park_full_name}</h2>
+            <pre></pre>
+            <input value={this.state.newPark.date_visited_1} onChange={this.handleChangeFor('date_visited_1')} type="date"></input>
+            <input value={this.state.newPark.notes} onChange={this.handleChangeFor('notes')} placeholder="notes"></input>
+            <button onClick={this.addPark}>Add Park</button>
+          </div>
+          </Modal>
         }
-          {/* <h2>Add New Park Visit</h2>
+        {/* <h2>Add New Park Visit</h2>
           <input value={this.state.newPark.date_visited_1} onChange={this.handleChangeFor('date_visited_1')} type="date"></input>
           <input value={this.state.newPark.notes} onChange={this.handleChangeFor('notes')} placeholder="notes"></input>
           <button onClick={this.addPark}>Add Park</button> */}
-        </div>
+      </div>
     }
     else {
       addParkDOMDisplay = null;
     }
 
     let parkSubmitted
-    if (this.state.parkSubmitted){
+    if (this.state.parkSubmitted) {
       parkSubmitted = <h1>Success!</h1>
     }
     else {
