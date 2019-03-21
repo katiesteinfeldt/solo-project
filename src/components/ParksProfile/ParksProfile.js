@@ -65,6 +65,7 @@ class ParksProfile extends Component {
     }
     return (
       <div>
+        <h1>Katie's Park Profile</h1>
         {this.createMyParks()}
         {currentParkDisplay}
       </div>

@@ -37,7 +37,6 @@ class MyParks extends Component {
     }
   }
 
-
   //this will delete park from the database 
   deletePark = (parks_visited_id) => {
     return () => {
@@ -72,9 +71,14 @@ class MyParks extends Component {
     )
   }
 
+closeParkDisplay = () => {
+  console.log('closing park display');
+  this.setState({
+    displayParkInfo: false,
+  })
+}
 
   render() {
-    console.log(this.props.parkdisplay[0]);
     let currentParkDisplay;
     if (this.state.displayParkInfo) {
       currentParkDisplay = <div>
@@ -85,6 +89,8 @@ class MyParks extends Component {
           {this.props.parkdisplay[0].park_description}
           <pre></pre>
           <img alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1}/>
+          <pre></pre>
+          <button onClick={this.closeParkDisplay}>OK</button>
         </div>
         }
       </div>;
