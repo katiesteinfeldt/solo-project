@@ -15,6 +15,12 @@ router.get('/', (req, res) => {
         });
 });
 
+router.get('/:id', (req, res) => {
+    console.log('at current park get request/server', req.params.id);
+    res.sendStatus(200);
+});
+
+
 /**
  * POST route template
  */

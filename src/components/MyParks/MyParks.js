@@ -29,7 +29,7 @@ class MyParks extends Component {
 
   displayParkInfo = (parks_visited_id) => {
     return () => {
-    console.log('displayParkInfo running', parks_visited_id)
+    this.props.dispatch({type: 'FETCH_CURRENT_PARK', payload: parks_visited_id})
     this.setState({
       displayParkInfo: true,
       currentPark: parks_visited_id,
