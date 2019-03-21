@@ -124,6 +124,7 @@ closeParkDisplay = () => {
   this.setState({
     open: false,
   })
+  this.props.dispatch({ type: 'FETCH_CURRENT_PARK', payload: '' })
 }
 
   render() {
