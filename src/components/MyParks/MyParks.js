@@ -29,12 +29,12 @@ class MyParks extends Component {
 
   displayParkInfo = (parks_visited_id) => {
     return () => {
-    this.props.dispatch({type: 'FETCH_CURRENT_PARK', payload: parks_visited_id})
-    this.setState({
-      displayParkInfo: true,
-      currentPark: parks_visited_id,
-    })
-  }
+      this.props.dispatch({ type: 'FETCH_CURRENT_PARK', payload: parks_visited_id })
+      this.setState({
+        displayParkInfo: true,
+        currentPark: parks_visited_id,
+      })
+    }
   }
 
 
@@ -79,7 +79,7 @@ class MyParks extends Component {
       currentParkDisplay = <div>
         <h2>Park To Display!</h2>
         {this.state.currentPark}
-        </div>;
+      </div>;
     }
     else {
       currentParkDisplay = null;
