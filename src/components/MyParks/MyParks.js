@@ -83,9 +83,8 @@ class MyParks extends Component {
           <h3>{this.props.parkdisplay[0].park_full_name}</h3>
           <pre></pre>
           {this.props.parkdisplay[0].park_description}
-        
-        
-        
+          <pre></pre>
+          <img alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1}/>
         </div>
         }
       </div>;
