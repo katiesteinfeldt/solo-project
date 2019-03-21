@@ -84,7 +84,11 @@ class FindAPark extends Component {
       }
     })
     .then((response) => {
-      console.log(response.data);
+      console.log('back from server');
+      this.setState({
+        addParkDisplay: false,
+        parkSubmitted: true,
+      })
     })
   }
 
@@ -109,13 +113,33 @@ class FindAPark extends Component {
       parkDOMDisplay = null;
     }
 
+    // currentParkDisplay = <div>
+    //   {this.props.parkdisplay[0] &&
+    //     <div>
+    //       <h3>{this.props.parkdisplay[0].park_full_name}</h3>
+    //       <pre></pre>
+    //       {this.props.parkdisplay[0].park_description}
+    //       <pre></pre>
+    //       <img alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1} />
+    //     </div>
+    //   }
+    // </div>;
+
     if (this.state.addParkDisplay) {
-      addParkDOMDisplay =
+      addParkDOMDisplay = <div>
+        {this.props.currentpark[0] &&
         <div>
-          <h2>Add New Park Visit</h2>
+          <h2> Add Visit To {this.props.currentpark[0].park_full_name}</h2>
+          <pre></pre>
           <input value={this.state.newPark.date_visited_1} onChange={this.handleChangeFor('date_visited_1')} type="date"></input>
           <input value={this.state.newPark.notes} onChange={this.handleChangeFor('notes')} placeholder="notes"></input>
           <button onClick={this.addPark}>Add Park</button>
+        </div>
+        }
+          {/* <h2>Add New Park Visit</h2>
+          <input value={this.state.newPark.date_visited_1} onChange={this.handleChangeFor('date_visited_1')} type="date"></input>
+          <input value={this.state.newPark.notes} onChange={this.handleChangeFor('notes')} placeholder="notes"></input>
+          <button onClick={this.addPark}>Add Park</button> */}
         </div>
     }
     else {
