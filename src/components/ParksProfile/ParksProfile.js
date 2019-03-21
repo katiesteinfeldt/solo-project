@@ -46,10 +46,27 @@ class ParksProfile extends Component {
 
  
   render() {
+    let currentParkDisplay;
+    if (this.state.displayParkInfo) {
+      currentParkDisplay = <div>
+        {this.props.parkdisplay[0] &&
+          <div>
+            <h3>{this.props.parkdisplay[0].park_full_name}</h3>
+            <pre></pre>
+            {this.props.parkdisplay[0].park_description}
+            <pre></pre>
+            <img alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1} />
+          </div>
+        }
+      </div>;
+    }
+    else {
+      currentParkDisplay = null;
+    }
     return (
       <div>
-        Parks PRofile lol
         {this.createMyParks()}
+        {currentParkDisplay}
       </div>
     );
   }
