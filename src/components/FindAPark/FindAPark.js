@@ -190,7 +190,7 @@ class FindAPark extends Component {
         <br />
         <br />
         <div>{parkSubmitted}</div>
-        <h1>Find A Park</h1>
+        <Typography variant="h3">Find A Park</Typography>
         <select onChange={this.handleParkChange}>
           <option>--Find A Park--</option>
           {this.props.parks.map(park =>
