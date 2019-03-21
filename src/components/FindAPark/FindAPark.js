@@ -42,14 +42,11 @@ class FindAPark extends Component {
       this.setState({
         park_id: this.props.currentpark.id,
         parkDisplay: true,
+        parkSubmitted: false,
       })
     }).catch(error => {
       console.log('error in current park get request', error);
     });
-    // this.setState({
-    //   currentPark: event.target.value,
-    //   parkDisplay: true,
-    // })
   }
 
   //displays new park fields on the DOM when the function runs
@@ -88,7 +85,17 @@ class FindAPark extends Component {
       this.setState({
         addParkDisplay: false,
         parkSubmitted: true,
+        parkDisplay: true,
+        newPark: {
+          park_id: 0,
+          user_id: this.props.user.id,
+          date_visited_1: '2019-03-01',
+          date_visited_2: '',
+          date_visited_3: '',
+          notes: '',
+        },
       })
+      
     })
   }
 
