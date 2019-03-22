@@ -59,6 +59,8 @@ class MyParks extends Component {
     open: false,
     currentPark: 0,
     editParkForm: false,
+    edit_date: '',
+    edit_notes: '',
   }
 
   componentDidMount = () => {
@@ -83,6 +85,14 @@ class MyParks extends Component {
       })
     }
   }
+
+  // sets local state to input values
+  handleChangeFor = (propertyName) => (event) => {
+    this.setState({
+      [propertyName]: event.target.value,
+    });
+  }
+
 
   //this will delete park from the database 
   deletePark = (parks_visited_id) => {
@@ -151,6 +161,10 @@ class MyParks extends Component {
     this.props.dispatch({ type: 'FETCH_CURRENT_PARK', payload: '' })
   }
 
+  saveEditedInfo = () => {
+    console.log(this.state);
+  }
+
   render() {
     const { classes } = this.props;
     let currentParkDisplay;
@@ -185,6 +199,9 @@ class MyParks extends Component {
         <Typography>{this.props.editpark[0].park_full_name}</Typography>
         <Typography>{this.props.editpark[0].date_visited_1}</Typography>
         <Typography>{this.props.editpark[0].notes}</Typography>
+        <input type="date" value={this.state.edit_date} onChange={this.handleChangeFor('edit_date')} placeholder={this.props.editpark[0].date_visited_1}></input>
+        <input value={this.state.edit_notes} onChange={this.handleChangeFor('edit_notes')} placeholder={this.props.editpark[0].notes}></input>
+        <Button onClick={this.saveEditedInfo}>Save</Button>
       </div>
       }
       </div>
