@@ -5,7 +5,7 @@ const axios = require('axios');
 
 router.get('/:id', (req, res) => {
     console.log('at edit park get request/server', req.params.id);
-    pool.query(`SELECT * FROM "parks_visited" WHERE "id"= $1;`, [req.params.id])
+    pool.query(`SELECT "parks_visited"."id" AS "parks_visited_id", "park_full_name", "notes", "date_visited_1" FROM "parks_visited" JOIN "all_parks" ON "all_parks"."id"="parks_visited"."park_id" WHERE "parks_visited"."id"=$1;`, [req.params.id])
         .then((result) => {
             res.send(result.rows);
         }).catch((error) => {
