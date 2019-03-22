@@ -152,6 +152,7 @@ class FindAPark extends Component {
     console.log('closing park display');
     this.setState({
       open: false,
+      parkSubmitted: false,
     })
   }
 
