@@ -83,6 +83,7 @@ class MyParks extends Component {
       this.setState({
         open: true,
         currentPark: parks_visited_id,
+        editParkForm: false,
       })
     }
   }
@@ -116,7 +117,7 @@ class MyParks extends Component {
   editVisit = (parks_visited_id) => {
     return () => {
       //this.props.dispatch({ type: 'EDIT_PARK', payload: parks_visited_id })
-      console.log('edit visit has been clicked', parks_visited_id);
+      console.log('edit visit has been clicked', this.state);
       this.setState({
         editParkForm: true,
       })
@@ -170,6 +171,18 @@ class MyParks extends Component {
     console.log(this.state);
   }
 
+  displayEditFormDisplay = () => {
+    console.log('function running');
+    if (this.state.editParkForm) {
+      editFormDisplay =
+        <div>
+          HI
+      </div>
+    }
+    else {
+      editFormDisplay = null;
+    }
+  }
   render() {
     const { classes } = this.props;
     let currentParkDisplay;
@@ -186,11 +199,12 @@ class MyParks extends Component {
             <div style={getModalStyle()} className={classes.paper}>
               <Typography variant="h4" id="modal-title">{this.props.parkdisplay[0].park_full_name}</Typography>
               <Typography>{this.props.parkdisplay[0].park_description}</Typography>
+            {this.displayEditFormDisplay()}
+            {editFormDisplay}
               <img alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1} />
               <Button variant="contained" color="default" className={this.props.classes.button} onClick={this.closeParkDisplay}>OK</Button>
-            <Button variant="contained" color="default" className={this.props.classes.button} onClick={this.editVisit(this.props.parkdisplay[0].id)}>Edit</Button>
-            <Button variant="contained" color="default" className={this.props.classes.button} onClick={this.deletePark(this.props.parkdisplay[0].id)}>Delete This Visit</Button>
-            {editFormDisplay}
+              <Button variant="contained" color="default" className={this.props.classes.button} onClick={this.editVisit(this.props.parkdisplay[0].id)}>Edit</Button>
+              <Button variant="contained" color="default" className={this.props.classes.button} onClick={this.deletePark(this.props.parkdisplay[0].id)}>Delete This Visit</Button>
             </div>
           </Modal>
         }
@@ -200,15 +214,7 @@ class MyParks extends Component {
       currentParkDisplay = null;
     }
 
-    if (this.state.editParkForm) {
-      editFormDisplay = 
-      <div> 
-        HI
-      </div>
-      }
-    else {
-      editFormDisplay = null;
-    }
+  
 
     // displays a form for the user to update the visit information when the user clicks
 
