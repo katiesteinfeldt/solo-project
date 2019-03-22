@@ -105,6 +105,7 @@ class MyParks extends Component {
 
   editVisit = (parks_visited_id) => {
     return () => {
+      this.props.dispatch({ type: 'EDIT_PARK', payload: parks_visited_id})
       console.log('edit visit has been clicked');
       this.setState({
         editParkForm: true,

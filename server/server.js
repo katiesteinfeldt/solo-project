@@ -13,6 +13,7 @@ const userRouter = require('./routes/user.router');
 const parksRouter = require('./routes/parks.router');
 const currentParkRouter = require('./routes/current-park.router');
 const myParksRouter = require('./routes/my.parks.router');
+const editParkRouter = require('./routes/edit.park.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -30,6 +31,7 @@ app.use('/api/user', userRouter);
 app.use('/parks', parksRouter);
 app.use('/currentpark', currentParkRouter)
 app.use('/myparks', myParksRouter);
+app.use('/editpark', editParkRouter);
 
 // Serve static files
 app.use(express.static('build'));
