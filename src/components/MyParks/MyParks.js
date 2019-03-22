@@ -14,6 +14,7 @@ import Button from '@material-ui/core/Button';
 // this could also be written with destructuring parameters as:
 // const UserPage = ({ user }) => (
 // and then instead of `props.user.username` you could use `user.username`
+let editFormDisplay;
 
 const styles = theme => ({
   paper: {
@@ -60,6 +61,7 @@ class MyParks extends Component {
     currentPark: 0,
     edit_date: '',
     edit_notes: '',
+    editParkForm: false,
   }
 
   componentDidMount = () => {
@@ -115,6 +117,9 @@ class MyParks extends Component {
     return () => {
       //this.props.dispatch({ type: 'EDIT_PARK', payload: parks_visited_id })
       console.log('edit visit has been clicked', parks_visited_id);
+      this.setState({
+        editParkForm: true,
+      })
       // axios({
       //   method: 'PUT',
       //   url: '/myparks/' + parks_visited_id,
@@ -141,8 +146,8 @@ class MyParks extends Component {
         </CardContent>
         <Divider />
         <CardActions className={this.props.classes.button}>
-          <Button variant="contained" color="primary" className={this.props.classes.button} onClick={this.editVisit(park.parks_visited_id)}>Update Visit</Button>
-          <Button variant="contained" color="primary" className={this.props.classes.button} onClick={this.deletePark(park.parks_visited_id)}>Delete From My Parks</Button>
+          {/* <Button variant="contained" color="primary" className={this.props.classes.button} onClick={this.editVisit(park.parks_visited_id)}>Update Visit</Button> */}
+          {/* <Button variant="contained" color="primary" className={this.props.classes.button} onClick={this.deletePark(park.parks_visited_id)}>Delete From My Parks</Button> */}
         </CardActions>
       </Card>
     )
@@ -168,7 +173,6 @@ class MyParks extends Component {
   render() {
     const { classes } = this.props;
     let currentParkDisplay;
-    //let editForm;
 
     // displays the current park information in a modal when the user clicks on the image
     if (this.state.open) {
@@ -186,6 +190,7 @@ class MyParks extends Component {
               <Button variant="contained" color="default" className={this.props.classes.button} onClick={this.closeParkDisplay}>OK</Button>
             <Button variant="contained" color="default" className={this.props.classes.button} onClick={this.editVisit(this.props.parkdisplay[0].id)}>Edit</Button>
             <Button variant="contained" color="default" className={this.props.classes.button} onClick={this.deletePark(this.props.parkdisplay[0].id)}>Delete This Visit</Button>
+            {editFormDisplay}
             </div>
           </Modal>
         }
@@ -195,24 +200,15 @@ class MyParks extends Component {
       currentParkDisplay = null;
     }
 
-    // if (this.state.editParkForm) {
-    //   editForm = <div>{this.props.editpark[0] && 
-    //   <div> 
-    //     <Typography>{this.props.editpark[0].park_full_name}</Typography>
-    //     <Typography>{this.props.editpark[0].date_visited_1}</Typography>
-    //     <Typography>{this.props.editpark[0].notes}</Typography>
-    //     {this.props.editpark[0].parks_visited_id}
-    //     <input type="date" value={this.state.edit_date} onChange={this.handleChangeFor('edit_date')} placeholder={this.props.editpark[0].date_visited_1}></input>
-    //     <input value={this.state.edit_notes} onChange={this.handleChangeFor('edit_notes')} placeholder={this.props.editpark[0].notes}></input>
-    //     <Button onClick={this.saveEditedInfo}>Save</Button>
-    //     <Button onClick={this.submitEditedInfo}>Submit</Button>
-    //   </div>
-    //   }
-    //   </div>
-    // }
-    // else {
-    //   editForm = null;
-    // }
+    if (this.state.editParkForm) {
+      editFormDisplay = 
+      <div> 
+        HI
+      </div>
+      }
+    else {
+      editFormDisplay = null;
+    }
 
     // displays a form for the user to update the visit information when the user clicks
 
