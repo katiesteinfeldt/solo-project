@@ -105,7 +105,7 @@ class MyParks extends Component {
 
   editVisit = (parks_visited_id) => {
     return () => {
-      this.props.dispatch({ type: 'EDIT_PARK', payload: parks_visited_id})
+      this.props.dispatch({ type: 'EDIT_PARK', payload: parks_visited_id })
       console.log('edit visit has been clicked');
       this.setState({
         editParkForm: true,
@@ -180,8 +180,13 @@ class MyParks extends Component {
     }
 
     if (this.state.editParkForm) {
-      editForm = <div>{this.props.editpark[0] && this.props.editpark[0].id}
-  
+      editForm = <div>{this.props.editpark[0] && 
+      <div> 
+        <Typography>{this.props.editpark[0].park_full_name}</Typography>
+        <Typography>{this.props.editpark[0].date_visited_1}</Typography>
+        <Typography>{this.props.editpark[0].notes}</Typography>
+      </div>
+      }
       </div>
     }
     else {
