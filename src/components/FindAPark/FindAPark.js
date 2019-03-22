@@ -188,8 +188,14 @@ class FindAPark extends Component {
           <div style={getModalStyle()} className={classes.paper}>
             <Typography variant="h4"> Add Visit To {this.props.currentpark[0].park_full_name}</Typography>
             <pre></pre>
-            <input value={this.state.newPark.date_visited_1} onChange={this.handleChangeFor('date_visited_1')} type="date"></input>
-            {/* <input value={this.state.newPark.notes} onChange={this.handleChangeFor('notes')} placeholder="notes"></input> */}
+            <TextField
+              value={this.state.newPark.date_visited_1}
+              onChange={this.handleChangeFor('date_visited_1')}
+              id="date"
+              type="date"
+              className={classes.textField}
+              margin="normal"
+            />
             <TextField
             value={this.state.newPark.notes}
             onChange={this.handleChangeFor('notes')}
