@@ -10,6 +10,7 @@ import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 //import Input from '@material-ui/core/Input';
 import TextField from '@material-ui/core/TextField';
+import Select from '@material-ui/core/Select';
 
 const styles = theme => ({
   paper: {
@@ -215,10 +216,7 @@ class FindAPark extends Component {
           </div>
           </Modal>
         }
-        {/* <h2>Add New Park Visit</h2>
-          <input value={this.state.newPark.date_visited_1} onChange={this.handleChangeFor('date_visited_1')} type="date"></input>
-          <input value={this.state.newPark.notes} onChange={this.handleChangeFor('notes')} placeholder="notes"></input>
-          <button onClick={this.addPark}>Add Park</button> */}
+    
       </div>
     }
     else {
@@ -240,12 +238,17 @@ class FindAPark extends Component {
         <br />
         <div>{parkSubmitted}</div>
         <Typography variant="h3">Find A Park</Typography>
-        <select onChange={this.handleParkChange}>
+        <Select
+          native
+          onChange={this.handleParkChange}
+        >
+        {/* <select onChange={this.handleParkChange}> */}
           <option>--Find A Park--</option>
           {this.props.parks.map(park =>
             <option value={park.id} key={park.id}>{park.park_full_name}</option>
           )}
-        </select>
+          </Select>
+        {/* </select> */}
         <br />
         <br />
         <div>{parkDOMDisplay}</div>
