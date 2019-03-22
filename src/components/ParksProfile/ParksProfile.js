@@ -63,9 +63,11 @@ class ParksProfile extends Component {
     else {
       currentParkDisplay = null;
     }
+    console.log(this.props.user.username)
     return (
+      
       <div>
-        <h1>Katie's Park Profile</h1>
+        <h1>{this.props.user.username}'s Park Profile</h1>
         {this.createMyParks()}
         {currentParkDisplay}
       </div>

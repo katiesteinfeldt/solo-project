@@ -36,6 +36,7 @@ const styles = theme => ({
   },
   button: {
     width: '100%',
+    padding: 10,
   },
   header: {
     margin: 10,
@@ -113,10 +114,9 @@ class MyParks extends Component {
           <Typography>Notes: {park.notes}</Typography>
         </CardContent>
         <Divider />
-        <CardActions>
+        <CardActions className={this.props.classes.button}>
         {/* <button>Update</button> */}
         <Button variant="contained" color="primary" className={this.props.classes.button} onClick={this.deletePark(park.parks_visited_id)}>Delete From My Parks</Button>
-        <pre></pre>
         </CardActions>
       </Card>
     )
@@ -143,12 +143,9 @@ closeParkDisplay = () => {
             onClose={this.closeParkDisplay}>
           <div style={getModalStyle()} className={classes.paper}>
           <Typography variant="h4" id="modal-title">{this.props.parkdisplay[0].park_full_name}</Typography>
-          <pre></pre>
           <Typography>{this.props.parkdisplay[0].park_description}</Typography>
-          <pre></pre>
           <img alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1}/>
-          <pre></pre>
-          <Button onClick={this.closeParkDisplay}>OK</Button>
+            <Button variant="contained" color="default" className={this.props.classes.button} onClick={this.closeParkDisplay}>Cool!</Button>
           </div>
         </Modal>
         }
