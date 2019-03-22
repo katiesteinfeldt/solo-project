@@ -1,12 +1,14 @@
-const currentParkReducer = (state = [], action) => {
+
+const editCurrentParkReducer = (state = [], action) => {
     switch (action.type) {
-        case 'SET_CURRENT_PARK':
+        case 'SET_PARK_TO_EDIT':
             return action.payload;
         default:
             return state;
     }
 };
 
+
 // user will be on the redux state at:
 // state.user
-export default currentParkReducer;
+export default editCurrentParkReducer;

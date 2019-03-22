@@ -180,8 +180,8 @@ class MyParks extends Component {
     }
 
     if (this.state.editParkForm) {
-      editForm = <div>
-        EDIT FORM HERE
+      editForm = <div>{this.props.editpark[0] && this.props.editpark[0].id}
+  
       </div>
     }
     else {
@@ -196,7 +196,6 @@ class MyParks extends Component {
         <Typography className={classes.header} variant="h3">
           My Parks
       </Typography>
-        {/* <LogOutButton className="log-in" /> */}
         <div className="container">
           {this.createMyParks()}
         </div>
@@ -214,6 +213,7 @@ const mapStateToProps = state => ({
   user: state.user,
   parks: state.parks,
   parkdisplay: state.parkdisplay,
+  editpark: state.editpark,
 });
 
 // this allows us to use <App /> in index.js

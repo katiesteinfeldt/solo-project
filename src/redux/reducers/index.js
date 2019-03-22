@@ -5,6 +5,7 @@ import user from './userReducer';
 import parks from './parksReducer';
 import currentpark from './currentParkReducer';
 import parkdisplay from './parkDisplayReducer';
+import editpark from './editCurrentParkReducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   parks,
   currentpark,
   parkdisplay,
+  editpark,
 });
 
 export default rootReducer;
