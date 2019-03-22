@@ -58,7 +58,6 @@ class MyParks extends Component {
   state = {
     open: false,
     currentPark: 0,
-    editParkForm: false,
     edit_date: '',
     edit_notes: '',
   }
@@ -97,29 +96,25 @@ class MyParks extends Component {
   //this will delete park from the database 
   deletePark = (parks_visited_id) => {
     return () => {
-      console.log('delete was clicked', parks_visited_id);
       const r = window.confirm("Are you sure you want to delete this park?");
       if (r === true) {
         axios({
           method: 'DELETE',
           url: '/myparks/' + parks_visited_id,
         }).then((response) => {
+          this.setState({
+            open: false,
+          })
           this.getMyParks();
         });
-      }
-      else {
-        window.alert("Feedback saved");
       }
     }
   }
 
   editVisit = (parks_visited_id) => {
     return () => {
-      this.props.dispatch({ type: 'EDIT_PARK', payload: parks_visited_id })
-      console.log('edit visit has been clicked');
-      this.setState({
-        editParkForm: true,
-      })
+      //this.props.dispatch({ type: 'EDIT_PARK', payload: parks_visited_id })
+      console.log('edit visit has been clicked', parks_visited_id);
       // axios({
       //   method: 'PUT',
       //   url: '/myparks/' + parks_visited_id,
@@ -166,10 +161,14 @@ class MyParks extends Component {
     //this.props.dispatch({type: 'EDIT_PARK', payload: this.state })
   }
 
+  submitEditedInfo = () => {
+    console.log(this.state);
+  }
+
   render() {
     const { classes } = this.props;
     let currentParkDisplay;
-    let editForm;
+    //let editForm;
 
     // displays the current park information in a modal when the user clicks on the image
     if (this.state.open) {
@@ -184,7 +183,9 @@ class MyParks extends Component {
               <Typography variant="h4" id="modal-title">{this.props.parkdisplay[0].park_full_name}</Typography>
               <Typography>{this.props.parkdisplay[0].park_description}</Typography>
               <img alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1} />
-              <Button variant="contained" color="default" className={this.props.classes.button} onClick={this.closeParkDisplay}>Cool!</Button>
+              <Button variant="contained" color="default" className={this.props.classes.button} onClick={this.closeParkDisplay}>OK</Button>
+            <Button variant="contained" color="default" className={this.props.classes.button} onClick={this.editVisit(this.props.parkdisplay[0].id)}>Edit</Button>
+            <Button variant="contained" color="default" className={this.props.classes.button} onClick={this.deletePark(this.props.parkdisplay[0].id)}>Delete This Visit</Button>
             </div>
           </Modal>
         }
@@ -194,23 +195,24 @@ class MyParks extends Component {
       currentParkDisplay = null;
     }
 
-    if (this.state.editParkForm) {
-      editForm = <div>{this.props.editpark[0] && 
-      <div> 
-        <Typography>{this.props.editpark[0].park_full_name}</Typography>
-        <Typography>{this.props.editpark[0].date_visited_1}</Typography>
-        <Typography>{this.props.editpark[0].notes}</Typography>
-        {this.props.editpark[0].parks_visited_id}
-        <input type="date" value={this.state.edit_date} onChange={this.handleChangeFor('edit_date')} placeholder={this.props.editpark[0].date_visited_1}></input>
-        <input value={this.state.edit_notes} onChange={this.handleChangeFor('edit_notes')} placeholder={this.props.editpark[0].notes}></input>
-        <Button onClick={this.saveEditedInfo}>Save</Button>
-      </div>
-      }
-      </div>
-    }
-    else {
-      editForm = null;
-    }
+    // if (this.state.editParkForm) {
+    //   editForm = <div>{this.props.editpark[0] && 
+    //   <div> 
+    //     <Typography>{this.props.editpark[0].park_full_name}</Typography>
+    //     <Typography>{this.props.editpark[0].date_visited_1}</Typography>
+    //     <Typography>{this.props.editpark[0].notes}</Typography>
+    //     {this.props.editpark[0].parks_visited_id}
+    //     <input type="date" value={this.state.edit_date} onChange={this.handleChangeFor('edit_date')} placeholder={this.props.editpark[0].date_visited_1}></input>
+    //     <input value={this.state.edit_notes} onChange={this.handleChangeFor('edit_notes')} placeholder={this.props.editpark[0].notes}></input>
+    //     <Button onClick={this.saveEditedInfo}>Save</Button>
+    //     <Button onClick={this.submitEditedInfo}>Submit</Button>
+    //   </div>
+    //   }
+    //   </div>
+    // }
+    // else {
+    //   editForm = null;
+    // }
 
     // displays a form for the user to update the visit information when the user clicks
 
@@ -224,7 +226,7 @@ class MyParks extends Component {
           {this.createMyParks()}
         </div>
         {currentParkDisplay}
-        {editForm}
+        {/* {editForm} */}
       </div>
     )
   }
