@@ -27,12 +27,19 @@ const styles = theme => ({
   card: {
     minWidth: 275,
     maxWidth: 500,
-    margin: 22,
+    margin: 20,
+    padding: 20,
   },
   cardTitle: {
     padding: 15,
     textAlign: 'center',
   },
+  button: {
+    width: '100%',
+  },
+  header: {
+    margin: 10,
+  }
 });
 
 function getModalStyle() {
@@ -108,7 +115,7 @@ class MyParks extends Component {
         <Divider />
         <CardActions>
         {/* <button>Update</button> */}
-        <Button onClick={this.deletePark(park.parks_visited_id)}>Delete From My Parks</Button>
+        <Button variant="contained" color="primary" className={this.props.classes.button} onClick={this.deletePark(park.parks_visited_id)}>Delete From My Parks</Button>
         <pre></pre>
         </CardActions>
       </Card>
@@ -152,7 +159,7 @@ closeParkDisplay = () => {
     }
     return (
       <div>
-        <Typography variant="h3">
+        <Typography className={classes.header} variant="h3">
           My Parks
       </Typography>
         {/* <LogOutButton className="log-in" /> */}

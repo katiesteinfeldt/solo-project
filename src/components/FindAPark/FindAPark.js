@@ -38,7 +38,11 @@ const styles = theme => ({
   },
   button: {
     width: '100%',
-  }
+  },
+  headerSelect: {
+    margin: 10,
+    padding: 10,
+  },
 });
 
 function getModalStyle() {
@@ -234,21 +238,18 @@ class FindAPark extends Component {
 
     return (
       <div>
-        <br />
-        <br />
         <div>{parkSubmitted}</div>
-        <Typography variant="h3">Find A Park</Typography>
+        <Typography variant="h3" className={classes.headerSelect}>Find A Park</Typography>
         <Select
           native
           onChange={this.handleParkChange}
+          className={classes.headerSelect}
         >
-        {/* <select onChange={this.handleParkChange}> */}
           <option>--Find A Park--</option>
           {this.props.parks.map(park =>
             <option value={park.id} key={park.id}>{park.park_full_name}</option>
           )}
           </Select>
-        {/* </select> */}
         <br />
         <br />
         <div>{parkDOMDisplay}</div>
