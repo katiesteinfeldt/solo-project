@@ -162,7 +162,7 @@ class MyParks extends Component {
   }
 
   saveEditedInfo = () => {
-    console.log(this.state);
+    console.log(this.state)
   }
 
   render() {
