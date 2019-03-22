@@ -167,22 +167,31 @@ class MyParks extends Component {
     //this.props.dispatch({type: 'EDIT_PARK', payload: this.state })
   }
 
+  cancelEditedInfo = () => {
+    console.log(this.state)
+    this.setState({
+      editParkForm: false,
+    })
+  }
+
   submitEditedInfo = () => {
     console.log(this.state);
   }
 
   displayEditFormDisplay = () => {
-    console.log('function running');
     if (this.state.editParkForm) {
       editFormDisplay =
         <div>
           HI
+          <button onClick={this.saveEditedInfo}>Save</button>
+        <button onClick={this.cancelEditedInfo}>Cancel</button>
       </div>
     }
     else {
       editFormDisplay = null;
     }
   }
+
   render() {
     const { classes } = this.props;
     let currentParkDisplay;
@@ -214,21 +223,11 @@ class MyParks extends Component {
       currentParkDisplay = null;
     }
 
-  
-
-    // displays a form for the user to update the visit information when the user clicks
-
-
     return (
       <div>
-        <Typography className={classes.header} variant="h3">
-          My Parks
-      </Typography>
-        <div className="container">
-          {this.createMyParks()}
-        </div>
+        <Typography className={classes.header} variant="h3">My Parks</Typography>
+        <div className="container">{this.createMyParks()}</div>
         {currentParkDisplay}
-        {/* {editForm} */}
       </div>
     )
   }
