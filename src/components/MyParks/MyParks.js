@@ -162,7 +162,8 @@ class MyParks extends Component {
   }
 
   saveEditedInfo = () => {
-    console.log(this.state)
+    console.log(this.state);
+    //this.props.dispatch({type: 'EDIT_PARK', payload: this.state })
   }
 
   render() {
@@ -199,6 +200,7 @@ class MyParks extends Component {
         <Typography>{this.props.editpark[0].park_full_name}</Typography>
         <Typography>{this.props.editpark[0].date_visited_1}</Typography>
         <Typography>{this.props.editpark[0].notes}</Typography>
+        {this.props.editpark[0].parks_visited_id}
         <input type="date" value={this.state.edit_date} onChange={this.handleChangeFor('edit_date')} placeholder={this.props.editpark[0].date_visited_1}></input>
         <input value={this.state.edit_notes} onChange={this.handleChangeFor('edit_notes')} placeholder={this.props.editpark[0].notes}></input>
         <Button onClick={this.saveEditedInfo}>Save</Button>
