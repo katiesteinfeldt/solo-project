@@ -8,6 +8,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+//import Input from '@material-ui/core/Input';
+import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
   paper: {
@@ -17,6 +19,11 @@ const styles = theme => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
     outline: 'none',
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 300,
   },
   card: {
     minWidth: 275,
@@ -182,7 +189,17 @@ class FindAPark extends Component {
             <Typography variant="h4"> Add Visit To {this.props.currentpark[0].park_full_name}</Typography>
             <pre></pre>
             <input value={this.state.newPark.date_visited_1} onChange={this.handleChangeFor('date_visited_1')} type="date"></input>
-            <input value={this.state.newPark.notes} onChange={this.handleChangeFor('notes')} placeholder="notes"></input>
+            {/* <input value={this.state.newPark.notes} onChange={this.handleChangeFor('notes')} placeholder="notes"></input> */}
+            <TextField
+            value={this.state.newPark.notes}
+            onChange={this.handleChangeFor('notes')}
+              id="standard-multiline-static"
+              label="Park Notes"
+              multiline
+              rows="4"
+              className={classes.textField}
+              margin="normal"
+            />
             <Button onClick={this.addPark}>Add Park</Button>
           </div>
           </Modal>
