@@ -147,8 +147,6 @@ class MyParks extends Component {
         </CardContent>
         <Divider />
         <CardActions className={this.props.classes.button}>
-          {/* <Button variant="contained" color="primary" className={this.props.classes.button} onClick={this.editVisit(park.parks_visited_id)}>Update Visit</Button> */}
-          {/* <Button variant="contained" color="primary" className={this.props.classes.button} onClick={this.deletePark(park.parks_visited_id)}>Delete From My Parks</Button> */}
         </CardActions>
       </Card>
     )
@@ -164,6 +162,9 @@ class MyParks extends Component {
 
   saveEditedInfo = () => {
     console.log(this.state);
+    this.setState({
+      editParkForm: false,
+    })
     //this.props.dispatch({type: 'EDIT_PARK', payload: this.state })
   }
 
@@ -174,15 +175,16 @@ class MyParks extends Component {
     })
   }
 
-  submitEditedInfo = () => {
-    console.log(this.state);
-  }
+  // submitEditedInfo = () => {
+  //   console.log(this.state);
+  // }
 
   displayEditFormDisplay = () => {
     if (this.state.editParkForm) {
       editFormDisplay =
         <div>
           HI
+          {this.props.parks[0].date_visited_1}
           <button onClick={this.saveEditedInfo}>Save</button>
         <button onClick={this.cancelEditedInfo}>Cancel</button>
       </div>
