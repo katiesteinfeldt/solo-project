@@ -183,11 +183,11 @@ class MyParks extends Component {
     if (this.state.editParkForm) {
       editFormDisplay =
         <div>
-          HI
           {this.props.parks[0].date_visited_1}
+          {this.props.parks[0].notes}
           <button onClick={this.saveEditedInfo}>Save</button>
-        <button onClick={this.cancelEditedInfo}>Cancel</button>
-      </div>
+          <button onClick={this.cancelEditedInfo}>Cancel</button>
+        </div>
     }
     else {
       editFormDisplay = null;
@@ -210,8 +210,8 @@ class MyParks extends Component {
             <div style={getModalStyle()} className={classes.paper}>
               <Typography variant="h4" id="modal-title">{this.props.parkdisplay[0].park_full_name}</Typography>
               <Typography>{this.props.parkdisplay[0].park_description}</Typography>
-            {this.displayEditFormDisplay()}
-            {editFormDisplay}
+              {this.displayEditFormDisplay()}
+              {editFormDisplay}
               <img alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1} />
               <Button variant="contained" color="default" className={this.props.classes.button} onClick={this.closeParkDisplay}>OK</Button>
               <Button variant="contained" color="default" className={this.props.classes.button} onClick={this.editVisit(this.props.parkdisplay[0].id)}>Edit</Button>
