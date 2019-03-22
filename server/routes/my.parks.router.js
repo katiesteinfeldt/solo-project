@@ -25,4 +25,16 @@ router.delete('/:id', (req, res) => {
         });
 });
 
+router.put('/:id', (req, res) => {
+    console.log(req.params.id);
+    res.sendStatus(200);
+    // pool.query(`DELETE FROM "parks_visited" WHERE "id"= $1;`, [req.params.id])
+    //     .then(() => {
+    //         res.sendStatus(204);
+    //     }).catch((error) => {
+    //         console.log('error with park delete query', error);
+    //         res.sendStatus(500);
+    //     });
+});
+
 module.exports = router;

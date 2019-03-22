@@ -58,6 +58,7 @@ class MyParks extends Component {
   state = {
     open: false,
     currentPark: 0,
+    editParkForm: false,
   }
 
   componentDidMount = () => {
@@ -102,11 +103,24 @@ class MyParks extends Component {
     }
   }
 
-  editVisit = () => {
+  editVisit = (parks_visited_id) => {
     return () => {
-    console.log('edit visit has been clicked');
+      console.log('edit visit has been clicked');
+      this.setState({
+        editParkForm: true,
+      })
+      // axios({
+      //   method: 'PUT',
+      //   url: '/myparks/' + parks_visited_id,
+      //   // data: {
+      //   //   date_visited_1: 
+      //   //   notes: 
+      //   // }
+      // }).then((response) => {
+      //   console.log('park updated');
+      // })
+    }
   }
-}
 
   createMyParks = () => {
     return this.props.parks.map(park =>
@@ -139,6 +153,9 @@ class MyParks extends Component {
   render() {
     const { classes } = this.props;
     let currentParkDisplay;
+    let editForm;
+
+    // displays the current park information in a modal when the user clicks on the image
     if (this.state.open) {
       currentParkDisplay = <div>
         {this.props.parkdisplay[0] &&
@@ -160,6 +177,19 @@ class MyParks extends Component {
     else {
       currentParkDisplay = null;
     }
+
+    if (this.state.editParkForm) {
+      editForm = <div>
+        EDIT FORM HERE
+      </div>
+    }
+    else {
+      editForm = null;
+    }
+
+    // displays a form for the user to update the visit information when the user clicks
+
+
     return (
       <div>
         <Typography className={classes.header} variant="h3">
@@ -170,6 +200,7 @@ class MyParks extends Component {
           {this.createMyParks()}
         </div>
         {currentParkDisplay}
+        {editForm}
       </div>
     )
   }
