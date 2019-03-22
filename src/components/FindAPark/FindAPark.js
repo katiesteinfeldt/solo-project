@@ -179,11 +179,11 @@ class FindAPark extends Component {
             open={this.state.open}
             onClose={this.closeParkDisplay}>
           <div style={getModalStyle()} className={classes.paper}>
-            <h2> Add Visit To {this.props.currentpark[0].park_full_name}</h2>
+            <Typography variant="h4"> Add Visit To {this.props.currentpark[0].park_full_name}</Typography>
             <pre></pre>
             <input value={this.state.newPark.date_visited_1} onChange={this.handleChangeFor('date_visited_1')} type="date"></input>
             <input value={this.state.newPark.notes} onChange={this.handleChangeFor('notes')} placeholder="notes"></input>
-            <button onClick={this.addPark}>Add Park</button>
+            <Button onClick={this.addPark}>Add Park</Button>
           </div>
           </Modal>
         }
