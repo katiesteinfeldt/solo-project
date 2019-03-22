@@ -29,11 +29,15 @@ const styles = theme => ({
     minWidth: 275,
     maxWidth: 800,
     margin: 22,
+    padding: 20,
   },
   cardTitle: {
     padding: 15,
     textAlign: 'center',
   },
+  button: {
+    width: '100%',
+  }
 });
 
 function getModalStyle() {
@@ -170,7 +174,7 @@ class FindAPark extends Component {
             <Typography variant="h6">{this.props.currentpark[0].park_description}</Typography>
           </CardContent>
           <CardActions>
-            <Button onClick={this.addVisit}>Add Visit</Button>
+          <Button variant="contained" color="primary" className={classes.button} onClick={this.addVisit}>Add Visit</Button>
           </CardActions>
         </Card>
     }
@@ -207,7 +211,7 @@ class FindAPark extends Component {
               className={classes.textField}
               margin="normal"
             />
-            <Button onClick={this.addPark}>Add Park</Button>
+            <Button variant="contained" color="primary" className={classes.button} onClick={this.addPark}>Add Park</Button>
           </div>
           </Modal>
         }
