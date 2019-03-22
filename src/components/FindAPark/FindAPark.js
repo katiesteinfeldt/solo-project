@@ -29,13 +29,9 @@ const styles = theme => ({
   },
 });
 
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-
 function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
+  const top = 50;
+  const left = 50;
 
   return {
     top: `${top}%`,
@@ -143,6 +139,13 @@ class FindAPark extends Component {
   //view more information about park when image is clicked on
   viewParkInfo = () => {
     console.log('image clicked');
+  }
+
+  closeParkDisplay = () => {
+    console.log('closing park display');
+    this.setState({
+      open: false,
+    })
   }
 
   render() {
