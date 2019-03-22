@@ -102,52 +102,58 @@ class MyParks extends Component {
     }
   }
 
+  editVisit = () => {
+    return () => {
+    console.log('edit visit has been clicked');
+  }
+}
+
   createMyParks = () => {
     return this.props.parks.map(park =>
       <Card className={this.props.classes.card} key={park.all_parks_id}><Typography className={this.props.classes.cardTitle} variant="h4">{park.park_full_name}</Typography>
         <Divider />
         <CardContent>
-        <img onClick={this.displayParkInfo(park.all_parks_id)} alt={park.park_description} src={park.image_path_1} />
-        <pre></pre>
+          <img onClick={this.displayParkInfo(park.all_parks_id)} alt={park.park_description} src={park.image_path_1} />
+          <pre></pre>
           <Typography>Date Visited: {park.date_visited_1}</Typography>
-        <pre></pre>
+          <pre></pre>
           <Typography>Notes: {park.notes}</Typography>
         </CardContent>
         <Divider />
         <CardActions className={this.props.classes.button}>
-        {/* <button>Update</button> */}
-        <Button variant="contained" color="primary" className={this.props.classes.button} onClick={this.deletePark(park.parks_visited_id)}>Delete From My Parks</Button>
+          <Button variant="contained" color="primary" className={this.props.classes.button} onClick={this.editVisit(park.parks_visited_id)}>Update Visit</Button>
+          <Button variant="contained" color="primary" className={this.props.classes.button} onClick={this.deletePark(park.parks_visited_id)}>Delete From My Parks</Button>
         </CardActions>
       </Card>
     )
   }
 
-closeParkDisplay = () => {
-  console.log('closing park display');
-  this.setState({
-    open: false,
-  })
-  this.props.dispatch({ type: 'FETCH_CURRENT_PARK', payload: '' })
-}
+  closeParkDisplay = () => {
+    console.log('closing park display');
+    this.setState({
+      open: false,
+    })
+    this.props.dispatch({ type: 'FETCH_CURRENT_PARK', payload: '' })
+  }
 
   render() {
     const { classes } = this.props;
     let currentParkDisplay;
     if (this.state.open) {
       currentParkDisplay = <div>
-        {this.props.parkdisplay[0] && 
-          <Modal 
+        {this.props.parkdisplay[0] &&
+          <Modal
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
             open={this.state.open}
             onClose={this.closeParkDisplay}>
-          <div style={getModalStyle()} className={classes.paper}>
-          <Typography variant="h4" id="modal-title">{this.props.parkdisplay[0].park_full_name}</Typography>
-          <Typography>{this.props.parkdisplay[0].park_description}</Typography>
-          <img alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1}/>
-            <Button variant="contained" color="default" className={this.props.classes.button} onClick={this.closeParkDisplay}>Cool!</Button>
-          </div>
-        </Modal>
+            <div style={getModalStyle()} className={classes.paper}>
+              <Typography variant="h4" id="modal-title">{this.props.parkdisplay[0].park_full_name}</Typography>
+              <Typography>{this.props.parkdisplay[0].park_description}</Typography>
+              <img alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1} />
+              <Button variant="contained" color="default" className={this.props.classes.button} onClick={this.closeParkDisplay}>Cool!</Button>
+            </div>
+          </Modal>
         }
       </div>;
     }
