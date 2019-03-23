@@ -26,15 +26,15 @@ router.delete('/:id', (req, res) => {
 });
 
 router.put('/:id', (req, res) => {
-    console.log(req.params.id);
-    res.sendStatus(200);
-    // pool.query(`DELETE FROM "parks_visited" WHERE "id"= $1;`, [req.params.id])
-    //     .then(() => {
-    //         res.sendStatus(204);
-    //     }).catch((error) => {
-    //         console.log('error with park delete query', error);
-    //         res.sendStatus(500);
-    //     });
+    console.log('put request', req.body);
+    pool.query(`UPDATE "parks_visited" SET "date_visited_1"=$1, "notes"=$2 WHERE "park_id"=$3;`, 
+    [req.body.date_visited_1, req.body.notes, req.body.id])
+        .then(() => {
+            res.sendStatus(204);
+        }).catch((error) => {
+            console.log('error with park delete query', error);
+            res.sendStatus(500);
+        });
 });
 
 module.exports = router;

@@ -36,7 +36,7 @@ const styles = theme => ({
     textAlign: 'center',
   },
   button: {
-    width: '30%',
+    width: '50%',
     padding: 10,
   },
   header: {
@@ -63,6 +63,8 @@ class MyParks extends Component {
     edit_notes: '',
     isInEditMode: false,
     editText: 'TEST!',
+    dateVisited: '01/06/1989',
+    notes: 'Test notes',
   }
 
   componentDidMount = () => {
@@ -115,13 +117,13 @@ class MyParks extends Component {
     }
   }
 
-  editVisit = (parks_visited_id) => {
-    return () => {
-      //this.props.dispatch({ type: 'EDIT_PARK', payload: parks_visited_id })
-      console.log('edit visit has been clicked', this.state);
-      this.setState({
-        isInEditMode: true,
-      })
+  // editVisit = (parks_visited_id) => {
+  //   return () => {
+  //     //this.props.dispatch({ type: 'EDIT_PARK', payload: parks_visited_id })
+  //     console.log('edit visit has been clicked', this.state);
+  //     this.setState({
+  //       isInEditMode: true,
+  //     })
       // axios({
       //   method: 'PUT',
       //   url: '/myparks/' + parks_visited_id,
@@ -132,8 +134,8 @@ class MyParks extends Component {
       // }).then((response) => {
       //   console.log('park updated');
       // })
-    }
-  }
+  //   }
+  // }
 
   createMyParks = () => {
     return this.props.parks.map(park =>
@@ -167,12 +169,25 @@ class MyParks extends Component {
     console.log(this.state);
     this.setState({
       isInEditMode: false,
+      dateVisited: this.state.dateVisited,
+      notes: this.state.notes,
     })
+    axios({
+      method: 'PUT',
+      url: '/myparks/' + this.props.parkdisplay[0].id,
+      data: {
+        id: this.props.parkdisplay[0].id,
+        date_visited_1: this.state.dateVisited,
+        notes: this.state.notes,
+      }
+    }).then((response) => {
+      console.log('back from park update on server', response);
+  })
     //this.props.dispatch({type: 'EDIT_PARK', payload: this.state })
   }
 
   cancelEditedInfo = () => {
-    console.log(this.state)
+    console.log('cancel clicked');
     this.setState({
       isInEditMode: false,
     })
@@ -192,20 +207,22 @@ class MyParks extends Component {
   displayEditFormDisplay = () => {
     if (this.state.isInEditMode) {
       editFormDisplay =
-        <div onClick={this.changeEditMode}>
+        <div>
           IN EDIT MODE
           <pre></pre>
           <div>
             <input type="date"
-            defaultValue={this.props.parks[0].date_visited_1}
+            onChange={this.handleChangeFor('dateVisited')}
+            defaultValue={this.state.dateVisited}
             />
           <input type="text"
-            defaultValue={this.props.parks[0].notes}
+            defaultValue={this.state.notes}
+            onChange={this.handleChangeFor('notes')}
           />
             </div>
           <pre></pre>
-          <button onClick={this.saveEditedInfo}>Save</button>
-          <button onClick={this.cancelEditedInfo}>Cancel</button>
+          <Button onClick={this.saveEditedInfo}>Save</Button>
+          <Button onClick={this.cancelEditedInfo}>Cancel</Button>
         </div>
     }
     else {
@@ -213,9 +230,9 @@ class MyParks extends Component {
         <div onDoubleClick={this.changeEditMode}>
         NOT IN EDIT MODE
         <pre></pre>
-      Date Visited: {this.props.parks[0].date_visited_1}
+      Date Visited: {this.state.dateVisited}
         <pre></pre>
-      Notes: {this.props.parks[0].notes}
+      Notes: {this.state.notes}
       </div>
     }
   }
