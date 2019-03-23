@@ -181,7 +181,7 @@ class MyParks extends Component {
         notes: this.state.notes,
       }
     }).then((response) => {
-      console.log('back from park update on server', response);
+      this.getMyParks();
   })
     //this.props.dispatch({type: 'EDIT_PARK', payload: this.state })
   }
