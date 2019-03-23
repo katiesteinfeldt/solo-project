@@ -224,10 +224,12 @@ class MyParks extends Component {
     }
     else {
       editFormDisplay =
-        <div onDoubleClick={this.changeEditMode}>
+        <div>
           Date Visited: {this.props.parks[0].date_visited_1}
           <pre></pre>
           Notes: {this.props.parks[0].notes}
+          <pre></pre>
+        <Button onClick={this.changeEditMode}>Edit</Button>
         </div>
     }
   }
