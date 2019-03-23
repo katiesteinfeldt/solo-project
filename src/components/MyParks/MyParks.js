@@ -245,7 +245,7 @@ class MyParks extends Component {
             aria-describedby="simple-modal-description"
             open={this.state.open}
             onClose={this.closeParkDisplay}
-          onClick={this.cancelEditedInfo}>
+            >
             <div style={getModalStyle()} className={classes.paper}>
               <Typography variant="h4" id="modal-title">{this.props.parkdisplay[0].park_full_name}</Typography>
               {this.displayEditFormDisplay()}
