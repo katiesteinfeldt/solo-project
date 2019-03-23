@@ -36,7 +36,7 @@ const styles = theme => ({
     textAlign: 'center',
   },
   button: {
-    width: '100%',
+    width: '30%',
     padding: 10,
   },
   header: {
@@ -61,7 +61,8 @@ class MyParks extends Component {
     currentPark: 0,
     edit_date: '',
     edit_notes: '',
-    editParkForm: false,
+    isInEditMode: false,
+    editText: 'TEST!',
   }
 
   componentDidMount = () => {
@@ -83,7 +84,7 @@ class MyParks extends Component {
       this.setState({
         open: true,
         currentPark: parks_visited_id,
-        editParkForm: false,
+        isInEditMode: false,
       })
     }
   }
@@ -119,7 +120,7 @@ class MyParks extends Component {
       //this.props.dispatch({ type: 'EDIT_PARK', payload: parks_visited_id })
       console.log('edit visit has been clicked', this.state);
       this.setState({
-        editParkForm: true,
+        isInEditMode: true,
       })
       // axios({
       //   method: 'PUT',
@@ -165,7 +166,7 @@ class MyParks extends Component {
   saveEditedInfo = () => {
     console.log(this.state);
     this.setState({
-      editParkForm: false,
+      isInEditMode: false,
     })
     //this.props.dispatch({type: 'EDIT_PARK', payload: this.state })
   }
@@ -173,7 +174,7 @@ class MyParks extends Component {
   cancelEditedInfo = () => {
     console.log(this.state)
     this.setState({
-      editParkForm: false,
+      isInEditMode: false,
     })
   }
 
@@ -181,18 +182,41 @@ class MyParks extends Component {
   //   console.log(this.state);
   // }
 
+  changeEditMode = () => {
+    console.log('HI');
+    this.setState({
+      isInEditMode: !this.state.isInEditMode,
+    })
+  }
+
   displayEditFormDisplay = () => {
-    if (this.state.editParkForm) {
+    if (this.state.isInEditMode) {
       editFormDisplay =
-        <div>
-          {this.props.parks[0].date_visited_1}
-          {this.props.parks[0].notes}
+        <div onClick={this.changeEditMode}>
+          IN EDIT MODE
+          <pre></pre>
+          <div>
+            <input type="date"
+            defaultValue={this.props.parks[0].date_visited_1}
+            />
+          <input type="text"
+            defaultValue={this.props.parks[0].notes}
+          />
+            </div>
+          <pre></pre>
           <button onClick={this.saveEditedInfo}>Save</button>
           <button onClick={this.cancelEditedInfo}>Cancel</button>
         </div>
     }
     else {
-      editFormDisplay = null;
+      editFormDisplay = 
+        <div onDoubleClick={this.changeEditMode}>
+        NOT IN EDIT MODE
+        <pre></pre>
+      Date Visited: {this.props.parks[0].date_visited_1}
+        <pre></pre>
+      Notes: {this.props.parks[0].notes}
+      </div>
     }
   }
 
@@ -211,13 +235,11 @@ class MyParks extends Component {
             onClose={this.closeParkDisplay}>
             <div style={getModalStyle()} className={classes.paper}>
               <Typography variant="h4" id="modal-title">{this.props.parkdisplay[0].park_full_name}</Typography>
-              <Typography>{this.props.parks[0].date_visited_1}</Typography>
-              <Typography>{this.props.parks[0].notes}</Typography>
               {this.displayEditFormDisplay()}
               {editFormDisplay}
               <img alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1} />
               <Button variant="contained" color="default" className={this.props.classes.button} onClick={this.closeParkDisplay}>OK</Button>
-              <Button variant="contained" color="default" className={this.props.classes.button} onClick={this.editVisit(this.props.parkdisplay[0].id)}>Edit</Button>
+              {/* <Button variant="contained" color="default" className={this.props.classes.button} onClick={this.editVisit(this.props.parkdisplay[0].id)}>Edit</Button> */}
               <Button variant="contained" color="default" className={this.props.classes.button} onClick={this.deletePark(this.props.parkdisplay[0].id)}>Delete This Visit</Button>
             </div>
           </Modal>
