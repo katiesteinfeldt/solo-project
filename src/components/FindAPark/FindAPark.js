@@ -246,7 +246,7 @@ class FindAPark extends Component {
           className={classes.headerSelect}
         >
           <option>--Find A Park--</option>
-          {this.props.parks.map(park =>
+          {this.props.parks && this.props.parks.map(park =>
             <option value={park.id} key={park.id}>{park.park_full_name}</option>
           )}
           </Select>
