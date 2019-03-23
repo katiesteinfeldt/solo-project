@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import './MyParks.css';
 import Card from '@material-ui/core/Card';
-import { CardContent, CardActions, Divider } from '@material-ui/core';
+import { CardContent, Divider } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Typography from '@material-ui/core/Typography';
@@ -136,18 +136,20 @@ class MyParks extends Component {
 
   createMyParks = () => {
     return this.props.parks.map(park =>
-      <Card className={this.props.classes.card} key={park.all_parks_id}><Typography className={this.props.classes.cardTitle} variant="h4">{park.park_full_name}</Typography>
+      <Card onClick={this.displayParkInfo(park.all_parks_id)} className={this.props.classes.card} key={park.all_parks_id}><Typography className={this.props.classes.cardTitle} variant="h4">{park.park_full_name}</Typography>
         <Divider />
         <CardContent>
-          <img onClick={this.displayParkInfo(park.all_parks_id)} alt={park.park_description} src={park.image_path_1} />
+          <img  alt={park.park_description} src={park.image_path_1} />
           <pre></pre>
-          <Typography>Date Visited: {park.date_visited_1}</Typography>
+          <Typography>{park.park_description}</Typography>
+          <pre></pre>
+          <Divider />
+          <pre></pre>
+          <Typography variant="h5"> My Visit:</Typography>
+          <Typography>Date: {park.date_visited_1}</Typography>
           <pre></pre>
           <Typography>Notes: {park.notes}</Typography>
         </CardContent>
-        <Divider />
-        <CardActions className={this.props.classes.button}>
-        </CardActions>
       </Card>
     )
   }
@@ -209,7 +211,8 @@ class MyParks extends Component {
             onClose={this.closeParkDisplay}>
             <div style={getModalStyle()} className={classes.paper}>
               <Typography variant="h4" id="modal-title">{this.props.parkdisplay[0].park_full_name}</Typography>
-              <Typography>{this.props.parkdisplay[0].park_description}</Typography>
+              <Typography>{this.props.parks[0].date_visited_1}</Typography>
+              <Typography>{this.props.parks[0].notes}</Typography>
               {this.displayEditFormDisplay()}
               {editFormDisplay}
               <img alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1} />
