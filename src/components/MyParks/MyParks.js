@@ -63,7 +63,7 @@ class MyParks extends Component {
     edit_notes: '',
     isInEditMode: false,
     editText: 'TEST!',
-    dateVisited: '01/06/1989',
+    dateVisited: '1/6/89',
     notes: 'Test notes',
   }
 
@@ -124,16 +124,16 @@ class MyParks extends Component {
   //     this.setState({
   //       isInEditMode: true,
   //     })
-      // axios({
-      //   method: 'PUT',
-      //   url: '/myparks/' + parks_visited_id,
-      //   // data: {
-      //   //   date_visited_1: 
-      //   //   notes: 
-      //   // }
-      // }).then((response) => {
-      //   console.log('park updated');
-      // })
+  // axios({
+  //   method: 'PUT',
+  //   url: '/myparks/' + parks_visited_id,
+  //   // data: {
+  //   //   date_visited_1: 
+  //   //   notes: 
+  //   // }
+  // }).then((response) => {
+  //   console.log('park updated');
+  // })
   //   }
   // }
 
@@ -142,7 +142,7 @@ class MyParks extends Component {
       <Card onClick={this.displayParkInfo(park.all_parks_id)} className={this.props.classes.card} key={park.all_parks_id}><Typography className={this.props.classes.cardTitle} variant="h4">{park.park_full_name}</Typography>
         <Divider />
         <CardContent>
-          <img  alt={park.park_description} src={park.image_path_1} />
+          <img alt={park.park_description} src={park.image_path_1} />
           <pre></pre>
           <Typography>{park.park_description}</Typography>
           <pre></pre>
@@ -182,7 +182,7 @@ class MyParks extends Component {
       }
     }).then((response) => {
       this.getMyParks();
-  })
+    })
     //this.props.dispatch({type: 'EDIT_PARK', payload: this.state })
   }
 
@@ -208,32 +208,27 @@ class MyParks extends Component {
     if (this.state.isInEditMode) {
       editFormDisplay =
         <div>
-          IN EDIT MODE
-          <pre></pre>
           <div>
             <input type="date"
-            onChange={this.handleChangeFor('dateVisited')}
-            defaultValue={this.state.dateVisited}
+              onChange={this.handleChangeFor('dateVisited')}
             />
-          <input type="text"
-            defaultValue={this.state.notes}
-            onChange={this.handleChangeFor('notes')}
-          />
-            </div>
+            <input type="text"
+              defaultValue={this.props.parks[0].notes}
+              onChange={this.handleChangeFor('notes')}
+            />
+          </div>
           <pre></pre>
           <Button onClick={this.saveEditedInfo}>Save</Button>
           <Button onClick={this.cancelEditedInfo}>Cancel</Button>
         </div>
     }
     else {
-      editFormDisplay = 
+      editFormDisplay =
         <div onDoubleClick={this.changeEditMode}>
-        NOT IN EDIT MODE
-        <pre></pre>
-      Date Visited: {this.state.dateVisited}
-        <pre></pre>
-      Notes: {this.state.notes}
-      </div>
+          Date Visited: {this.props.parks[0].date_visited_1}
+          <pre></pre>
+          Notes: {this.props.parks[0].notes}
+        </div>
     }
   }
 
