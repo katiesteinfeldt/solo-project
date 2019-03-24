@@ -199,10 +199,8 @@ class MyParks extends Component {
     else {
       editFormDisplay =
         <div>
-          Date Visited: {this.props.parks[0].date_visited_1}
-          <pre></pre>
-          Notes: {this.props.parks[0].notes}
-          <pre></pre>
+        <Typography>Date Visited: {this.props.parks[0].date_visited_1}</Typography>
+        <Typography>Notes: { this.props.parks[0].notes }</Typography >
         <Button onClick={this.changeEditMode}>Edit</Button>
         </div>
     }
