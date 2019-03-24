@@ -8,7 +8,7 @@ import { CardContent, Divider } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Typography from '@material-ui/core/Typography';
-//import Button from '@material-ui/core/Button';
+import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
   paper: {
@@ -28,6 +28,10 @@ const styles = theme => ({
   cardTitle: {
     padding: 15,
     textAlign: 'center',
+  },
+  button: {
+    width: '50%',
+    padding: 10,
   },
 });
 
@@ -110,11 +114,13 @@ class ParksProfile extends Component {
         onClose={this.closeParkDisplay}
         >
           <div style={getModalStyle()} className={this.props.classes.paper}>
-            <h3>{this.props.parkdisplay[0].park_full_name}</h3>
-            <pre></pre>
-            {this.props.parkdisplay[0].park_description}
+            <Typography variant="h5">{this.props.parkdisplay[0].park_full_name}</Typography>
+            <Divider />
+            <Typography>{this.props.parkdisplay[0].park_description}</Typography>
             <pre></pre>
             <img alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1} />
+            <Divider/>
+            <Button className={this.props.classes.button} onClick={this.closeParkDisplay}>OK</Button>
           </div>
           </Modal>
         }
