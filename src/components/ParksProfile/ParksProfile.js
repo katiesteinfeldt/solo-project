@@ -6,19 +6,19 @@ import axios from 'axios';
 import Card from '@material-ui/core/Card';
 import { CardContent, Divider } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-//import Modal from '@material-ui/core/Modal';
+import Modal from '@material-ui/core/Modal';
 import Typography from '@material-ui/core/Typography';
 //import Button from '@material-ui/core/Button';
 
 const styles = theme => ({
-  // paper: {
-  //   position: 'absolute',
-  //   width: theme.spacing.unit * 70,
-  //   backgroundColor: theme.palette.background.paper,
-  //   boxShadow: theme.shadows[5],
-  //   padding: theme.spacing.unit * 4,
-  //   outline: 'none',
-  // },
+  paper: {
+    position: 'absolute',
+    width: theme.spacing.unit * 70,
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing.unit * 4,
+    outline: 'none',
+  },
   card: {
     minWidth: 275,
     maxWidth: 500,
@@ -31,9 +31,22 @@ const styles = theme => ({
   },
 });
 
+// -- styling for Material UI modal -- //
+function getModalStyle() {
+  const top = 50;
+  const left = 50;
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
+
 class ParksProfile extends Component {
   state = {
-    displayMyParks: false,
+    //displayMyParks: false,
+    open: false,
   }
 
   componentDidMount = () => {
@@ -53,10 +66,17 @@ class ParksProfile extends Component {
     return () => {
       this.props.dispatch({ type: 'FETCH_CURRENT_PARK', payload: parks_visited_id })
       this.setState({
-        displayParkInfo: true,
+        open: true,
         currentPark: parks_visited_id,
       })
     }
+  }
+
+  //closes modal on click of "ok" button or when clicking on the background page
+  closeParkDisplay = () => {
+    this.setState({
+      open: false,
+    })
   }
 
   createMyParks = () => {
@@ -79,16 +99,24 @@ class ParksProfile extends Component {
 
   render() {
     let currentParkDisplay;
-    if (this.state.displayParkInfo) {
+
+    if (this.state.open) {
       currentParkDisplay = <div>
         {this.props.parkdisplay[0] &&
-          <div>
+        <Modal
+        aria-labelledby="simple-modal-title"
+        aria-describedby="simple-modal-description"
+        open={this.state.open}
+        onClose={this.closeParkDisplay}
+        >
+          <div style={getModalStyle()} className={this.props.classes.paper}>
             <h3>{this.props.parkdisplay[0].park_full_name}</h3>
             <pre></pre>
             {this.props.parkdisplay[0].park_description}
             <pre></pre>
             <img alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1} />
           </div>
+          </Modal>
         }
       </div>;
     }
