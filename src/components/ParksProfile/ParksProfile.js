@@ -13,36 +13,23 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardMedia from '@material-ui/core/CardMedia';
 
-// const styles = theme => ({
-//   paper: {
-//     position: 'absolute',
-//     width: theme.spacing.unit * 70,
-//     backgroundColor: theme.palette.background.paper,
-//     boxShadow: theme.shadows[5],
-//     padding: theme.spacing.unit * 4,
-//     outline: 'none',
-//   },
-//   card: {
-//     minWidth: 275,
-//     maxWidth: 500,
-//     margin: 20,
-//     padding: 20,
-//   },
-//   cardTitle: {
-//     padding: 15,
-//     textAlign: 'center',
-//   },
-//   button: {
-//     width: '50%',
-//     padding: 10,
-//   },
-//   media: {
-//     // ⚠️ object-fit is not supported by IE 11.
-//     objectFit: 'cover',
-//   },
-// });
-
-const styles = {
+const styles = theme => ({
+  paper: {
+    position: 'absolute',
+    width: theme.spacing.unit * 70,
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5],
+    padding: theme.spacing.unit * 4,
+    outline: 'none',
+  },
+  cardTitle: {
+    padding: 15,
+    textAlign: 'center',
+  },
+  button: {
+    width: '50%',
+    padding: 10,
+  },
   card: {
     maxWidth: 345,
     margin: 20,
@@ -51,7 +38,8 @@ const styles = {
     // ⚠️ object-fit is not supported by IE 11.
     objectFit: 'cover',
   },
-};
+});
+
 
 // -- styling for Material UI modal -- //
 function getModalStyle() {

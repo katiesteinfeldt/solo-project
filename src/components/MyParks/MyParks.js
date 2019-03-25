@@ -10,6 +10,10 @@ import { withStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import CardMedia from '@material-ui/core/CardMedia';
+import CardActions from '@material-ui/core/CardActions';
+import CardActionArea from '@material-ui/core/CardActionArea';
+
 
 let editFormDisplay;
 
@@ -24,12 +28,6 @@ const styles = theme => ({
     outline: 'none',
     font: 'Roboto'
   },
-  card: {
-    minWidth: 275,
-    maxWidth: 500,
-    margin: 20,
-    padding: 20,
-  },
   cardTitle: {
     padding: 15,
     textAlign: 'center',
@@ -37,6 +35,17 @@ const styles = theme => ({
   button: {
     width: '50%',
     padding: 10,
+  },
+  card: {
+    maxWidth: 345,
+    margin: 20,
+  },
+  media: {
+    // ⚠️ object-fit is not supported by IE 11.
+    objectFit: 'cover',
+  },  media: {
+    // ⚠️ object-fit is not supported by IE 11.
+    objectFit: 'cover',
   },
 });
 
@@ -120,20 +129,23 @@ class MyParks extends Component {
   // displays list of parks visited on the dom in a material ui card
   createMyParks = () => {
     return this.props.parks.map(park =>
-      <Card onClick={this.displayParkInfo(park.all_parks_id)} className={this.props.classes.card} key={park.all_parks_id}><Typography className={this.props.classes.cardTitle} variant="h4">{park.park_full_name}</Typography>
-        <Divider />
+      <Card onClick={this.displayParkInfo(park.all_parks_id)} className={this.props.classes.card} key={park.all_parks_id}>
+        <CardActionArea>
+        <CardMedia
+          component="img"
+          alt={park.park_description}
+          className={this.props.classes.media}
+          height="140"
+          image={park.image_path_1}
+          title={park.park_full_name}
+        />
         <CardContent>
-          <img alt={park.park_description} src={park.image_path_1} />
-          <pre></pre>
-          <Typography>{park.park_description}</Typography>
-          <pre></pre>
-          <Divider />
-          <pre></pre>
-          <Typography variant="h5"> My Visit:</Typography>
-          <Typography>Date: {park.date_visited_1}</Typography>
-          <pre></pre>
-          <Typography>Notes: {park.notes}</Typography>
+            <Typography className={this.props.classes.cardTitle} variant="h4">{park.park_full_name}</Typography>
         </CardContent>
+        </CardActionArea>
+        <CardActions>
+          <Button onClick={this.displayParkInfo(park.all_parks_id)}>See Visit Details</Button>
+        </CardActions>
       </Card>
     )
   }
@@ -197,9 +209,9 @@ class MyParks extends Component {
     else {
       editFormDisplay =
         <div>
-        <Typography>Date Visited: {this.props.parks[0].date_visited_1}</Typography>
-        <Typography>Notes: { this.props.parks[0].notes }</Typography >
-        <Button onClick={this.changeEditMode}>Edit</Button>
+          <Typography>Date Visited: {this.props.parks[0].date_visited_1}</Typography>
+          <Typography>Notes: {this.props.parks[0].notes}</Typography >
+          <Button onClick={this.changeEditMode}>Edit</Button>
         </div>
     }
   }
@@ -217,11 +229,12 @@ class MyParks extends Component {
             aria-describedby="simple-modal-description"
             open={this.state.open}
             onClose={this.closeParkDisplay}
-            >
+          >
             <div style={getModalStyle()} className={classes.paper}>
               <h3 id="modal-title">{this.props.parkdisplay[0].park_full_name}</h3>
               {this.displayEditFormDisplay()}
               {editFormDisplay}
+              {this.props.parkdisplay[0].description}
               <img alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1} />
               <Button variant="contained" color="default" className={this.props.classes.button} onClick={this.closeParkDisplay}>OK</Button>
               <Button variant="contained" color="default" className={this.props.classes.button} onClick={this.deletePark(this.props.parkdisplay[0].id)}>Delete This Visit</Button>
