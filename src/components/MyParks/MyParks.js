@@ -32,10 +32,6 @@ const styles = theme => ({
     padding: 15,
     textAlign: 'center',
   },
-  button: {
-    width: '50%',
-    padding: 10,
-  },
   card: {
     maxWidth: 345,
     margin: 20,
@@ -43,9 +39,9 @@ const styles = theme => ({
   media: {
     // ⚠️ object-fit is not supported by IE 11.
     objectFit: 'cover',
-  },  media: {
-    // ⚠️ object-fit is not supported by IE 11.
-    objectFit: 'cover',
+  }, 
+  image: {
+    maxHeight: 400,
   },
 });
 
@@ -140,7 +136,7 @@ class MyParks extends Component {
           title={park.park_full_name}
         />
         <CardContent>
-            <Typography className={this.props.classes.cardTitle} variant="h4">{park.park_full_name}</Typography>
+            <Typography variant="h5">{park.park_full_name}</Typography>
         </CardContent>
         </CardActionArea>
         <CardActions>
@@ -192,7 +188,6 @@ class MyParks extends Component {
     if (this.state.isInEditMode) {
       editFormDisplay =
         <div>
-          <div>
             <input type="date"
               onChange={this.handleChangeFor('dateVisited')}
             />
@@ -200,8 +195,6 @@ class MyParks extends Component {
               defaultValue={this.props.parks[0].notes}
               onChange={this.handleChangeFor('notes')}
             />
-          </div>
-          <pre></pre>
           <Button onClick={this.saveEditedInfo}>Save</Button>
           <Button onClick={this.changeEditMode}>Cancel</Button>
         </div>
@@ -211,7 +204,7 @@ class MyParks extends Component {
         <div>
           <Typography>Date Visited: {this.props.parks[0].date_visited_1}</Typography>
           <Typography>Notes: {this.props.parks[0].notes}</Typography >
-          <Button onClick={this.changeEditMode}>Edit</Button>
+        <Button variant="contained" onClick={this.changeEditMode}>Edit</Button>
         </div>
     }
   }
@@ -231,13 +224,14 @@ class MyParks extends Component {
             onClose={this.closeParkDisplay}
           >
             <div style={getModalStyle()} className={classes.paper}>
-              <h3 id="modal-title">{this.props.parkdisplay[0].park_full_name}</h3>
-              {this.displayEditFormDisplay()}
-              {editFormDisplay}
-              {this.props.parkdisplay[0].description}
-              <img alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1} />
-              <Button variant="contained" color="default" className={this.props.classes.button} onClick={this.closeParkDisplay}>OK</Button>
-              <Button variant="contained" color="default" className={this.props.classes.button} onClick={this.deletePark(this.props.parkdisplay[0].id)}>Delete This Visit</Button>
+            <img className={this.props.classes.image} alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1} />
+            <Typography variant="h5">{this.props.parkdisplay[0].park_full_name}</Typography>
+            <Typography>{this.props.parkdisplay[0].park_description}</Typography>
+            <Divider /> 
+            {this.displayEditFormDisplay()}
+            {editFormDisplay}
+              <Button variant="contained" onClick={this.closeParkDisplay}>OK</Button>
+              <Button variant="contained" onClick={this.deletePark(this.props.parkdisplay[0].id)}>Delete This Visit</Button>
             </div>
           </Modal>
         }

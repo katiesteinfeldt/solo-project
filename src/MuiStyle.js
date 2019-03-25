@@ -20,6 +20,10 @@ const theme = createMuiTheme({
         }
         // error: will use the default color
     },
+    typography: {
+        fontFamily: 'Roboto',
+        fontSize: 14,
+    },
 
 });
 
