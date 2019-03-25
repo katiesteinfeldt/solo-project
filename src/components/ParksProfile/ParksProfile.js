@@ -9,31 +9,49 @@ import { withStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+import CardActionArea from '@material-ui/core/CardActionArea';
+import CardActions from '@material-ui/core/CardActions';
+import CardMedia from '@material-ui/core/CardMedia';
 
-const styles = theme => ({
-  paper: {
-    position: 'absolute',
-    width: theme.spacing.unit * 70,
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit * 4,
-    outline: 'none',
-  },
+// const styles = theme => ({
+//   paper: {
+//     position: 'absolute',
+//     width: theme.spacing.unit * 70,
+//     backgroundColor: theme.palette.background.paper,
+//     boxShadow: theme.shadows[5],
+//     padding: theme.spacing.unit * 4,
+//     outline: 'none',
+//   },
+//   card: {
+//     minWidth: 275,
+//     maxWidth: 500,
+//     margin: 20,
+//     padding: 20,
+//   },
+//   cardTitle: {
+//     padding: 15,
+//     textAlign: 'center',
+//   },
+//   button: {
+//     width: '50%',
+//     padding: 10,
+//   },
+//   media: {
+//     // ⚠️ object-fit is not supported by IE 11.
+//     objectFit: 'cover',
+//   },
+// });
+
+const styles = {
   card: {
-    minWidth: 275,
-    maxWidth: 500,
+    maxWidth: 345,
     margin: 20,
-    padding: 20,
   },
-  cardTitle: {
-    padding: 15,
-    textAlign: 'center',
+  media: {
+    // ⚠️ object-fit is not supported by IE 11.
+    objectFit: 'cover',
   },
-  button: {
-    width: '50%',
-    padding: 10,
-  },
-});
+};
 
 // -- styling for Material UI modal -- //
 function getModalStyle() {
@@ -86,17 +104,35 @@ class ParksProfile extends Component {
   createMyParks = () => {
     return this.props.parks.map(park =>
       <Card className={this.props.classes.card}>
-        <div key={park.all_parks_id}><Typography variant="h4">{park.park_full_name}</Typography>
-          <Divider />
+        <CardActionArea>
+          <CardMedia
+            component="img"
+            alt={park.park_description}
+            className={this.props.classes.media}
+            height="140"
+            image={park.image_path_1}
+            title={park.park_full_name}
+          />
           <CardContent>
-            <img onClick={this.displayParkInfo(park.all_parks_id)} alt={park.park_description} src={park.image_path_1} />
-            <pre></pre>
-            <Typography>Date Visited: {park.date_visited_1}</Typography>
-            <pre></pre>
-            <Typography>Notes: {park.notes}</Typography>
-            <pre></pre>
+            <Typography gutterBottom variant="h5" component="h2">
+              {park.park_full_name}
+          </Typography>
+            <Typography component="p">
+             Notes: {park.notes}
+          </Typography>
+            <Typography component="p">
+             Date Visited: {park.date_visited_1}
+            </Typography>
           </CardContent>
-        </div>
+        </CardActionArea>
+        <CardActions>
+          <Button size="small" color="primary">
+            Share
+        </Button>
+          <Button size="small" color="primary">
+            Learn More
+        </Button>
+        </CardActions>
       </Card>
     )
   }

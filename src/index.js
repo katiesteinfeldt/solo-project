@@ -9,6 +9,8 @@ import rootReducer from './redux/reducers'; // imports ./redux/reducers/index.js
 import rootSaga from './redux/sagas'; // imports ./redux/sagas/index.js
 
 import App from './components/App/App';
+import MuiStyle from './MuiStyle';
+import { MuiThemeProvider } from '@material-ui/core';
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -33,7 +35,9 @@ sagaMiddleware.run(rootSaga);
 
 ReactDOM.render(
   <Provider store={store}>
+  <MuiThemeProvider theme={MuiStyle}>
     <App />
+    </MuiThemeProvider>
   </Provider>,
   document.getElementById('react-root'),
 );

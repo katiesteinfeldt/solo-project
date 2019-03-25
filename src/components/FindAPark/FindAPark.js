@@ -42,6 +42,9 @@ const styles = theme => ({
   headerSelect: {
     margin: 10,
     padding: 10,
+    textAlign: 'center',
+    color: 'white',
+    left: '39%',
   },
 });
 
@@ -239,7 +242,7 @@ class FindAPark extends Component {
     return (
       <div>
         <div>{parkSubmitted}</div>
-        <Typography variant="h3" className={classes.headerSelect}>Find A Park</Typography>
+        <h1 className="findAPark">Find A Park</h1>
         <Select
           native
           onChange={this.handleParkChange}

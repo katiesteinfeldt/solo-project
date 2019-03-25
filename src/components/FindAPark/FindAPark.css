@@ -3,3 +3,10 @@
     max-width: 700px;
     padding: 20px;
 }
+
+.findAPark {
+  font-family: 'Roboto', sans-serif;
+  color: white;
+  text-align: center;
+  left: 50%;
+}

@@ -22,6 +22,7 @@ const styles = theme => ({
     boxShadow: theme.shadows[5],
     padding: theme.spacing.unit * 4,
     outline: 'none',
+    font: 'Roboto'
   },
   card: {
     minWidth: 275,
@@ -37,9 +38,6 @@ const styles = theme => ({
     width: '50%',
     padding: 10,
   },
-  header: {
-    margin: 10,
-  }
 });
 
 // -- styling for Material UI modal -- //
@@ -221,7 +219,7 @@ class MyParks extends Component {
             onClose={this.closeParkDisplay}
             >
             <div style={getModalStyle()} className={classes.paper}>
-              <Typography variant="h4" id="modal-title">{this.props.parkdisplay[0].park_full_name}</Typography>
+              <h3 id="modal-title">{this.props.parkdisplay[0].park_full_name}</h3>
               {this.displayEditFormDisplay()}
               {editFormDisplay}
               <img alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1} />
@@ -238,7 +236,7 @@ class MyParks extends Component {
 
     return (
       <div>
-        <Typography className={classes.header} variant="h3">My Parks</Typography>
+        <h1 className="myParksHeader">My Parks</h1>
         <div className="container">{this.createMyParks()}</div>
         {currentParkDisplay}
       </div>
