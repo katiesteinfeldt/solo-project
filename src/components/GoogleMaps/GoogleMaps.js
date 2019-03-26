@@ -4,7 +4,7 @@ import './GoogleMaps.css';
 import axios from 'axios';
 import { connect } from 'react-redux';
 
-
+let newMarker
 class GoogleMaps extends Component {
 
     getMyParks = () => {
@@ -15,6 +15,28 @@ class GoogleMaps extends Component {
                 console.log('error in my parks client get request', error);
             });
     }
+
+    createMyParks = () => {
+        return this.props.parks.map(park =>
+           <div>{park.latLong}</div>
+        )
+    }
+    createMyParks = () => {
+        return this.props.parks.map(park =>
+            <div>{park.latLong}</div>
+        )
+    }
+
+    createMarkers = () => {
+        return this.props.parks.map(park =>
+            <Marker 
+                title={'The marker`s title will appear as a tooltip.'}
+                name={'Glacier National Park'}
+                position={{ lat: 48.68414678, lng: -113.8009306 }}
+            />
+            )
+    }
+
 
     state = {
         userLocation: {
@@ -62,9 +84,12 @@ class GoogleMaps extends Component {
         }
 
         return (
-        <div className="map">
-        <Map google={google} initialCenter={userLocation} zoom={4}>
-                <Marker
+            <div>
+                <div>{this.createMyParks()}</div>
+                
+                <Map className="googleMap" google={google} initialCenter={userLocation} zoom={4}>
+                    {this.createMarkers()}
+                {/* <Marker
                     title={'The marker`s title will appear as a tooltip.'}
                     name={'Grand Canyon National Park'}
                     position={{ lat: 36.17280161, lng: -112.6836024 }} />
@@ -84,8 +109,9 @@ class GoogleMaps extends Component {
                     title={'The marker`s title will appear as a tooltip.'}
                     name={'Glacier National Park'}
                     position={{ lat: 48.68414678, lng: -113.8009306 }} />
-        
-        </Map>
+                     */}
+                </Map>
+               
             </div>
         );
 
