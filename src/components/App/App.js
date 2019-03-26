@@ -15,7 +15,6 @@ import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import ParksProfile from '../ParksProfile/ParksProfile';
 import MyParks from '../MyParks/MyParks';
 import FindAPark from '../FindAPark/FindAPark';
-//import GoogleMaps from '../GoogleMaps/GoogleMaps';
 
 import './App.css';
 import GoogleMaps from '../GoogleMaps/GoogleMaps';
@@ -47,11 +46,7 @@ class App extends Component {
               component={GoogleMaps}
             />
 
-            {/* <Route
-              exact
-              path="/map"
-              component={GoogleMaps}
-            /> */}
+        
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.

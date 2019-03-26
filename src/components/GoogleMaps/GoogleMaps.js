@@ -1,40 +1,58 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import axios from 'axios';
-
+import { GoogleApiWrapper, Map } from "google-maps-react";
 
 class GoogleMaps extends Component {
-    
-    componentDidMount = () => {
-       //this.getMyMap();
-    }
 
-    getMyMap = () => {
-        axios.get('/googlemaps')
-            .then((response) => {
-                console.log(response.data);
-            }).catch(error => {
-                console.log('error in my googlemaps client get request', error);
-            });
+
+    state = {
+        userLocation: {
+            lat: 45,
+            lng: -45,
+        },
+        loading: true
+    };
+
+    componentDidMount() {
+        navigator.geolocation.getCurrentPosition(
+            position => {
+                const { latitude, longitude } = position.coords;
+
+                this.setState({
+                    userLocation: {
+                        lat: 48.367222,
+                        lng: - 99.996111,
+                    },
+                    loading: false,
+                });
+                new window.google.maps.Marker({
+                    position: {
+                        lat: latitude,
+                        lng: longitude,
+                    },
+                    map: Map,
+                });
+            },
+            () => {
+                this.setState({
+                    loading: false
+                });
+            }
+        );
     }
-  
 
     render() {
-        
-        return (
-            <div>
-                GOOGLE MAPS
-            </div>
-        );
+        const { loading, userLocation } = this.state;
+        const { google } = this.props;
+
+        if (loading) {
+            return null;
+        }
+
+        return <Map google={google} initialCenter={userLocation} zoom={4} />;
+
     }
 }
 
-const mapStateToProps = state => ({
-    user: state.user,
-    parks: state.parks,
-    parkdisplay: state.parkdisplay,
-});
-
-// this allows us to use <App /> in index.js
-export default connect(mapStateToProps)(GoogleMaps);
-
+export default GoogleApiWrapper({
+    apiKey: 'AIzaSyCHYi2wtrFyckBkYUz6Brsx7mB2z5khGHM'
+})(GoogleMaps);
