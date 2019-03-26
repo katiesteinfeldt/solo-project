@@ -1,22 +1,40 @@
-import React from 'react';
-import Map, { GoogleApiWrapper } from 'google-maps-react';
-const apiKey = process.env.GOOGLE_MAPS_API_KEY
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import axios from 'axios';
 
-class GoogleMaps extends React.Component {
+
+class GoogleMaps extends Component {
+    
+    componentDidMount = () => {
+       //this.getMyMap();
+    }
+
+    getMyMap = () => {
+        axios.get('/googlemaps')
+            .then((response) => {
+                console.log(response.data);
+            }).catch(error => {
+                console.log('error in my googlemaps client get request', error);
+            });
+    }
+  
+
     render() {
+        
         return (
-            <Map
-                google={this.props.google}
-                zoom={14}
-                center={{
-                    lat: 37.29839254,
-                    lng: -113.0265138,
-                }}
-            />
+            <div>
+                GOOGLE MAPS
+            </div>
         );
     }
 }
 
-export default GoogleApiWrapper({
-    apiKey: apiKey
-})(GoogleMaps);
+const mapStateToProps = state => ({
+    user: state.user,
+    parks: state.parks,
+    parkdisplay: state.parkdisplay,
+});
+
+// this allows us to use <App /> in index.js
+export default connect(mapStateToProps)(GoogleMaps);
+

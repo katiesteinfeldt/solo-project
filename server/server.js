@@ -14,6 +14,7 @@ const parksRouter = require('./routes/parks.router');
 const currentParkRouter = require('./routes/current-park.router');
 const myParksRouter = require('./routes/my.parks.router');
 const editParkRouter = require('./routes/edit.park.router');
+const googleMapsRouter = require('./routes/google.maps.router.js');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -32,6 +33,7 @@ app.use('/parks', parksRouter);
 app.use('/currentpark', currentParkRouter)
 app.use('/myparks', myParksRouter);
 app.use('/editpark', editParkRouter);
+app.use('/googlemaps', googleMapsRouter);
 
 // Serve static files
 app.use(express.static('build'));

@@ -18,6 +18,7 @@ import FindAPark from '../FindAPark/FindAPark';
 //import GoogleMaps from '../GoogleMaps/GoogleMaps';
 
 import './App.css';
+import GoogleMaps from '../GoogleMaps/GoogleMaps';
 
 class App extends Component {
   componentDidMount () {
@@ -38,6 +39,12 @@ class App extends Component {
               exact
               path="/profile"
               component={ParksProfile}
+            />
+
+            <Route
+              exact
+              path="/map"
+              component={GoogleMaps}
             />
 
             {/* <Route
