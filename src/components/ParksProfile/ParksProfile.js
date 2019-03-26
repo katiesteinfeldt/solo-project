@@ -159,7 +159,7 @@ class ParksProfile extends Component {
     return (
       <div>
         <Typography variant="h3">{this.props.user.username}'s Park Profile</Typography>
-        {this.createMyParks()}
+        <div className="parkContainer">{this.createMyParks()}</div>
         {currentParkDisplay}
       </div>
     );
