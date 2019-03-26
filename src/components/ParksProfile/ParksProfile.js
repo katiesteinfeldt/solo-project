@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
+import './ParksProfile.css';
 
 // -- Material UI components -- //
 import Card from '@material-ui/core/Card';
@@ -33,10 +34,6 @@ const styles = theme => ({
   card: {
     maxWidth: 345,
     margin: 20,
-  },
-  media: {
-    // ⚠️ object-fit is not supported by IE 11.
-    objectFit: 'cover',
   },
 });
 
@@ -92,16 +89,20 @@ class ParksProfile extends Component {
   createMyParks = () => {
     return this.props.parks.map(park =>
       <Card onClick={this.displayParkInfo(park.all_parks_id)} className={this.props.classes.card}>
-        <CardActionArea>
+        <CardActionArea className="container">
           <CardMedia
             component="img"
             alt={park.park_description}
-            className={this.props.classes.media}
+            className="image"
             height="200"
             image={park.image_path_1}
             title={park.park_full_name}
           />
-          <CardContent>
+          <div className="overlay">
+            <div className="text">{park.park_full_name}
+            </div>
+          </div>
+          {/* <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
               {park.park_full_name}
           </Typography>
@@ -111,16 +112,16 @@ class ParksProfile extends Component {
             <Typography component="p">
              Date Visited: {park.date_visited_1}
             </Typography>
-          </CardContent>
+          </CardContent> */}
         </CardActionArea>
-        <CardActions>
-          <Button size="small" color="primary">
+        {/* <CardActions> */}
+        {/* <Button size="small" color="primary">
             Share
         </Button>
           <Button size="small" color="primary">
             Learn More
         </Button>
-        </CardActions>
+        </CardActions> */}
       </Card>
     )
   }
@@ -131,21 +132,21 @@ class ParksProfile extends Component {
     if (this.state.open) {
       currentParkDisplay = <div>
         {this.props.parkdisplay[0] &&
-        <Modal
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
-        open={this.state.open}
-        onClose={this.closeParkDisplay}
-        >
-          <div style={getModalStyle()} className={this.props.classes.paper}>
-            <Typography variant="h5">{this.props.parkdisplay[0].park_full_name}</Typography>
-            <Divider />
-            <Typography>{this.props.parkdisplay[0].park_description}</Typography>
-            <pre></pre>
-            <img alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1} />
-            <Divider/>
-            <Button className={this.props.classes.button} onClick={this.closeParkDisplay}>OK</Button>
-          </div>
+          <Modal
+            aria-labelledby="simple-modal-title"
+            aria-describedby="simple-modal-description"
+            open={this.state.open}
+            onClose={this.closeParkDisplay}
+          >
+            <div style={getModalStyle()} className={this.props.classes.paper}>
+              <Typography variant="h5">{this.props.parkdisplay[0].park_full_name}</Typography>
+              <Divider />
+              <Typography>{this.props.parkdisplay[0].park_description}</Typography>
+              <pre></pre>
+              <img alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1} />
+              <Divider />
+              <Button className={this.props.classes.button} onClick={this.closeParkDisplay}>OK</Button>
+            </div>
           </Modal>
         }
       </div>;
