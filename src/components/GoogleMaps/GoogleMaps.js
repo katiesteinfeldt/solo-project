@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { GoogleApiWrapper, Map } from "google-maps-react";
+import { GoogleApiWrapper, Map, Marker, InfoWindow } from "google-maps-react";
 
 class MapContainer extends Component {
 
@@ -48,7 +48,15 @@ class MapContainer extends Component {
             return null;
         }
 
-        return <Map google={google} initialCenter={userLocation} zoom={4} />;
+        return (
+        <Map google={google} initialCenter={userLocation} zoom={4}>
+                <Marker
+                    title={'The marker`s title will appear as a tooltip.'}
+                    name={'SOMA'}
+                    position={{ lat: 36.17280161, lng: -112.6836024 }} />
+        
+        </Map>
+        );
 
     }
 }
