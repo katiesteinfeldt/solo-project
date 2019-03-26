@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import { GoogleApiWrapper, Map } from "google-maps-react";
+import axios from 'axios';
+import { connect } from 'react-redux';
+import GoogleMapsInfo from './GoogleMapsInfo';
+
+
 
 class GoogleMaps extends Component {
 
@@ -11,8 +16,21 @@ class GoogleMaps extends Component {
         },
         loading: true
     };
+    
+    componentDidMount = () => {
+        this.getMyParks();
+    }
 
-    componentDidMount() {
+    getMyParks = () => {
+        axios.get('/myparks')
+            .then((response) => {
+                this.props.dispatch({ type: 'SET_MY_PARKS', payload: response.data })
+            }).catch(error => {
+                console.log('error in my parks client get request', error);
+            });
+    }
+
+    componentDidUpdate = () => {
         navigator.geolocation.getCurrentPosition(
             position => {
                 const { latitude, longitude } = position.coords;
@@ -40,7 +58,13 @@ class GoogleMaps extends Component {
         );
     }
 
+    // for each park in the reducer => park
+        // const marker = new window.google.maps.Marker({
+        //     position: {lat: park.latitude, long: park.longitude}
+        // })
+
     render() {
+      
         const { loading, userLocation } = this.state;
         const { google } = this.props;
 
@@ -48,11 +72,26 @@ class GoogleMaps extends Component {
             return null;
         }
 
-        return <Map google={google} initialCenter={userLocation} zoom={4} />;
+       
+
+        return (
+            <div>
+        <Map google={google} initialCenter={userLocation} zoom={4} />
+        <GoogleMapsInfo />
+            </div>
+        );
 
     }
 }
+const mapStateToProps = state => ({
+    //user: state.user,
+    parks: state.parks,
+    parkdisplay: state.parkdisplay,
+    editpark: state.editpark,
+});
 
 export default GoogleApiWrapper({
     apiKey: 'AIzaSyCHYi2wtrFyckBkYUz6Brsx7mB2z5khGHM'
-})(GoogleMaps);
+})(connect(mapStateToProps)(GoogleMaps));
+
+
