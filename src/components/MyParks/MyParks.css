@@ -11,13 +11,13 @@ img {
 
 body {
   margin-top: 100px;
-  /* background-image: 
+  /* background-color: #faca9c; */
+  background-image: 
     url('/images/IMG_1076.JPG');
   background-repeat: repeat;
-  /* background-position: center; */
-  /* background-size: cover; */ 
+  background-position: center;
+  background-size: cover; 
 }
-
 
 .myParksHeader {
   font-family: 'Roboto', sans-serif;

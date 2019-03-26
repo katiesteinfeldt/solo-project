@@ -28,24 +28,24 @@ const styles = theme => ({
     outline: 'none',
     font: 'Roboto'
   },
-  cardTitle: {
-    padding: 15,
-    textAlign: 'center',
-  },
   card: {
     maxWidth: 400,
-    margin: 20,
+    margin: 15,
   },
   media: {
     // ⚠️ object-fit is not supported by IE 11.
     objectFit: 'cover',
   }, 
   button: {
-    position: 'absolute',
+    position: 'center',
+    width: '100%',
   },
   cardActions: {
     position: 'relative',
   },
+  typography: {
+    textAlign: 'center',
+  }
 });
 
 // -- styling for Material UI modal -- //
@@ -139,7 +139,7 @@ class MyParks extends Component {
           title={park.park_full_name}
         />
           <CardContent className={this.props.classes.cardContent} >
-            <Typography className={this.props.classes.typography} variant="h5">{park.park_full_name}</Typography>
+            <Typography className={this.props.classes.typography} variant="h6">{park.park_full_name}</Typography>
         </CardContent>
         </CardActionArea>
         <CardActions className={this.props.classes.cardActions} >
@@ -207,7 +207,7 @@ class MyParks extends Component {
         <div>
           <Typography>Date Visited: {this.props.parks[0].date_visited_1}</Typography>
           <Typography>Notes: {this.props.parks[0].notes}</Typography >
-        <Button variant="contained" onClick={this.changeEditMode}>Edit</Button>
+        <Button onClick={this.changeEditMode}>Edit</Button>
         </div>
     }
   }
@@ -233,8 +233,8 @@ class MyParks extends Component {
             <Divider /> 
             {this.displayEditFormDisplay()}
             {editFormDisplay}
-              <Button variant="contained" onClick={this.closeParkDisplay}>OK</Button>
-              <Button variant="contained" onClick={this.deletePark(this.props.parkdisplay[0].id)}>Delete This Visit</Button>
+              <Button onClick={this.closeParkDisplay}>OK</Button>
+              <Button onClick={this.deletePark(this.props.parkdisplay[0].id)}>Delete This Visit</Button>
             </div>
           </Modal>
         }

@@ -91,13 +91,13 @@ class ParksProfile extends Component {
 
   createMyParks = () => {
     return this.props.parks.map(park =>
-      <Card className={this.props.classes.card}>
+      <Card onClick={this.displayParkInfo(park.all_parks_id)} className={this.props.classes.card}>
         <CardActionArea>
           <CardMedia
             component="img"
             alt={park.park_description}
             className={this.props.classes.media}
-            height="140"
+            height="200"
             image={park.image_path_1}
             title={park.park_full_name}
           />
