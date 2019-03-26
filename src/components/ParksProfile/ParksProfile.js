@@ -5,13 +5,12 @@ import './ParksProfile.css';
 
 // -- Material UI components -- //
 import Card from '@material-ui/core/Card';
-import { CardContent, Divider } from '@material-ui/core';
+import { Divider } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
 import CardMedia from '@material-ui/core/CardMedia';
 
 const styles = theme => ({
@@ -102,26 +101,7 @@ class ParksProfile extends Component {
             <div className="text">{park.park_full_name}
             </div>
           </div>
-          {/* <CardContent>
-            <Typography gutterBottom variant="h5" component="h2">
-              {park.park_full_name}
-          </Typography>
-            <Typography component="p">
-             Notes: {park.notes}
-          </Typography>
-            <Typography component="p">
-             Date Visited: {park.date_visited_1}
-            </Typography>
-          </CardContent> */}
         </CardActionArea>
-        {/* <CardActions> */}
-        {/* <Button size="small" color="primary">
-            Share
-        </Button>
-          <Button size="small" color="primary">
-            Learn More
-        </Button>
-        </CardActions> */}
       </Card>
     )
   }
@@ -142,7 +122,6 @@ class ParksProfile extends Component {
               <Typography variant="h5">{this.props.parkdisplay[0].park_full_name}</Typography>
               <Divider />
               <Typography>{this.props.parkdisplay[0].park_description}</Typography>
-              <pre></pre>
               <img alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1} />
               <Divider />
               <Button className={this.props.classes.button} onClick={this.closeParkDisplay}>OK</Button>
@@ -155,10 +134,9 @@ class ParksProfile extends Component {
       currentParkDisplay = null;
     }
 
-
     return (
-      <div>
-        <Typography variant="h3">{this.props.user.username}'s Park Profile</Typography>
+      <div className="body">
+        <Typography className="title" variant="h3">Park Profile</Typography>
         <div className="parkContainer">{this.createMyParks()}</div>
         {currentParkDisplay}
       </div>

@@ -161,7 +161,6 @@ class FindAPark extends Component {
   }
 
   closeParkDisplay = () => {
-    console.log('closing park display');
     this.setState({
       open: false,
       parkSubmitted: false,
@@ -248,7 +247,7 @@ class FindAPark extends Component {
           onChange={this.handleParkChange}
           className={classes.headerSelect}
         >
-          <option>--Find A Park--</option>
+          <option>-- Find A Park --</option>
           {this.props.parks && this.props.parks.map(park =>
             <option value={park.id} key={park.id}>{park.park_full_name}</option>
           )}

@@ -30,3 +30,11 @@
   display: flex;
   flex-flow: wrap;
 }
+
+.body {
+    background-color: white;
+}
+
+.title {
+    text-align: center;
+}
