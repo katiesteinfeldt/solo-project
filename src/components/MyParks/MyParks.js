@@ -33,15 +33,18 @@ const styles = theme => ({
     textAlign: 'center',
   },
   card: {
-    maxWidth: 345,
+    maxWidth: 400,
     margin: 20,
   },
   media: {
     // ⚠️ object-fit is not supported by IE 11.
     objectFit: 'cover',
   }, 
-  image: {
-    maxHeight: 400,
+  button: {
+    position: 'absolute',
+  },
+  cardActions: {
+    position: 'relative',
   },
 });
 
@@ -131,16 +134,16 @@ class MyParks extends Component {
           component="img"
           alt={park.park_description}
           className={this.props.classes.media}
-          height="140"
+          height="300"
           image={park.image_path_1}
           title={park.park_full_name}
         />
-        <CardContent>
-            <Typography variant="h5">{park.park_full_name}</Typography>
+          <CardContent className={this.props.classes.cardContent} >
+            <Typography className={this.props.classes.typography} variant="h5">{park.park_full_name}</Typography>
         </CardContent>
         </CardActionArea>
-        <CardActions>
-          <Button onClick={this.displayParkInfo(park.all_parks_id)}>See Visit Details</Button>
+        <CardActions className={this.props.classes.cardActions} >
+          <Button className={this.props.classes.button} onClick={this.displayParkInfo(park.all_parks_id)}>See Visit Details</Button>
         </CardActions>
       </Card>
     )
