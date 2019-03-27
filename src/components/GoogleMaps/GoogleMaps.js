@@ -26,23 +26,18 @@ class GoogleMaps extends Component {
         const element = this.props.parks.map((park, index) => {
             let latitude = park.lat.split(' ');
             let longitude = park.long.split(' ');
-            console.log(longitude);
             let latValue = Number(latitude[2]);
             let longValue = Number(longitude[4]);
-            //console.log('latitude match:',(latValue === 36.17280161));
-            //console.log('longitude match:', longValue, (longValue === -112.6836024 ));
 
             return (<Marker
                 key={index}
-                title={'The marker`s title will appear as a tooltip.'}
-                name={'Glacier National Park'}
+                title={park.park_description}
+                name={park.park_full_name}
                 position={{ lat: latValue, lng: longValue }}
             />)
 
         }
         )
-
-        console.log(element);
         return element;
     }
 
@@ -87,33 +82,9 @@ class GoogleMaps extends Component {
 
         return (
             <div>
-                {/* <div>{this.createMyParks()}</div> */}
-
                 <Map className="googleMap" google={google} initialCenter={userLocation} zoom={4}>
                     {this.createMarkers()}
-                    {/* <Marker
-                    title={'The marker`s title will appear as a tooltip.'}
-                    name={'Grand Canyon National Park'}
-                    position={{ lat: 36.17280161, lng: -112.6836024 }} />
-                    <Marker
-                    title={'The marker`s title will appear as a tooltip.'}
-                    name={'Great Smoky Mountains National Park'}
-                    position={{ lat: 35.60116374, lng: -83.50818326 }} />
-                    <Marker
-                    title={'The marker`s title will appear as a tooltip.'}
-                    name={'Grand Teton National Park'}
-                    position={{ lat: 43.81853565, lng: -110.7054666 }} />
-                    <Marker
-                    title={'The marker`s title will appear as a tooltip.'}
-                    name={'Rocky Mountain National Park'}
-                    position={{ lat: 40.3556924, lng: -105.6972879 }} />
-                    <Marker
-                    title={'The marker`s title will appear as a tooltip.'}
-                    name={'Glacier National Park'}
-                    position={{ lat: 48.68414678, lng: -113.8009306 }} />
-                     */}
                 </Map>
-
             </div>
         );
 
