@@ -5,7 +5,14 @@ import axios from 'axios';
 import { connect } from 'react-redux';
 
 class GoogleMaps extends Component {
-
+    state = {
+        userLocation: {
+            lat: 45,
+            lng: -45,
+        },
+        loading: true,
+    };
+    
     getMyParks = () => {
         axios.get('/myparks')
             .then((response) => {
@@ -15,12 +22,9 @@ class GoogleMaps extends Component {
             });
     }
 
-    // createMyParks = () => {
-    //     return this.props.parks.map(park =>
-    //         <div>{park.latLong}</div>
-    //     )
-    // }
-
+    onMarkerClick = () => {
+        console.log('hello');
+    }
 
     createMarkers = () => {
         const element = this.props.parks.map((park, index) => {
@@ -28,27 +32,18 @@ class GoogleMaps extends Component {
             let longitude = park.long.split(' ');
             let latValue = Number(latitude[2]);
             let longValue = Number(longitude[4]);
-
             return (<Marker
                 key={index}
-                title={park.park_description}
+                title={park.park_full_name}
                 name={park.park_full_name}
                 position={{ lat: latValue, lng: longValue }}
-            />)
-
+                onClick={this.onMarkerClick}
+            ></Marker>
+            )
         }
         )
         return element;
     }
-
-
-    state = {
-        userLocation: {
-            lat: 45,
-            lng: -45,
-        },
-        loading: true
-    };
 
     componentDidMount() {
         this.getMyParks();
