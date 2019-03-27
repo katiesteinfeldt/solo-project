@@ -28,12 +28,15 @@ class GoogleMaps extends Component {
     }
 
     createMarkers = () => {
-        return this.props.parks.map(park =>
+        return this.props.parks.map(park => {
+            let latitude = park.lat.split(' ');
+            let longitude = park.long.split(' ');
             <Marker 
                 title={'The marker`s title will appear as a tooltip.'}
                 name={'Glacier National Park'}
-                position={{ lat: 48.68414678, lng: -113.8009306 }}
+                position={{ lat: latitude[2], lng: longitude[2] }}
             />
+        }
             )
     }
 
