@@ -4,7 +4,6 @@ import './GoogleMaps.css';
 import axios from 'axios';
 import { connect } from 'react-redux';
 
-let newMarker
 class GoogleMaps extends Component {
 
     getMyParks = () => {
@@ -16,28 +15,35 @@ class GoogleMaps extends Component {
             });
     }
 
-    createMyParks = () => {
-        return this.props.parks.map(park =>
-           <div>{park.latLong}</div>
-        )
-    }
-    createMyParks = () => {
-        return this.props.parks.map(park =>
-            <div>{park.latLong}</div>
-        )
-    }
+    // createMyParks = () => {
+    //     return this.props.parks.map(park =>
+    //         <div>{park.latLong}</div>
+    //     )
+    // }
+
 
     createMarkers = () => {
-        return this.props.parks.map(park => {
+        const element = this.props.parks.map((park, index) => {
             let latitude = park.lat.split(' ');
             let longitude = park.long.split(' ');
-            <Marker 
+            console.log(longitude);
+            let latValue = Number(latitude[2]);
+            let longValue = Number(longitude[4]);
+            //console.log('latitude match:',(latValue === 36.17280161));
+            //console.log('longitude match:', longValue, (longValue === -112.6836024 ));
+
+            return (<Marker
+                key={index}
                 title={'The marker`s title will appear as a tooltip.'}
                 name={'Glacier National Park'}
-                position={{ lat: latitude[2], lng: longitude[2] }}
-            />
+                position={{ lat: latValue, lng: longValue }}
+            />)
+
         }
-            )
+        )
+
+        console.log(element);
+        return element;
     }
 
 
@@ -53,7 +59,7 @@ class GoogleMaps extends Component {
         this.getMyParks();
         navigator.geolocation.getCurrentPosition(
             position => {
-                const { latitude, longitude } = position.coords;
+                //const { latitude, longitude } = position.coords;
 
                 this.setState({
                     userLocation: {
@@ -61,13 +67,6 @@ class GoogleMaps extends Component {
                         lng: -99.996111,
                     },
                     loading: false,
-                });
-                new window.google.maps.Marker({
-                    position: {
-                        lat: latitude,
-                        lng: longitude,
-                    },
-                    map: Map,
                 });
             },
             () => {
@@ -88,11 +87,11 @@ class GoogleMaps extends Component {
 
         return (
             <div>
-                <div>{this.createMyParks()}</div>
-                
+                {/* <div>{this.createMyParks()}</div> */}
+
                 <Map className="googleMap" google={google} initialCenter={userLocation} zoom={4}>
                     {this.createMarkers()}
-                {/* <Marker
+                    {/* <Marker
                     title={'The marker`s title will appear as a tooltip.'}
                     name={'Grand Canyon National Park'}
                     position={{ lat: 36.17280161, lng: -112.6836024 }} />
@@ -114,7 +113,7 @@ class GoogleMaps extends Component {
                     position={{ lat: 48.68414678, lng: -113.8009306 }} />
                      */}
                 </Map>
-               
+
             </div>
         );
 
