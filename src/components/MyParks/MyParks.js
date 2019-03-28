@@ -43,9 +43,6 @@ const styles = theme => ({
   cardActions: {
     position: 'relative',
   },
-  typography: {
-    textAlign: 'center',
-  },
   modalImage: {
     width: '100%',
     position: 'center',
@@ -141,7 +138,7 @@ class MyParks extends Component {
           title={park.park_full_name}
         />
           <CardContent className={this.props.classes.cardContent} >
-            <Typography className={this.props.classes.typography} variant="h6">{park.park_full_name}</Typography>
+            <Typography className="parkName" variant="h5">{park.park_full_name}</Typography>
         </CardContent>
         </CardActionArea>
         <CardActions className={this.props.classes.cardActions} >
@@ -195,7 +192,7 @@ class MyParks extends Component {
   displayEditFormDisplay = () => {
     if (this.state.isInEditMode) {
       editFormDisplay =
-        <div>
+        <div className ="editForm">
             <input type="date"
               onChange={this.handleChangeFor('dateVisited')}
             />
@@ -203,15 +200,19 @@ class MyParks extends Component {
               defaultValue={this.props.parks[0].notes}
               onChange={this.handleChangeFor('notes')}
             />
-        <i style={{ fontSize: '1em' }} onClick={this.saveEditedInfo} className="far fa-save"></i> Save
-        <i style={{ fontSize: '1em' }} onClick={this.changeEditMode} className="far fa-window-close"></i> Cancel
+        <Button onClick={this.saveEditedInfo}><i style={{ fontSize: '1em' }} className="far fa-save"></i> </Button>
+        <Button onClick={this.changeEditMode}><i style={{ fontSize: '1em' }} className="far fa-window-close"></i></Button >
+        <div>
+          <Button color="secondary" onClick={this.deletePark(this.props.parkdisplay[0].id)}><i style={{ fontSize: '1em' }} className="far fa-trash-alt"></i></Button>
+        </div>
         </div>
     }
     else {
       editFormDisplay =
        
         <div>
-        <i style={{ fontSize: '1em' }}onClick={this.changeEditMode} class="far fa-edit"></i>
+        <div className="editButton"><i onClick={this.changeEditMode} style={{ fontSize: '1em' }} class="far fa-edit"></i></div>
+        <pre></pre>
           <Typography>Date Visited: {this.props.parks[0].date_visited_1}</Typography>
           <Typography>Trip Highlights: {this.props.parks[0].notes}</Typography >
         </div>
@@ -233,14 +234,15 @@ class MyParks extends Component {
             onClose={this.closeParkDisplay}
           >
             <div style={getModalStyle()} className={classes.paper}>
+            <Button className="closeModal" onClick={this.closeParkDisplay}><i style={{ fontSize: '1em' }} class="far fa-window-close"></i></Button>
+            <Typography variant="h5" className="parkName">{this.props.parkdisplay[0].park_full_name}</Typography>
+            <Divider className="modalDivider" /> 
+            <Typography className="parkDescription">{this.props.parkdisplay[0].park_description}</Typography>
             <img className={this.props.classes.modalImage} alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1} />
-            <Typography variant="h5">{this.props.parkdisplay[0].park_full_name}</Typography>
-            <Typography>{this.props.parkdisplay[0].park_description}</Typography>
-            <Divider /> 
+            <Divider className="modalDivider"/> 
             {this.displayEditFormDisplay()}
             {editFormDisplay}
-              <Button onClick={this.closeParkDisplay}>OK</Button>
-            <i style={{ fontSize: '2em'}}className="far fa-trash-alt" onClick={this.deletePark(this.props.parkdisplay[0].id)}></i>
+              
             </div>
           </Modal>
         }

@@ -36,4 +36,36 @@ body {
   text-align: center;
 }
 
+.editForm {
+  font-family: 'Roboto', sans-serif;
+  color: #44505c;
+}
 
+.modalDivider {
+  margin: 10px;
+}
+.parkName {
+  text-align: center;
+  padding: 20px;
+}
+
+.parkDescription {
+  text-align: left;
+  padding: 10px;
+}
+
+.visitDetails {
+  text-align: center;
+}
+
+.editButton {
+  float: right;
+}
+
+.editButton:hover{
+  cursor: pointer;
+}
+
+.closeModal {
+  float: right;
+}
