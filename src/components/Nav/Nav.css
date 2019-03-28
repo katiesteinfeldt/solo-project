@@ -12,12 +12,13 @@
 
 .nav-link {
   float: left;
-  color: white;
+  color: #3180c6;
   text-align: center;
   padding: 24px 10px;
   text-decoration: none;
-  font-size: 15px;
+  font-size: 18px;
   margin: 10px;
+  font-family: 'Roboto', sans-serif;
 
   /* these last two make the logout button in
   the nav bar look like another link */

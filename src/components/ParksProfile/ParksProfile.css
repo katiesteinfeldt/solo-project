@@ -32,9 +32,11 @@
 }
 
 .body {
-    background-color: white;
+    background-color: #f3f5f7;
 }
 
-.title {
-    text-align: center;
+.profileTitle {
+font-family: 'Roboto', sans-serif;
+  color: #3180c6;
+  text-align: center;
 }

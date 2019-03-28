@@ -138,7 +138,7 @@ class ParksProfile extends Component {
 
     return (
       <div className="body">
-        <Typography className="title" variant="h3">Park Profile</Typography>
+        <Typography className="profileTitle" variant="h3">Park Profile</Typography>
         <div className="parkContainer">{this.createMyParks()}</div>
         {currentParkDisplay}
       </div>

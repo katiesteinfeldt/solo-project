@@ -17,11 +17,11 @@ body {
   background-repeat: repeat;
   background-position: center;
   background-size: cover;  */
-  background-color: black;
+  background-color: #f3f5f7;
 }
 
 .myParksHeader {
   font-family: 'Roboto', sans-serif;
-  color: white;
+  color: #3180c6;
   text-align: center;
 }
