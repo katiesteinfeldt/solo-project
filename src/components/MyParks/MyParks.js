@@ -199,7 +199,7 @@ class MyParks extends Component {
               onChange={this.handleChangeFor('dateVisited')}
             />
             <input type="text"
-              defaultValue={this.props.parks[0].notes}
+              defaultValue={this.props.parkdisplay[0].notes}
               onChange={this.handleChangeFor('notes')}
             />
         <Button onClick={this.saveEditedInfo}><i style={{ fontSize: '1em' }} className="far fa-save"></i> </Button>
