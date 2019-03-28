@@ -69,7 +69,7 @@ class MyParks extends Component {
     edit_notes: '',
     isInEditMode: false,
     editText: '',
-    dateVisited: '',
+    dateVisited: '01/06/1989',
     notes: '',
   }
 
@@ -102,7 +102,6 @@ class MyParks extends Component {
 
   // sets local state to input values
   handleChangeFor = (propertyName) => (event) => {
-    console.log('in handleChangeFor')
     this.setState({
       [propertyName]: event.target.value,
     });
@@ -166,14 +165,15 @@ class MyParks extends Component {
   saveEditedInfo = () => {
     this.setState({
       isInEditMode: false,
-      // dateVisited: this.state.dateVisited,
-      // notes: this.state.notes,
+      dateVisited: this.state.dateVisited,
+      notes: this.state.notes,
+      open: false,
     })
     axios({
       method: 'PUT',
-      url: '/myparks/' + this.props.parkdisplay[0].id,
+      url: '/myparks/' + this.props.parkdisplay[0].all_parks_id,
       data: {
-        id: this.props.parkdisplay[0].id,
+        id: this.props.parkdisplay[0].all_parks_id,
         date_visited_1: this.state.dateVisited,
         notes: this.state.notes,
       }
@@ -224,8 +224,6 @@ class MyParks extends Component {
   render() {
     const { classes } = this.props;
     let currentParkDisplay;
-
-    console.log(this.props.parkdisplay);
 
     // displays the current park information in a modal when the user clicks on the image
     if (this.state.open) {
