@@ -59,11 +59,10 @@ function getModalStyle() {
     transform: `translate(-${top}%, -${left}%)`,
   };
 }
-
+let emptyArray = [];
 class MyParks extends Component {
   state = {
     open: false,
-    currentPark: 0,
     edit_date: '',
     edit_notes: '',
     isInEditMode: false,
@@ -94,7 +93,6 @@ class MyParks extends Component {
       this.props.dispatch({ type: 'FETCH_CURRENT_PARK', payload: parks_visited_id })
       this.setState({
         open: true,
-        currentPark: parks_visited_id,
         isInEditMode: false,
       })
     }
@@ -150,7 +148,10 @@ class MyParks extends Component {
   }
 
   //closes modal on click of "ok" button or when clicking on the background page
+  //and also clears current park reducer so that it doesn't lag on the last image
+  //when a new park is clicked on
   closeParkDisplay = () => {
+    this.props.dispatch({type: 'DISPLAY_CURRENT_PARK', payload: emptyArray })
     this.setState({
       open: false,
     })

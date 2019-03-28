@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { GoogleApiWrapper, Map, Marker } from "google-maps-react";
+import { GoogleApiWrapper, Map, Marker, InfoWindow } from "google-maps-react";
 import './GoogleMaps.css';
 import axios from 'axios';
 import { connect } from 'react-redux';
@@ -11,6 +11,10 @@ class GoogleMaps extends Component {
             lng: -45,
         },
         loading: true,
+        showingInfoWindow: true,
+        activeMarker: {},
+        selectedPlace: {},
+        open: false,
     };
     
     getMyParks = () => {
@@ -22,9 +26,26 @@ class GoogleMaps extends Component {
             });
     }
 
-    onMarkerClick = () => {
-        console.log('hello');
+    onMarkerClick = (props, marker, e) => {
+        console.log(props);
+        console.log(marker);
+        console.log(e);
+        this.setState({
+            selectedPlace: props,
+            activeMarker: marker,
+            showingInfoWindow: true
+        })
     }
+
+    displayParkInfo = (props, marker, e) => {
+        console.log('WHAT UP')
+    //   this.props.dispatch({ type: 'FETCH_CURRENT_PARK', payload: parks_visited_id })
+    //   this.setState({
+    //     open: true,
+    //     currentPark: parks_visited_id,
+    //     isInEditMode: false,
+    //   })
+  }
 
     createMarkers = () => {
         const element = this.props.parks.map((park, index) => {
@@ -32,13 +53,22 @@ class GoogleMaps extends Component {
             let longitude = park.long.split(' ');
             let latValue = Number(latitude[2]);
             let longValue = Number(longitude[4]);
-            return (<Marker
+            return (
+            <Marker
                 key={index}
                 title={park.park_full_name}
                 name={park.park_full_name}
                 position={{ lat: latValue, lng: longValue }}
-                onClick={this.onMarkerClick}
-            ></Marker>
+                onClick={this.onMarkerClick}>
+{/* 
+                <InfoWindow
+                marker={this.state.activeMarker}
+                visible={true}>
+                    <div>
+                    <h1>{this.state.selectedPlace.name + "taco"}</h1>
+                    </div>
+                </InfoWindow> */}
+            </Marker>
             )
         }
         )
