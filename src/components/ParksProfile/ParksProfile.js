@@ -13,6 +13,7 @@ import Button from '@material-ui/core/Button';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
 
+let emptyArray = [];
 const styles = theme => ({
   paper: {
     position: 'absolute',
@@ -80,6 +81,7 @@ class ParksProfile extends Component {
 
   //closes modal on click of "ok" button or when clicking on the background page
   closeParkDisplay = () => {
+  this.props.dispatch({type: 'DISPLAY_CURRENT_PARK', payload: emptyArray })
     this.setState({
       open: false,
     })

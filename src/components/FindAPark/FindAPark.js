@@ -47,16 +47,16 @@ const styles = theme => ({
   },
 });
 
-function getModalStyle() {
-  const top = 50;
-  const left = 50;
+// function getModalStyle() {
+//   const top = 50;
+//   const left = 50;
 
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
+//   return {
+//     top: `${top}%`,
+//     left: `${left}%`,
+//     transform: `translate(-${top}%, -${left}%)`,
+//   };
+// }
 
 class FindAPark extends Component {
   state = {
@@ -187,8 +187,9 @@ class FindAPark extends Component {
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
             open={this.state.open}
-            onClose={this.closeParkDisplay}>
-          <div style={getModalStyle()} className={classes.paper}>
+            onClose={this.closeParkDisplay}
+            className="modal">
+          <div  className={classes.paper}>
             <Typography variant="h4"> Add Visit To {this.props.currentpark[0].park_full_name}</Typography>
             <pre></pre>
             <TextField
