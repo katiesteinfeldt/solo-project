@@ -37,7 +37,8 @@ const styles = theme => ({
   },
   modalImage: {
     width: '100%',
-    position: 'center',
+    display: 'block',
+    margin: 'auto',
   }
 });
 

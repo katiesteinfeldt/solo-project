@@ -42,9 +42,12 @@ const styles = theme => ({
     margin: 10,
     padding: 10,
     textAlign: 'center',
-    color: 'white',
+    color: '#3180c6',
     left: '39%',
   },
+  parkDescription: {
+    marginTop: 20,
+  }
 });
 
 // function getModalStyle() {
@@ -169,7 +172,7 @@ class FindAPark extends Component {
             <Typography className={this.props.classes.cardTitle} variant="h4">{this.props.currentpark[0].park_full_name}</Typography>
             <Divider />
             <img onClick={this.viewParkInfo} className="parkImages" alt={this.props.currentpark[0].park_description} src={this.props.currentpark[0].image_path_1} />
-            <Typography variant="h6">{this.props.currentpark[0].park_description}</Typography>
+            <Typography className={classes.parkDescription}>{this.props.currentpark[0].park_description}</Typography>
           </CardContent>
           <CardActions>
           <Button variant="contained" color="primary" className={classes.button} onClick={this.addVisit}>Add Visit</Button>
@@ -234,16 +237,17 @@ class FindAPark extends Component {
       <div>
         <div>{parkSubmitted}</div>
         <h1 className="findAPark">Find A Park</h1>
-        <Select
+        <div className="container">
+        <select
           native
           onChange={this.handleParkChange}
-          className={classes.headerSelect}
         >
           <option>-- Find A Park --</option>
           {this.props.parks && this.props.parks.map(park =>
             <option value={park.id} key={park.id}>{park.park_full_name}</option>
           )}
-          </Select>
+          </select>
+        </div>
         <br />
         <br />
         <div>{parkDOMDisplay}</div>
