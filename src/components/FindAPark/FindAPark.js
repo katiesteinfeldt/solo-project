@@ -31,6 +31,10 @@ const styles = theme => ({
   button: {
     width: '100%',
   },
+  card: {
+    maxWidth: 600,
+    margin: 15,
+  },
   parkDescription: {
     marginTop: 20,
   }
@@ -153,7 +157,7 @@ class FindAPark extends Component {
     let addParkDOMDisplay
     if (this.state.parkDisplay) {
       parkDOMDisplay =
-        <Card className="parkCard">
+        <Card className={this.props.classes.card}>
           <CardContent>
             <Typography className={this.props.classes.cardTitle} variant="h4">{this.props.currentpark[0].park_full_name}</Typography>
             <Divider />
@@ -170,14 +174,14 @@ class FindAPark extends Component {
     }
 
     if (this.state.open) {
-      addParkDOMDisplay = <div>
+      addParkDOMDisplay = <div className="parkModal">
         {this.props.currentpark[0] &&
           <Modal
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
             open={this.state.open}
             onClose={this.closeParkDisplay}
-            className="modal">
+            className="parkModal">
           <div className={classes.paper}>
             <Typography variant="h4"> Add Visit To {this.props.currentpark[0].park_full_name}</Typography>
             <pre></pre>
@@ -225,7 +229,7 @@ class FindAPark extends Component {
         <h1 className="findAPark">Find A Park</h1>
         <div className="container">
         <select
-          native
+          
           onChange={this.handleParkChange}
         >
           <option>-- Find A Park --</option>
@@ -236,7 +240,7 @@ class FindAPark extends Component {
         </div>
         <br />
         <br />
-        <div>{parkDOMDisplay}</div>
+        <div className="parkCard">{parkDOMDisplay}</div>
         <br />
         <br />
         <div>{addParkDOMDisplay}</div>

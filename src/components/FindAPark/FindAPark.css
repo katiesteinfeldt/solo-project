@@ -11,7 +11,7 @@
   left: 50%;
 }
 
-.modal{
+.parkModal{
     position: fixed;
   top: 50%;
   left: 50%;
@@ -51,9 +51,5 @@ display: block;
 }
 
 .parkCard {
-  margin: 50px;
-  min-width: 275;
-  max-width: 800;
-    margin: 22;
-  padding: 20;
+  
 }
