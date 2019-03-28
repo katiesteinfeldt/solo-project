@@ -17,7 +17,8 @@ router.get('/', (req, res) => {
 
 router.get('/:id', (req, res) => {
     console.log('at current park get request/server', req.params.id);
-    pool.query(`SELECT * FROM "all_parks" WHERE "id"= $1;`, [req.params.id])
+    pool.query(`SELECT "parks_visited"."id" AS "parks_visited_id", "all_parks"."id" AS "all_parks_id", "date_visited_1", "park_description", "notes", "image_path_1" FROM "all_parks" JOIN "parks_visited" ON "parks_visited"."park_id"="all_parks"."id"
+ WHERE "all_parks"."id"=$1;`, [req.params.id])
         .then((result) => {
             res.send(result.rows);
         }).catch((error) => {

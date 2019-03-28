@@ -49,3 +49,11 @@ display: block;
 	border: 1px solid #aaa;
 	box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
 }
+
+.parkCard {
+  margin: 50px;
+  min-width: 275;
+  max-width: 800;
+    margin: 22;
+  padding: 20;
+}

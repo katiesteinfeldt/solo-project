@@ -60,6 +60,7 @@ function getModalStyle() {
     transform: `translate(-${top}%, -${left}%)`,
   };
 }
+
 let emptyArray = [];
 class MyParks extends Component {
   state = {
@@ -67,9 +68,9 @@ class MyParks extends Component {
     edit_date: '',
     edit_notes: '',
     isInEditMode: false,
-    editText: 'TEST!',
-    dateVisited: '1/6/89',
-    notes: 'Test notes',
+    editText: '',
+    dateVisited: '',
+    notes: '',
   }
 
   componentDidMount = () => {
@@ -101,6 +102,7 @@ class MyParks extends Component {
 
   // sets local state to input values
   handleChangeFor = (propertyName) => (event) => {
+    console.log('in handleChangeFor')
     this.setState({
       [propertyName]: event.target.value,
     });
@@ -164,8 +166,8 @@ class MyParks extends Component {
   saveEditedInfo = () => {
     this.setState({
       isInEditMode: false,
-      dateVisited: this.state.dateVisited,
-      notes: this.state.notes,
+      // dateVisited: this.state.dateVisited,
+      // notes: this.state.notes,
     })
     axios({
       method: 'PUT',
@@ -213,8 +215,8 @@ class MyParks extends Component {
         <div>
         <div className="editButton"><i onClick={this.changeEditMode} style={{ fontSize: '1em' }} class="far fa-edit"></i></div>
         <pre></pre>
-          <Typography>Date Visited: {this.props.parks[0].date_visited_1}</Typography>
-          <Typography>Trip Highlights: {this.props.parks[0].notes}</Typography >
+          <Typography>Date Visited: {this.props.parkdisplay[0].date_visited_1}</Typography>
+          <Typography>Trip Highlights: {this.props.parkdisplay[0].notes}</Typography >
         </div>
     }
   }
@@ -222,6 +224,8 @@ class MyParks extends Component {
   render() {
     const { classes } = this.props;
     let currentParkDisplay;
+
+    console.log(this.props.parkdisplay);
 
     // displays the current park information in a modal when the user clicks on the image
     if (this.state.open) {

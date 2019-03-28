@@ -24,12 +24,6 @@ const styles = theme => ({
     marginRight: theme.spacing.unit,
     width: 300,
   },
-  card: {
-    minWidth: 275,
-    maxWidth: 800,
-    margin: 22,
-    padding: 20,
-  },
   cardTitle: {
     padding: 15,
     textAlign: 'center',
@@ -159,7 +153,7 @@ class FindAPark extends Component {
     let addParkDOMDisplay
     if (this.state.parkDisplay) {
       parkDOMDisplay =
-        <Card className={this.props.classes.card}>
+        <Card className="parkCard">
           <CardContent>
             <Typography className={this.props.classes.cardTitle} variant="h4">{this.props.currentpark[0].park_full_name}</Typography>
             <Divider />
@@ -184,7 +178,7 @@ class FindAPark extends Component {
             open={this.state.open}
             onClose={this.closeParkDisplay}
             className="modal">
-          <div  className={classes.paper}>
+          <div className={classes.paper}>
             <Typography variant="h4"> Add Visit To {this.props.currentpark[0].park_full_name}</Typography>
             <pre></pre>
             <TextField
