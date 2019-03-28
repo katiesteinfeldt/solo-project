@@ -24,7 +24,7 @@ const styles = theme => ({
     width: theme.spacing.unit * 70,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit * 4,
+    //padding: theme.spacing.unit * 4,
     outline: 'none',
     font: 'Roboto'
   },
@@ -234,15 +234,13 @@ class MyParks extends Component {
             onClose={this.closeParkDisplay}
           >
             <div style={getModalStyle()} className={classes.paper}>
-            <Button className="closeModal" onClick={this.closeParkDisplay}><i style={{ fontSize: '1em' }} class="far fa-window-close"></i></Button>
+           {/* <Button className="closeModal" onClick={this.closeParkDisplay}><i style={{ fontSize: '1em' }} class="far fa-window-close"></i></Button> */}
             <Typography variant="h5" className="parkName">{this.props.parkdisplay[0].park_full_name}</Typography>
             <Divider className="modalDivider" /> 
             <Typography className="parkDescription">{this.props.parkdisplay[0].park_description}</Typography>
             <img className={this.props.classes.modalImage} alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1} />
-            <Divider className="modalDivider"/> 
             {this.displayEditFormDisplay()}
-            {editFormDisplay}
-              
+           <div className="editFormDisplay"> {editFormDisplay} </div>
             </div>
           </Modal>
         }

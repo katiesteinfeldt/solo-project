@@ -41,9 +41,10 @@ body {
   color: #44505c;
 }
 
-.modalDivider {
-  margin: 10px;
+.editFormDisplay{
+  padding: 20px;
 }
+
 .parkName {
   text-align: center;
   padding: 20px;
