@@ -9,7 +9,6 @@ import Modal from '@material-ui/core/Modal';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import Select from '@material-ui/core/Select';
 
 const styles = theme => ({
   paper: {
@@ -37,13 +36,6 @@ const styles = theme => ({
   },
   button: {
     width: '100%',
-  },
-  headerSelect: {
-    margin: 10,
-    padding: 10,
-    textAlign: 'center',
-    color: '#3180c6',
-    left: '39%',
   },
   parkDescription: {
     marginTop: 20,
