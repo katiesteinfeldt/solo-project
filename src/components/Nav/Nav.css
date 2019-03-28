@@ -4,6 +4,7 @@
     display: inline-block;
     color: #f2f2f2;
     padding-left: 10px;
+    margin: 20px;
 }
 
 .nav {
@@ -34,3 +35,7 @@
 .nav-right {
   float: right;
 }
+
+/* .nav-spacing {
+  margin-right: 1px;
+} */

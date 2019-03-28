@@ -49,7 +49,7 @@ const styles = theme => ({
   modalImage: {
     width: '100%',
     position: 'center',
-  }
+  },
 });
 
 // -- styling for Material UI modal -- //
@@ -203,16 +203,17 @@ class MyParks extends Component {
               defaultValue={this.props.parks[0].notes}
               onChange={this.handleChangeFor('notes')}
             />
-          <Button onClick={this.saveEditedInfo}>Save</Button>
-          <Button onClick={this.changeEditMode}>Cancel</Button>
+        <i style={{ fontSize: '1em' }} onClick={this.saveEditedInfo} className="far fa-save"></i> Save
+        <i style={{ fontSize: '1em' }} onClick={this.changeEditMode} className="far fa-window-close"></i> Cancel
         </div>
     }
     else {
       editFormDisplay =
+       
         <div>
+        <i style={{ fontSize: '1em' }}onClick={this.changeEditMode} class="far fa-edit"></i>
           <Typography>Date Visited: {this.props.parks[0].date_visited_1}</Typography>
-          <Typography>Notes: {this.props.parks[0].notes}</Typography >
-        <Button onClick={this.changeEditMode}>Edit</Button>
+          <Typography>Trip Highlights: {this.props.parks[0].notes}</Typography >
         </div>
     }
   }
@@ -239,7 +240,7 @@ class MyParks extends Component {
             {this.displayEditFormDisplay()}
             {editFormDisplay}
               <Button onClick={this.closeParkDisplay}>OK</Button>
-              <Button onClick={this.deletePark(this.props.parkdisplay[0].id)}>Delete This Visit</Button>
+            <i style={{ fontSize: '2em'}}className="far fa-trash-alt" onClick={this.deletePark(this.props.parkdisplay[0].id)}></i>
             </div>
           </Modal>
         }
@@ -252,7 +253,7 @@ class MyParks extends Component {
     return (
       <div>
         <h1 className="myParksHeader">My Parks</h1>
-        <div className="container">{this.createMyParks()}</div>
+        <div className="parksContainer">{this.createMyParks()}</div>
         {currentParkDisplay}
       </div>
     )

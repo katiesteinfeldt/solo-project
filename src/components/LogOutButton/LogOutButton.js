@@ -9,7 +9,8 @@ const LogOutButton = props => (
     className={props.className}
     onClick={() => props.dispatch({ type: 'LOGOUT' })}
   >
-    Log Out
+    <i class="fas fa-sign-out-alt"></i>
+    Logout
   </button>
 );
 

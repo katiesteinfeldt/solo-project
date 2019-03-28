@@ -3,7 +3,7 @@ img {
     object-fit: cover;
 }
 
-.container {
+.parksContainer {
   display: flex;
   flex-flow: wrap;
 }
@@ -35,3 +35,5 @@ body {
   color: #3180c6;
   text-align: center;
 }
+
+
