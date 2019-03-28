@@ -8,7 +8,6 @@ import { withStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
-//import Input from '@material-ui/core/Input';
 import TextField from '@material-ui/core/TextField';
 import Select from '@material-ui/core/Select';
 
@@ -81,7 +80,6 @@ class FindAPark extends Component {
   getParks = () => {
     axios.get('/parks')
       .then((response) => {
-        console.log(response);
         this.props.dispatch({ type: 'SET_PARKS', payload: response.data })
       }).catch(error => {
         console.log('error in parks client get request', error);
@@ -89,7 +87,6 @@ class FindAPark extends Component {
   }
 
   handleParkChange = event => {
-    console.log('handle park change running', event.target.value);
     axios.get('/currentpark/', {
       params: {
         id: event.target.value,
@@ -126,7 +123,6 @@ class FindAPark extends Component {
 
   //add park to parks_visited database 
   addPark = () => {
-    console.log('ADD SERVER STUFF HERE', this.props.currentpark[0].id);
     axios({
       method: 'POST',
       url: '/currentpark/' + this.props.currentpark[0].id,
@@ -137,8 +133,7 @@ class FindAPark extends Component {
         park_id: this.props.currentpark[0].id,
       }
     })
-      .then((response) => {
-        console.log('back from server');
+      .then(() => {
         this.setState({
           open: false,
           parkSubmitted: true,
@@ -154,11 +149,6 @@ class FindAPark extends Component {
         })
 
       })
-  }
-
-  //view more information about park when image is clicked on
-  viewParkInfo = () => {
-    console.log('image clicked');
   }
 
   closeParkDisplay = () => {

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { GoogleApiWrapper, Map, Marker, InfoWindow } from "google-maps-react";
+import { GoogleApiWrapper, Map, Marker } from "google-maps-react";
 import './GoogleMaps.css';
 import axios from 'axios';
 import { connect } from 'react-redux';
@@ -11,9 +11,9 @@ class GoogleMaps extends Component {
             lng: -45,
         },
         loading: true,
-        showingInfoWindow: true,
-        activeMarker: {},
-        selectedPlace: {},
+        // showingInfoWindow: true,
+        // activeMarker: {},
+        // selectedPlace: {},
         open: false,
     };
     
@@ -60,14 +60,6 @@ class GoogleMaps extends Component {
                 name={park.park_full_name}
                 position={{ lat: latValue, lng: longValue }}
                 onClick={this.onMarkerClick}>
-{/* 
-                <InfoWindow
-                marker={this.state.activeMarker}
-                visible={true}>
-                    <div>
-                    <h1>{this.state.selectedPlace.name + "taco"}</h1>
-                    </div>
-                </InfoWindow> */}
             </Marker>
             )
         }
