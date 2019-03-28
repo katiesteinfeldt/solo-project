@@ -45,6 +45,10 @@ const styles = theme => ({
   },
   typography: {
     textAlign: 'center',
+  },
+  modalImage: {
+    width: '100%',
+    position: 'center',
   }
 });
 
@@ -222,13 +226,13 @@ class MyParks extends Component {
       currentParkDisplay = <div>
         {this.props.parkdisplay[0] &&
           <Modal
-            aria-labelledby="simple-modal-title"
-            aria-describedby="simple-modal-description"
+            // aria-labelledby="simple-modal-title"
+            // aria-describedby="simple-modal-description"
             open={this.state.open}
             onClose={this.closeParkDisplay}
           >
             <div style={getModalStyle()} className={classes.paper}>
-            <img className={this.props.classes.image} alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1} />
+            <img className={this.props.classes.modalImage} alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1} />
             <Typography variant="h5">{this.props.parkdisplay[0].park_full_name}</Typography>
             <Typography>{this.props.parkdisplay[0].park_description}</Typography>
             <Divider /> 
