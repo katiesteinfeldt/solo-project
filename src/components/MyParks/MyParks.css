@@ -90,3 +90,11 @@ body {
 .closeModal {
   float: right;
 }
+
+.editIcons {
+  display: inline-block;
+}
+
+.editIconsContainer {
+text-align: center;
+}

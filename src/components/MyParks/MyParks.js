@@ -210,25 +210,28 @@ class MyParks extends Component {
     if (this.state.isInEditMode) {
       editFormDisplay =
         <div className="editForm">
-        <div className="textInputs">
-          <input type="date"
-          defaultValue={this.props.parkdisplay[0].date_visited_1}
-            className="dateInput"
-            onChange={this.handleChangeFor('dateVisited')}
-          />
-          <textarea type="text"
-            rows="4" cols="50"
-            defaultValue={this.props.parkdisplay[0].notes}
-            onChange={this.handleChangeFor('notes')}
-          />
-        </div>
-          <div className={this.props.classes.modalButtons}>
+          <div className="textInputs">
+            <input type="date"
+              defaultValue={this.props.parkdisplay[0].date_visited_1}
+              className="dateInput"
+              onChange={this.handleChangeFor('dateVisited')}
+            />
+            <textarea type="text"
+              rows="4" cols="50"
+              defaultValue={this.props.parkdisplay[0].notes}
+              onChange={this.handleChangeFor('notes')}
+            />
+          </div>
+          <div className="editIconsContainer">
             {/* <Button onClick={this.changeEditMode}><i style={{ fontSize: '2em', color: '#44505c' }} className="far fa-window-close"></i></Button > */}
-          <Button onClick={this.saveEditedInfo}><i style={{ fontSize: '1.75em', color: '#44505c' }} className="far fa-save"></i> </Button>
-          <div className="deleteButton"><Button onClick={this.deletePark(this.props.parkdisplay[0].parks_visited_id)}><i style={{ fontSize: '2em', color: '#b8522b' }} class="fas fa-trash"></i></Button ></div>
+            <div className="editIcons">
+              <Button onClick={this.saveEditedInfo}><i style={{ fontSize: '1.75em', color: '#44505c' }} className="far fa-save"></i> </Button>
+              <Button onClick={this.deletePark(this.props.parkdisplay[0].parks_visited_id)}>
+                <i style={{ fontSize: '1.75em', color: '#44505c' }} class="fas fa-trash"></i></Button >
+            </div>
           </div>
-        {/* <Button className={this.props.classes.deleteButton} variant="contained" color="secondary" onClick={this.deletePark(this.props.parkdisplay[0].parks_visited_id)}>Delete Park</Button> */}
-          </div>
+          {/* <Button className={this.props.classes.deleteButton} variant="contained" color="secondary" onClick={this.deletePark(this.props.parkdisplay[0].parks_visited_id)}>Delete Park</Button> */}
+        </div>
     }
     else {
       editFormDisplay =
