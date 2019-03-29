@@ -40,16 +40,16 @@ const styles = theme => ({
   }
 });
 
-// function getModalStyle() {
-//   const top = 50;
-//   const left = 50;
+function getModalStyle() {
+  const top = 50;
+  const left = 50;
 
-//   return {
-//     top: `${top}%`,
-//     left: `${left}%`,
-//     transform: `translate(-${top}%, -${left}%)`,
-//   };
-// }
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+  };
+}
 
 class FindAPark extends Component {
   state = {
@@ -174,15 +174,15 @@ class FindAPark extends Component {
     }
 
     if (this.state.open) {
-      addParkDOMDisplay = <div className="parkModal">
+      addParkDOMDisplay = <div>
         {this.props.currentpark[0] &&
           <Modal
             aria-labelledby="simple-modal-title"
             aria-describedby="simple-modal-description"
             open={this.state.open}
             onClose={this.closeParkDisplay}
-            className="parkModal">
-          <div className={classes.paper}>
+           >
+          <div style={getModalStyle()} className={classes.paper}>
             <Typography variant="h4"> Add Visit To {this.props.currentpark[0].park_full_name}</Typography>
             <pre></pre>
             <TextField
@@ -240,7 +240,7 @@ class FindAPark extends Component {
         </div>
         <br />
         <br />
-        <div className="parkCard">{parkDOMDisplay}</div>
+       {parkDOMDisplay}
         <br />
         <br />
         <div>{addParkDOMDisplay}</div>
