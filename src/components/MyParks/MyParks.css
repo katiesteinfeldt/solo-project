@@ -45,7 +45,12 @@ body {
   float: left;
 }
 .editFormDisplay{
-  padding: 20px;
+  padding: 10px;
+}
+
+.deleteButton {
+  float: left;
+  margin-bottom: 10px;
 }
 
 .parkName {

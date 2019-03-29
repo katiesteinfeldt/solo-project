@@ -52,6 +52,10 @@ const styles = theme => ({
     width: '100%',
     position: 'center',
   },
+  tripNotes: {
+    marginLeft: 15,
+    marginRight: 15,
+  }
 });
 
 // -- styling for Material UI modal -- //
@@ -209,10 +213,10 @@ class MyParks extends Component {
               defaultValue={this.props.parkdisplay[0].notes}
               onChange={this.handleChangeFor('notes')}
             />
-        <Button onClick={this.saveEditedInfo}><i style={{ fontSize: '1em', color: '#44505c'}} className="far fa-save"></i> </Button>
-        <Button onClick={this.changeEditMode}><i style={{ fontSize: '1em', color: '#44505c' }} className="far fa-window-close"></i></Button >
-        <div>
-          <Button color="secondary" onClick={this.deletePark(this.props.parkdisplay[0].parks_visited_id)}><i style={{ fontSize: '1em' }} className="far fa-trash-alt"></i></Button>
+        <Button onClick={this.saveEditedInfo}><i style={{ fontSize: '2em', color: '#44505c'}} className="far fa-save"></i> </Button>
+        <Button onClick={this.changeEditMode}><i style={{ fontSize: '2em', color: '#44505c' }} className="far fa-window-close"></i></Button >
+        <div className="deleteButton">
+          <Button color="secondary" onClick={this.deletePark(this.props.parkdisplay[0].parks_visited_id)}><i style={{ fontSize: '2em', color: 'red' }} className="far fa-trash-alt"></i></Button>
         </div>
         </div>
     }
@@ -220,10 +224,12 @@ class MyParks extends Component {
       editFormDisplay =
        
         <div>
-        <div className="editButton"><i style={{ fontSize: '1em', color: '#44505c' }} class="fa fa-edit"onClick={this.changeEditMode}></i></div>
-        <pre></pre>
+        <div className="editButton"><i style={{ fontSize: '1em', color: '#3180c6' }} class="fa fa-edit"onClick={this.changeEditMode}></i></div>
+        <br></br>
+        <div className={this.props.classes.tripNotes}>
           <Typography>Date Visited: {this.props.parkdisplay[0].date_visited_1}</Typography>
-          <Typography>Trip Highlights: {this.props.parkdisplay[0].notes}</Typography >
+          <Typography>Trip Highlights: {this.props.parkdisplay[0].notes}</Typography>
+        </div>
         </div>
     }
   }
