@@ -44,13 +44,10 @@ body {
 .dateInput {
   float: left;
 }
-.editFormDisplay{
-  padding: 10px;
-}
 
 .deleteButton {
   float: left;
-  margin-bottom: 10px;
+  vertical-align: middle;
 }
 
 .parkName {

@@ -40,7 +40,7 @@ const styles = theme => ({
   media: {
     // ⚠️ object-fit is not supported by IE 11.
     objectFit: 'cover',
-  }, 
+  },
   button: {
     position: 'center',
     width: '100%',
@@ -55,6 +55,9 @@ const styles = theme => ({
   tripNotes: {
     marginLeft: 15,
     marginRight: 15,
+  },
+  modalButtons: {
+    
   }
 });
 
@@ -139,17 +142,17 @@ class MyParks extends Component {
     return this.props.parks.map(park =>
       <Card onClick={this.displayParkInfo(park.all_parks_id)} className={this.props.classes.card} key={park.all_parks_id}>
         <CardActionArea>
-        <CardMedia
-          component="img"
-          alt={park.park_description}
-          className={this.props.classes.media}
-          height="300"
-          image={park.image_path_1}
-          title={park.park_full_name}
-        />
+          <CardMedia
+            component="img"
+            alt={park.park_description}
+            className={this.props.classes.media}
+            height="300"
+            image={park.image_path_1}
+            title={park.park_full_name}
+          />
           <CardContent className={this.props.classes.cardContent} >
             <Typography className="parkName" variant="h5">{park.park_full_name}</Typography>
-        </CardContent>
+          </CardContent>
         </CardActionArea>
         <CardActions className={this.props.classes.cardActions} >
           <Button className={this.props.classes.button} onClick={this.displayParkInfo(park.all_parks_id)}>See Visit Details</Button>
@@ -162,7 +165,7 @@ class MyParks extends Component {
   //and also clears current park reducer so that it doesn't lag on the last image
   //when a new park is clicked on
   closeParkDisplay = () => {
-    this.props.dispatch({type: 'DISPLAY_CURRENT_PARK', payload: emptyArray })
+    this.props.dispatch({ type: 'DISPLAY_CURRENT_PARK', payload: emptyArray })
     this.setState({
       open: false,
     })
@@ -203,33 +206,32 @@ class MyParks extends Component {
   displayEditFormDisplay = () => {
     if (this.state.isInEditMode) {
       editFormDisplay =
-        <div className ="editForm">
-            <input type="date"
+        <div className="editForm">
+          <input type="date"
             className="dateInput"
-              onChange={this.handleChangeFor('dateVisited')}
-            />
-            <textarea type="text"
+            onChange={this.handleChangeFor('dateVisited')}
+          />
+          <textarea type="text"
             rows="4" cols="50"
-              defaultValue={this.props.parkdisplay[0].notes}
-              onChange={this.handleChangeFor('notes')}
-            />
-        <Button onClick={this.saveEditedInfo}><i style={{ fontSize: '2em', color: '#44505c'}} className="far fa-save"></i> </Button>
-        <Button onClick={this.changeEditMode}><i style={{ fontSize: '2em', color: '#44505c' }} className="far fa-window-close"></i></Button >
-        <div className="deleteButton">
-          <Button color="secondary" onClick={this.deletePark(this.props.parkdisplay[0].parks_visited_id)}><i style={{ fontSize: '2em', color: 'red' }} className="far fa-trash-alt"></i></Button>
-        </div>
-        </div>
+            defaultValue={this.props.parkdisplay[0].notes}
+            onChange={this.handleChangeFor('notes')}
+          />
+          <div className={this.props.classes.modalButtons}>
+            <Button onClick={this.changeEditMode}><i style={{ fontSize: '2em', color: '#44505c' }} className="far fa-window-close"></i></Button >
+            <Button onClick={this.saveEditedInfo}><i style={{ fontSize: '2em', color: '#44505c' }} className="far fa-save"></i> </Button>
+          </div>
+          <div className="deleteButton"><Button color="secondary" onClick={this.deletePark(this.props.parkdisplay[0].parks_visited_id)}><i style={{ fontSize: '2em', color: 'red' }} className="far fa-trash-alt"></i></Button></div>
+          </div>
     }
     else {
       editFormDisplay =
-       
         <div>
-        <div className="editButton"><i style={{ fontSize: '1em', color: '#3180c6' }} class="fa fa-edit"onClick={this.changeEditMode}></i></div>
-        <br></br>
-        <div className={this.props.classes.tripNotes}>
-          <Typography>Date Visited: {this.props.parkdisplay[0].date_visited_1}</Typography>
-          <Typography>Trip Highlights: {this.props.parkdisplay[0].notes}</Typography>
-        </div>
+          <div className="editButton"><i style={{ fontSize: '1em', color: '#3180c6' }} class="fa fa-edit" onClick={this.changeEditMode}></i></div>
+          <br></br>
+          <div className={this.props.classes.tripNotes}>
+            <Typography>Date Visited: {this.props.parkdisplay[0].date_visited_1}</Typography>
+            <Typography>Trip Highlights: {this.props.parkdisplay[0].notes}</Typography>
+          </div>
         </div>
     }
   }
@@ -249,13 +251,13 @@ class MyParks extends Component {
             onClose={this.closeParkDisplay}
           >
             <div style={getModalStyle()} className={classes.paper}>
-           {/* <Button className="closeModal" onClick={this.closeParkDisplay}><i style={{ fontSize: '1em' }} class="far fa-window-close"></i></Button> */}
-            <Typography variant="h5" className="parkName">{this.props.parkdisplay[0].park_full_name}</Typography>
-            <Divider className="modalDivider" /> 
-            <Typography className="parkDescription">{this.props.parkdisplay[0].park_description}</Typography>
-            <img className={this.props.classes.modalImage} alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1} />
-            {this.displayEditFormDisplay()}
-           <div className="editFormDisplay"> {editFormDisplay} </div>
+              {/* <Button className="closeModal" onClick={this.closeParkDisplay}><i style={{ fontSize: '1em' }} class="far fa-window-close"></i></Button> */}
+              <Typography variant="h5" className="parkName">{this.props.parkdisplay[0].park_full_name}</Typography>
+              <Divider className="modalDivider" />
+              <Typography className="parkDescription">{this.props.parkdisplay[0].park_description}</Typography>
+              <img className={this.props.classes.modalImage} alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1} />
+              {this.displayEditFormDisplay()}
+              <div className="editFormDisplay"> {editFormDisplay} </div>
             </div>
           </Modal>
         }
