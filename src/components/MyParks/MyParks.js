@@ -13,7 +13,7 @@ import Button from '@material-ui/core/Button';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardActions from '@material-ui/core/CardActions';
 import CardActionArea from '@material-ui/core/CardActionArea';
-
+//import TextField from '@material-ui/core/TextField';
 
 let editFormDisplay;
 
@@ -31,6 +31,11 @@ const styles = theme => ({
   card: {
     maxWidth: 400,
     margin: 15,
+  },
+  textField: {
+    marginLeft: theme.spacing.unit,
+    marginRight: theme.spacing.unit,
+    width: 300,
   },
   media: {
     // ⚠️ object-fit is not supported by IE 11.
@@ -110,7 +115,7 @@ class MyParks extends Component {
   //this will delete a park visit from the parks_visited table in the database 
   deletePark = (parks_visited_id) => {
     return () => {
-      const r = window.confirm("Are you sure you want to delete this park?");
+      const r = window.confirm("Are you sure you want to delete this visit to this park?");
       if (r === true) {
         axios({
           method: 'DELETE',
@@ -205,7 +210,7 @@ class MyParks extends Component {
         <Button onClick={this.saveEditedInfo}><i style={{ fontSize: '1em' }} className="far fa-save"></i> </Button>
         <Button onClick={this.changeEditMode}><i style={{ fontSize: '1em' }} className="far fa-window-close"></i></Button >
         <div>
-          <Button color="secondary" onClick={this.deletePark(this.props.parkdisplay[0].id)}><i style={{ fontSize: '1em' }} className="far fa-trash-alt"></i></Button>
+          <Button color="secondary" onClick={this.deletePark(this.props.parkdisplay[0].parks_visited_id)}><i style={{ fontSize: '1em' }} className="far fa-trash-alt"></i></Button>
         </div>
         </div>
     }

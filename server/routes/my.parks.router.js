@@ -19,7 +19,7 @@ router.get('/', (req, res) => {
 
 router.delete('/:id', (req, res) => {
     console.log(req.params.id);
-    pool.query(`DELETE FROM "parks_visited" WHERE "park_id"= $1;`, [req.params.id])
+    pool.query(`DELETE FROM "parks_visited" WHERE "id"= $1;`, [req.params.id])
         .then(() => {
             res.sendStatus(204);
         }).catch((error) => {

@@ -30,6 +30,7 @@ const styles = theme => ({
   },
   button: {
     width: '100%',
+    display: 'inline-block',
   },
   card: {
     maxWidth: 600,
