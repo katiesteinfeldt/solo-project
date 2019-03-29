@@ -131,7 +131,8 @@ class ParksProfile extends Component {
               <Typography>{this.props.parkdisplay[0].park_description}</Typography>
             <img className={this.props.classes.modalImage} alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1} />
               <Divider />
-              <Button className={this.props.classes.button} onClick={this.closeParkDisplay}>OK</Button>
+              {/* <Button className={this.props.classes.button} onClick={this.closeParkDisplay}>OK</Button> */}
+            <Typography>Trip Highlights: {this.props.parkdisplay[0].notes}</Typography >
             </div>
           </Modal>
         }
