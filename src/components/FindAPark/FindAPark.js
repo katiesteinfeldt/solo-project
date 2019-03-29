@@ -34,6 +34,7 @@ const styles = theme => ({
   card: {
     maxWidth: 600,
     margin: 15,
+    display: 'inline-block',
   },
   parkDescription: {
     marginTop: 20,
@@ -156,7 +157,7 @@ class FindAPark extends Component {
     let parkDOMDisplay
     let addParkDOMDisplay
     if (this.state.parkDisplay) {
-      parkDOMDisplay =
+      parkDOMDisplay = <div className="cardContainer">
         <Card className={this.props.classes.card}>
           <CardContent>
             <Typography className={this.props.classes.cardTitle} variant="h4">{this.props.currentpark[0].park_full_name}</Typography>
@@ -168,6 +169,7 @@ class FindAPark extends Component {
           <Button variant="contained" color="primary" className={classes.button} onClick={this.addVisit}>Add Visit</Button>
           </CardActions>
         </Card>
+      </div>
     }
     else {
       parkDOMDisplay = null;
