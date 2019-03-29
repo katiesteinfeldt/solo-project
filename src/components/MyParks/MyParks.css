@@ -41,6 +41,12 @@ body {
   color: #44505c;
 }
 
+.editFormDisplay {
+  padding-right: 10px;
+  padding-left: 10px;
+  padding-bottom: 10px;
+}
+
 .dateInput {
   float: left;
 }
@@ -52,7 +58,11 @@ body {
 
 .parkName {
   text-align: center;
-  padding: 20px;
+  padding-top: 5px;
+}
+
+.textInputs {
+  float: left;
 }
 
 .parkDescription {
@@ -66,9 +76,14 @@ body {
 
 .editButton {
   float: right;
+  padding-top: 5px;
 }
 
 .editButton:hover{
+  cursor: pointer;
+}
+
+.deleteButton:hover{
   cursor: pointer;
 }
 

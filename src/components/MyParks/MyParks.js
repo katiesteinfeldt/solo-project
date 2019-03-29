@@ -45,6 +45,11 @@ const styles = theme => ({
     position: 'center',
     width: '100%',
   },
+  deleteButton: {
+    position: 'center',
+    width: '100%',
+    padding: '10px',
+  },
   cardActions: {
     position: 'relative',
   },
@@ -55,10 +60,8 @@ const styles = theme => ({
   tripNotes: {
     marginLeft: 15,
     marginRight: 15,
+    textAlign: 'left',
   },
-  modalButtons: {
-    
-  }
 });
 
 // -- styling for Material UI modal -- //
@@ -81,7 +84,7 @@ class MyParks extends Component {
     edit_notes: '',
     isInEditMode: false,
     editText: '',
-    dateVisited: '01/06/1989',
+    dateVisited: '04/01/2019',
     notes: '',
   }
 
@@ -207,7 +210,9 @@ class MyParks extends Component {
     if (this.state.isInEditMode) {
       editFormDisplay =
         <div className="editForm">
+        <div className="textInputs">
           <input type="date"
+          defaultValue={this.props.parkdisplay[0].date_visited_1}
             className="dateInput"
             onChange={this.handleChangeFor('dateVisited')}
           />
@@ -216,17 +221,19 @@ class MyParks extends Component {
             defaultValue={this.props.parkdisplay[0].notes}
             onChange={this.handleChangeFor('notes')}
           />
+        </div>
           <div className={this.props.classes.modalButtons}>
-            <Button onClick={this.changeEditMode}><i style={{ fontSize: '2em', color: '#44505c' }} className="far fa-window-close"></i></Button >
-            <Button onClick={this.saveEditedInfo}><i style={{ fontSize: '2em', color: '#44505c' }} className="far fa-save"></i> </Button>
+            {/* <Button onClick={this.changeEditMode}><i style={{ fontSize: '2em', color: '#44505c' }} className="far fa-window-close"></i></Button > */}
+          <Button onClick={this.saveEditedInfo}><i style={{ fontSize: '1.75em', color: '#44505c' }} className="far fa-save"></i> </Button>
+          <div className="deleteButton"><Button onClick={this.deletePark(this.props.parkdisplay[0].parks_visited_id)}><i style={{ fontSize: '2em', color: '#b8522b' }} class="fas fa-trash"></i></Button ></div>
           </div>
-          <div className="deleteButton"><Button color="secondary" onClick={this.deletePark(this.props.parkdisplay[0].parks_visited_id)}><i style={{ fontSize: '2em', color: 'red' }} className="far fa-trash-alt"></i></Button></div>
+        {/* <Button className={this.props.classes.deleteButton} variant="contained" color="secondary" onClick={this.deletePark(this.props.parkdisplay[0].parks_visited_id)}>Delete Park</Button> */}
           </div>
     }
     else {
       editFormDisplay =
         <div>
-          <div className="editButton"><i style={{ fontSize: '1em', color: '#3180c6' }} class="fa fa-edit" onClick={this.changeEditMode}></i></div>
+          <div className="editButton"><i style={{ fontSize: '1.25em', color: '#3180c6' }} class="fa fa-edit" onClick={this.changeEditMode}></i></div>
           <br></br>
           <div className={this.props.classes.tripNotes}>
             <Typography>Date Visited: {this.props.parkdisplay[0].date_visited_1}</Typography>
