@@ -40,7 +40,7 @@ class App extends Component {
               component={ParksProfile}
             />
 
-            <Route
+            <ProtectedRoute
               exact
               path="/map"
               component={GoogleMaps}

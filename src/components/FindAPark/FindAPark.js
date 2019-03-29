@@ -150,6 +150,7 @@ class FindAPark extends Component {
     this.setState({
       open: false,
       parkSubmitted: false,
+      notes: '',
     })
   }
 
