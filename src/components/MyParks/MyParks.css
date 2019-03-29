@@ -41,6 +41,9 @@ body {
   color: #44505c;
 }
 
+.dateInput {
+  float: left;
+}
 .editFormDisplay{
   padding: 20px;
 }

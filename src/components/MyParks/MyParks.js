@@ -201,14 +201,16 @@ class MyParks extends Component {
       editFormDisplay =
         <div className ="editForm">
             <input type="date"
+            className="dateInput"
               onChange={this.handleChangeFor('dateVisited')}
             />
-            <input type="text"
+            <textarea type="text"
+            rows="4" cols="50"
               defaultValue={this.props.parkdisplay[0].notes}
               onChange={this.handleChangeFor('notes')}
             />
-        <Button onClick={this.saveEditedInfo}><i style={{ fontSize: '1em' }} className="far fa-save"></i> </Button>
-        <Button onClick={this.changeEditMode}><i style={{ fontSize: '1em' }} className="far fa-window-close"></i></Button >
+        <Button onClick={this.saveEditedInfo}><i style={{ fontSize: '1em', color: '#44505c'}} className="far fa-save"></i> </Button>
+        <Button onClick={this.changeEditMode}><i style={{ fontSize: '1em', color: '#44505c' }} className="far fa-window-close"></i></Button >
         <div>
           <Button color="secondary" onClick={this.deletePark(this.props.parkdisplay[0].parks_visited_id)}><i style={{ fontSize: '1em' }} className="far fa-trash-alt"></i></Button>
         </div>
@@ -218,7 +220,7 @@ class MyParks extends Component {
       editFormDisplay =
        
         <div>
-        <div className="editButton"><i onClick={this.changeEditMode} style={{ fontSize: '1em' }} class="far fa-edit"></i></div>
+        <div className="editButton"><i style={{ fontSize: '1em', color: '#44505c' }} class="fa fa-edit"onClick={this.changeEditMode}></i></div>
         <pre></pre>
           <Typography>Date Visited: {this.props.parkdisplay[0].date_visited_1}</Typography>
           <Typography>Trip Highlights: {this.props.parkdisplay[0].notes}</Typography >
