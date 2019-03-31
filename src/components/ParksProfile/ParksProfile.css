@@ -33,6 +33,7 @@
 
 .body {
     background-color: #f3f5f7;
+    color: #3180c6;
 }
 
 .profileTitle {
@@ -63,4 +64,10 @@ font-family: 'Roboto', sans-serif;
 .parkContainer {
   display: flex;
   justify-content: center;
+}
+
+.profileHeader {
+  font-family: 'Roboto', sans-serif;
+  color: #3180c6;
+  text-align: center;
 }

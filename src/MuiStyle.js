@@ -24,6 +24,7 @@ const theme = createMuiTheme({
         fontFamily: 'Roboto',
         fontSize: 14,
         useNextVariants: true,
+        color: '#3180c6'
     },
 
 });
