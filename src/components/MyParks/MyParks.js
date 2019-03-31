@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import './MyParks.css';
 
+
 // -- Material UI components -- //
 import Card from '@material-ui/core/Card';
 import { CardContent, Divider } from '@material-ui/core';
@@ -14,7 +15,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import CardActions from '@material-ui/core/CardActions';
 import CardActionArea from '@material-ui/core/CardActionArea';
 //import TextField from '@material-ui/core/TextField';
-
+const moment = require('moment');
 let editFormDisplay;
 
 // -- styling for Material UI components -- //
@@ -126,7 +127,7 @@ class MyParks extends Component {
   deletePark = (parks_visited_id) => {
     return () => {
       const r = window.confirm("Are you sure you want to delete this visit to this park?");
-      if (r === true) {
+      if (r) {
         axios({
           method: 'DELETE',
           url: '/myparks/' + parks_visited_id,
@@ -239,12 +240,16 @@ class MyParks extends Component {
           <div className="editButton"><i style={{ fontSize: '1.25em', color: '#3180c6' }} class="fa fa-edit" onClick={this.changeEditMode}></i></div>
           <br></br>
           <div className={this.props.classes.tripNotes}>
-            <Typography>Date Visited: {this.props.parkdisplay[0].date_visited_1}</Typography>
+          <Typography>Date Visited: {moment(this.props.parkdisplay[0].date_visited_1).format('LL')}</Typography>
             <Typography>Trip Highlights: {this.props.parkdisplay[0].notes}</Typography>
           </div>
         </div>
     }
   }
+
+//   { new Date(book.published).getMonth() + 1 } /
+// { new Date(book.published).getDate() } /
+// { new Date(book.published).getFullYear() }
 
   render() {
     const { classes } = this.props;
