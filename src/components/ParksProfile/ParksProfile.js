@@ -12,6 +12,9 @@ import Typography from '@material-ui/core/Typography';
 import CardActionArea from '@material-ui/core/CardActionArea';
 import CardMedia from '@material-ui/core/CardMedia';
 
+//bring in moment js to this component and set it equal to the variable moment
+const moment = require('moment');
+
 let emptyArray = [];
 const styles = theme => ({
   paper: {
@@ -85,7 +88,7 @@ class ParksProfile extends Component {
 
   //closes modal on click of "ok" button or when clicking on the background page
   closeParkDisplay = () => {
-  this.props.dispatch({type: 'DISPLAY_CURRENT_PARK', payload: emptyArray })
+    this.props.dispatch({ type: 'DISPLAY_CURRENT_PARK', payload: emptyArray })
     this.setState({
       open: false,
     })
@@ -127,11 +130,16 @@ class ParksProfile extends Component {
             <div style={getModalStyle()} className={this.props.classes.paper}>
               <Typography variant="h5">{this.props.parkdisplay[0].park_full_name}</Typography>
               <Divider />
+              <div className="parkDescription">
               <Typography>{this.props.parkdisplay[0].park_description}</Typography>
-            <img className={this.props.classes.modalImage} alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1} />
+            </div>
+              <img className={this.props.classes.modalImage} alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1} />
               <Divider />
               {/* <Button className={this.props.classes.button} onClick={this.closeParkDisplay}>OK</Button> */}
-            <Typography>Trip Highlights: {this.props.parkdisplay[0].notes}</Typography >
+              <div className="tripNotes">
+                <Typography>Date Visited: {moment(this.props.parkdisplay[0].date_visited_1).format('LL')}</Typography>
+                <Typography>Trip Highlights: {this.props.parkdisplay[0].notes}</Typography >
+              </div>
             </div>
           </Modal>
         }
