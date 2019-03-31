@@ -28,15 +28,30 @@ const Nav = (props) => (
           
         </>
       )}
-      {/* Always show this link since the about page is not protected */}
-      <Link className="nav-link" to="/profile">
-        <i class="far fa-user"></i>         Profile
-      </Link>
 
-      <Link className="nav-link" to="/map">
-        <i class="fas fa-map-marked"></i>         Map
-      </Link>
-      <LogOutButton className="nav-link"/>
+      {props.user.id && (
+        <>
+          <Link className="nav-link" to="/profile">
+            <i class="fas fa-user"></i>       Profile
+          </Link>
+
+        </>
+      )}
+      {props.user.id && (
+        <>
+          <Link className="nav-link" to="/map">
+            <i class="fas fa-map-marked"></i>       Map
+          </Link>
+
+        </>
+      )}
+      {/* Always show this link since the about page is not protected */}
+      {props.user.id && (
+        <>
+          <LogOutButton className="nav-link" />
+        </>
+      )}
+      {/* <LogOutButton className="nav-link"/> */}
     </div>
   </div>
 );
