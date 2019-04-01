@@ -24,7 +24,7 @@ router.get('/', (req, res) => {
         dataFetched = true;
         cleanData(parksData);
         res.sendStatus(200);
-        postData(parksList);
+        //postData(parksList);
     }).catch(error => {
         console.log('error in parks get request', error);
     });
@@ -43,10 +43,13 @@ router.get('/', (req, res) => {
 
 
 postData = () => {
-    router.post('/', (req, res) => {
+    // router.post('/', (req, res) => {
         console.log('post data is running');
         const queryText = `INSERT INTO "all_parks" ("park_full_name", "park_name", "park_description", "latLong", "image_path_1")
-                    VALUES ($1, $2, $3, $4, $5)`;
+                    VALUES ($1, $2, $3, $4, $5) ON CONFLICT ("park_full_name") 
+DO
+ UPDATE
+   SET "park_description" = EXCLUDED.park_description;`;
         const queryValues = [
             parksList[0].park_full_name,
             parksList[0].park_name,
@@ -55,12 +58,12 @@ postData = () => {
             parksList[0].image_path_1,
         ];
         pool.query(queryText, queryValues)
-            .then(() => res.sendStatus(201))
+            // .then(() => res.sendStatus(201))
             .catch((err) => {
                 console.log('Error completing POST query', err);
-                res.sendStatus(500);
+                // res.sendStatus(500);
             });
-    })
+    // })
 }
 
 cleanData = () => {
@@ -68,16 +71,33 @@ cleanData = () => {
         let park = parksData[i];
         if (park.designation === 'National Park' || park.designation === 'National Park & Preserve' ||
             park.designation === 'National and State Parks' || park.designation === 'National Parks' || park.fullName === 'National Park of American Samoa') {
-            parksList.push({
-                park_full_name: park.fullName,
-                park_name: park.name,
-                park_description: park.description,
-                latLong: park.latLong,
-                image_path_1: park.images[0].url
-            })
+            const queryText = `INSERT INTO "all_parks" ("park_full_name", "park_name", "park_description", "latLong", "image_path_1")
+                    VALUES ($1, $2, $3, $4, $5) ON CONFLICT ("park_full_name") 
+DO
+ UPDATE
+   SET "park_description" = EXCLUDED.park_description;`;
+            const queryValues = [
+                park.fullName,
+                park.name,
+                park.description,
+                park.latLong,
+                park.images[0].url
+            ];
+            pool.query(queryText, queryValues)
+                .catch((err) => {
+                    console.log('Error completing POST query', err);
+                });
+            
+                // parksList.push({
+            //     park_full_name: park.fullName,
+            //     park_name: park.name,
+            //     park_description: park.description,
+            //     latLong: park.latLong,
+            //     image_path_1: park.images[0].url
+            // })
         }
     }
-    console.log(parksList);
+    console.log(queryValues);
 }
 
 

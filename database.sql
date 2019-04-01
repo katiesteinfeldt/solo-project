@@ -16,7 +16,7 @@ CREATE TABLE "parks_visited" (
 
 CREATE TABLE "all_parks" (
 "id" SERIAL PRIMARY KEY,
-"park_full_name" VARCHAR(200),
+"park_full_name" VARCHAR(200) UNIQUE,
 "park_name" VARCHAR(50),
 "park_description" VARCHAR(2000),
 "latLong" VARCHAR(500),
