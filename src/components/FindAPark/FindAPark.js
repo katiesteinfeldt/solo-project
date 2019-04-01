@@ -60,7 +60,7 @@ class FindAPark extends Component {
     newPark: {
       park_id: 0,
       user_id: this.props.user.id,
-      date_visited_1: '2019-03-01',
+      date_visited_1: '2019-04-01',
       date_visited_2: '',
       date_visited_3: '',
       notes: '',
