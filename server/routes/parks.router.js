@@ -9,24 +9,24 @@ let dataFetched = false;
 
 //goes to national park service api to retrieve park information
 router.get('/', (req, res) => {
-    if (!dataFetched){
-        console.log('getting data from API');
-    axios({
-        method: 'GET',
-        url: `https://developer.nps.gov/api/v1/parks?parkCode=&limit=200&q=National%20Park&fields=images`,
-        params: {
-            api_key: process.env.NPS_API_KEY,
-        }
-    }).then((response) => {
-        parksData = response.data.data;
-        dataFetched = true;
-        cleanData(parksData);
-        res.sendStatus(200);
-    }).catch(error => {
-        console.log('error in parks get request', error);
-    });
-    }
-    else {
+    // if (!dataFetched){
+    //     console.log('getting data from API');
+    // axios({
+    //     method: 'GET',
+    //     url: `https://developer.nps.gov/api/v1/parks?parkCode=&limit=200&q=National%20Park&fields=images`,
+    //     params: {
+    //         api_key: process.env.NPS_API_KEY,
+    //     }
+    // }).then((response) => {
+    //     parksData = response.data.data;
+    //     dataFetched = true;
+    //     cleanData(parksData);
+    //     res.sendStatus(200);
+    // }).catch(error => {
+    //     console.log('error in parks get request', error);
+    // });
+    // }
+    // else {
         console.log('getting info from database');
         const queryText = 'SELECT * FROM "all_parks" ORDER BY "park_full_name"';
         pool.query(queryText)
@@ -35,7 +35,7 @@ router.get('/', (req, res) => {
                 console.log('Error completing SELECT all_parks query', err);
                 res.sendStatus(500);
             })
-    }
+    // }
 });
 
 //posts current list of national parks into the all_parks table
