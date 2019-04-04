@@ -11,12 +11,10 @@ class GoogleMaps extends Component {
             lng: -45,
         },
         loading: true,
-        // showingInfoWindow: true,
-        // activeMarker: {},
-        // selectedPlace: {},
         open: false,
     };
     
+    //gets list of visited parks from the parks_visited database
     getMyParks = () => {
         axios.get('/myparks')
             .then((response) => {
@@ -26,27 +24,7 @@ class GoogleMaps extends Component {
             });
     }
 
-    onMarkerClick = (props, marker, e) => {
-        console.log(props);
-        console.log(marker);
-        console.log(e);
-        this.setState({
-            selectedPlace: props,
-            activeMarker: marker,
-            showingInfoWindow: true
-        })
-    }
-
-    displayParkInfo = (props, marker, e) => {
-        console.log('WHAT UP')
-    //   this.props.dispatch({ type: 'FETCH_CURRENT_PARK', payload: parks_visited_id })
-    //   this.setState({
-    //     open: true,
-    //     currentPark: parks_visited_id,
-    //     isInEditMode: false,
-    //   })
-  }
-
+    //creates markers of parks visited and displays them on the map
     createMarkers = () => {
         const element = this.props.parks.map((park, index) => {
             let latitude = park.lat.split(' ');
@@ -58,8 +36,7 @@ class GoogleMaps extends Component {
                 key={index}
                 title={park.park_full_name}
                 name={park.park_full_name}
-                position={{ lat: latValue, lng: longValue }}
-                onClick={this.onMarkerClick}>
+                position={{ lat: latValue, lng: longValue }}>
             </Marker>
             )
         }
@@ -67,12 +44,11 @@ class GoogleMaps extends Component {
         return element;
     }
 
+    // gets parks and sets initial map location to the geographical center of North America - Rugby, Minnesota
     componentDidMount() {
         this.getMyParks();
         navigator.geolocation.getCurrentPosition(
             position => {
-                //const { latitude, longitude } = position.coords;
-
                 this.setState({
                     userLocation: {
                         lat: 48.367222,
@@ -108,13 +84,10 @@ class GoogleMaps extends Component {
     }
 }
 const mapStateToProps = state => ({
-    //user: state.user,
     parks: state.parks,
     parkdisplay: state.parkdisplay,
     editpark: state.editpark,
 });
-
-// export default withStyles(styles)(connect(mapStateToProps)(MyParks));
 
 export default GoogleApiWrapper({
     apiKey: "AIzaSyCHYi2wtrFyckBkYUz6Brsx7mB2z5khGHM"

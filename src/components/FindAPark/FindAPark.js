@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import './FindAPark.css';
+
+// -- Material UI Styling -- //
 import Card from '@material-ui/core/Card';
 import { CardContent, CardActions, Divider } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
@@ -72,6 +74,7 @@ class FindAPark extends Component {
     this.getParks();
   }
 
+  //gets parks from database or national parks service api and sets the parks reducer equal to that information
   getParks = () => {
     axios.get('/parks')
       .then((response) => {
@@ -81,6 +84,7 @@ class FindAPark extends Component {
       });
   }
 
+  // determines which park was selected and fetches additional information from the database; sets current park reducer equal to that park's information
   handleParkChange = event => {
     axios.get('/currentpark/', {
       params: {
@@ -146,6 +150,7 @@ class FindAPark extends Component {
       })
   }
 
+  //closes park display
   closeParkDisplay = () => {
     this.setState({
       open: false,
@@ -158,6 +163,8 @@ class FindAPark extends Component {
     const { classes } = this.props;
     let parkDOMDisplay
     let addParkDOMDisplay
+
+    //displays Material UI card when a park is selected in the dropdown menu
     if (this.state.parkDisplay) {
       parkDOMDisplay = <div className="cardContainer">
         <Card className={this.props.classes.card}>
@@ -177,6 +184,7 @@ class FindAPark extends Component {
       parkDOMDisplay = null;
     }
 
+    //displays a modal that allows users to enter in information about their park visit
     if (this.state.open) {
       addParkDOMDisplay = <div>
         {this.props.currentpark[0] &&

@@ -3,13 +3,11 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const axios = require('axios');
 
-/**
- * GET route template
- */
 let parksData
 let parksList = [];
 let dataFetched = false;
 
+//goes to national park service api to retrieve park information
 router.get('/', (req, res) => {
     if (!dataFetched){
         console.log('getting data from API');
@@ -24,7 +22,6 @@ router.get('/', (req, res) => {
         dataFetched = true;
         cleanData(parksData);
         res.sendStatus(200);
-        //postData(parksList);
     }).catch(error => {
         console.log('error in parks get request', error);
     });
@@ -41,9 +38,8 @@ router.get('/', (req, res) => {
     }
 });
 
-
+//posts current list of national parks into the all_parks table
 postData = () => {
-    // router.post('/', (req, res) => {
         console.log('post data is running');
         const queryText = `INSERT INTO "all_parks" ("park_full_name", "park_name", "park_description", "latLong", "image_path_1")
                     VALUES ($1, $2, $3, $4, $5) ON CONFLICT ("park_full_name") 
@@ -58,14 +54,12 @@ DO
             parksList[0].image_path_1,
         ];
         pool.query(queryText, queryValues)
-            // .then(() => res.sendStatus(201))
             .catch((err) => {
                 console.log('Error completing POST query', err);
-                // res.sendStatus(500);
             });
-    // })
 }
 
+//cleans the park information that comes back from the national park service and only selects parks with the designation "national park"
 cleanData = () => {
     for (let i = 0; i < parksData.length; i++) {
         let park = parksData[i];
@@ -87,14 +81,6 @@ DO
                 .catch((err) => {
                     console.log('Error completing POST query', err);
                 });
-            
-                // parksList.push({
-            //     park_full_name: park.fullName,
-            //     park_name: park.name,
-            //     park_description: park.description,
-            //     latLong: park.latLong,
-            //     image_path_1: park.images[0].url
-            // })
         }
     }
     console.log(queryValues);

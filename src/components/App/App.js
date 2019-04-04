@@ -7,17 +7,15 @@ import {
 } from 'react-router-dom';
 
 import {connect} from 'react-redux';
-
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
 import ParksProfile from '../ParksProfile/ParksProfile';
 import MyParks from '../MyParks/MyParks';
 import FindAPark from '../FindAPark/FindAPark';
-
-import './App.css';
 import GoogleMaps from '../GoogleMaps/GoogleMaps';
+import './App.css';
+
 
 class App extends Component {
   componentDidMount () {
@@ -51,19 +49,20 @@ class App extends Component {
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
             Even though it seems like they are different pages, the user is always on localhost:3000/home */}
+
+            
             <ProtectedRoute
               exact
               path="/myparks"
               component={MyParks}
             />
-            {/* This works the same as the other protected route, except that if the user is logged in,
-            they will see the info page instead. */}
+          
             <ProtectedRoute
               exact
               path="/findpark"
               component={FindAPark}
             />
-            {/* If none of the other routes matched, we will show a 404. */}
+            {/* If none of the other routes matched, users will show a 404. */}
             <Route render={() => <h1>404</h1>} />
           </Switch>
           <Footer />
