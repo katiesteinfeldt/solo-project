@@ -90,7 +90,7 @@ class MyParks extends Component {
   }
 
   componentDidMount = () => {
-    this.getMyParks();
+    this.getMyParks(this.props.user.id);
   }
 
   // retrieves list of parks visited from database and saves the information
@@ -131,7 +131,7 @@ class MyParks extends Component {
         axios({
           method: 'DELETE',
           url: '/myparks/' + parks_visited_id,
-        }).then((response) => {
+        }).then(() => {
           this.setState({
             open: false,
           })
@@ -254,7 +254,7 @@ class MyParks extends Component {
   render() {
     const { classes } = this.props;
     let currentParkDisplay;
-
+  
     // displays the current park information in a modal when the user clicks on the image
     if (this.state.open) {
       currentParkDisplay = <div>
@@ -293,7 +293,7 @@ class MyParks extends Component {
 }
 
 const mapStateToProps = state => ({
-  //user: state.user,
+  user: state.user,
   parks: state.parks,
   parkdisplay: state.parkdisplay,
   editpark: state.editpark,

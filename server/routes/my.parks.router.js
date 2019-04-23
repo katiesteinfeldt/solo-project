@@ -4,7 +4,7 @@ const router = express.Router();
 const axios = require('axios');
 
 router.get('/', (req, res) => {
-    console.log('at server - my parks');
+    console.log('at server - my parks', req.params, req.body, req.query);
     pool.query(`SELECT "parks_visited"."id" AS "parks_visited_id", "all_parks"."id" AS "all_parks_id", "park_full_name", "user_id", "date_visited_1", 
     "date_visited_2", "date_visited_3", split_part("latLong", ',', 1) AS "lat"
      , split_part("latLong", ',', 2) AS "long", "notes", "image_path_1", "park_description" FROM "parks_visited"
