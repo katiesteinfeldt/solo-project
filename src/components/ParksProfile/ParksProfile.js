@@ -64,17 +64,18 @@ class ParksProfile extends Component {
   }
 
   componentDidMount = () => {
-    this.getMyParks();
+    // this.getMyParks();
+    this.props.dispatch({ type: 'GET_PARKS', payload: this.props.user.id })
   }
 
-  getMyParks = () => {
-    axios.get('/myparks')
-      .then((response) => {
-        this.props.dispatch({ type: 'SET_MY_PARKS', payload: response.data })
-      }).catch(error => {
-        console.log('error in my parks client get request', error);
-      });
-  }
+  // getMyParks = () => {
+  //   axios.get('/myparks')
+  //     .then((response) => {
+  //       this.props.dispatch({ type: 'SET_MY_PARKS', payload: response.data })
+  //     }).catch(error => {
+  //       console.log('error in my parks client get request', error);
+  //     });
+  // }
 
   displayParkInfo = (parks_visited_id) => {
     return () => {

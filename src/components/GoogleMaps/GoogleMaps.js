@@ -15,22 +15,22 @@ class GoogleMaps extends Component {
     };
     
     //gets list of visited parks from the parks_visited database
-    getMyParks = () => {
-        axios.get('/myparks')
-            .then((response) => {
-                this.props.dispatch({ type: 'SET_MY_PARKS', payload: response.data })
-            }).catch(error => {
-                console.log('error in my parks client get request', error);
-            });
-    }
+    // getMyParks = () => {
+    //     axios.get('/myparks')
+    //         .then((response) => {
+    //             this.props.dispatch({ type: 'SET_MY_PARKS', payload: response.data })
+    //         }).catch(error => {
+    //             console.log('error in my parks client get request', error);
+    //         });
+    // }
 
     //creates markers of parks visited and displays them on the map
     createMarkers = () => {
         const element = this.props.parks.map((park, index) => {
-            let latitude = park.lat.split(' ');
-            let longitude = park.long.split(' ');
-            let latValue = Number(latitude[2]);
-            let longValue = Number(longitude[4]);
+            let latitude = park.lat.split(':');
+            let longitude = park.long.split(':');
+            let latValue = Number(latitude[1]);
+            let longValue = Number(longitude[1]);
             return (
             <Marker
                 key={index}
@@ -46,7 +46,8 @@ class GoogleMaps extends Component {
 
     // gets parks and sets initial map location to the geographical center of North America - Rugby, Minnesota
     componentDidMount() {
-        this.getMyParks();
+        // this.getMyParks();
+        this.props.dispatch({ type: 'GET_PARKS', payload: this.props.user.id })
         navigator.geolocation.getCurrentPosition(
             position => {
                 this.setState({
@@ -72,7 +73,7 @@ class GoogleMaps extends Component {
         if (loading) {
             return null;
         }
-
+console.log(this.props.parks)
         return (
             <div>
                 <Map className="googleMap" google={google} initialCenter={userLocation} zoom={4}>
@@ -87,6 +88,7 @@ const mapStateToProps = state => ({
     parks: state.parks,
     parkdisplay: state.parkdisplay,
     editpark: state.editpark,
+    user: state.user,
 });
 
 export default GoogleApiWrapper({
