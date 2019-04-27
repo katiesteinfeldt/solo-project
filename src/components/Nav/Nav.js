@@ -14,10 +14,12 @@ const Nav = (props) => (
     </Link>
     <div className="nav-right">
       <Link className="nav-link" to="/myparks">
+        
+
         {/* Show this link if they are logged in or not,
-        but call this link 'Home' if they are logged in,
+        but call this link 'My Parks' if they are logged in,
         and call this link 'Login / Register' if they are not */}
-        {props.user.id ? `My Parks`  : 'Login / Register'}
+        {props.user.id ? [<i class="fas fa-mountain"></i>, '  My Parks'] : 'Login / Register'}
       </Link>
       {/* Show the link to the info page and the logout button if the user is logged in */}
       {props.user.id && (
