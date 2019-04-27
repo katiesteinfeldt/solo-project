@@ -3,8 +3,8 @@ This application uses both the National Parks Service and Google Maps API to dis
 
 Users are able to login, look up information about parks, save them to their parks visited page, and see the visited parks pinned on a map. Additionally, there is a public page for users to share should they want to show others which parks they have visited. 
 
-### SCREENSHOTS
-
+<!-- ### SCREENSHOTS
+ -->
 
 ### PREREQUISITES
 
