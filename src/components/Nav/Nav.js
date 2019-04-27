@@ -3,19 +3,16 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
 import './Nav.css';
-//import NavMountain from './NavMountain';
 
 const Nav = (props) => (
   <div className="nav">
     <Link to="/myparks">
-      {/* <h2 className="nav-title">National Parks App</h2> */}
       <div className="nav-title">
       </div>
     </Link>
     <div className="nav-right">
       <Link className="nav-link" to="/myparks">
         
-
         {/* Show this link if they are logged in or not,
         but call this link 'My Parks' if they are logged in,
         and call this link 'Login / Register' if they are not */}

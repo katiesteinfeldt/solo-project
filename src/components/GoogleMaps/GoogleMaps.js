@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { GoogleApiWrapper, Map, Marker } from "google-maps-react";
 import './GoogleMaps.css';
-import axios from 'axios';
 import { connect } from 'react-redux';
 
 class GoogleMaps extends Component {
@@ -14,16 +13,6 @@ class GoogleMaps extends Component {
         open: false,
     };
     
-    //gets list of visited parks from the parks_visited database
-    // getMyParks = () => {
-    //     axios.get('/myparks')
-    //         .then((response) => {
-    //             this.props.dispatch({ type: 'SET_MY_PARKS', payload: response.data })
-    //         }).catch(error => {
-    //             console.log('error in my parks client get request', error);
-    //         });
-    // }
-
     //creates markers of parks visited and displays them on the map
     createMarkers = () => {
         const element = this.props.parks.map((park, index) => {
@@ -44,9 +33,8 @@ class GoogleMaps extends Component {
         return element;
     }
 
-    // gets parks and sets initial map location to the geographical center of North America - Rugby, Minnesota
+    // gets parks and sets initial map location to the geographical center of North America - Rugby, North Dakota
     componentDidMount() {
-        // this.getMyParks();
         this.props.dispatch({ type: 'GET_PARKS', payload: this.props.user.id })
         navigator.geolocation.getCurrentPosition(
             position => {
@@ -73,7 +61,6 @@ class GoogleMaps extends Component {
         if (loading) {
             return null;
         }
-console.log(this.props.parks)
         return (
             <div>
                 <Map className="googleMap" google={google} initialCenter={userLocation} zoom={4}>

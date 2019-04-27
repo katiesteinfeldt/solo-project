@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import './ParksProfile.css';
 
 // -- Material UI components -- //
@@ -59,30 +58,20 @@ function getModalStyle() {
 
 class ParksProfile extends Component {
   state = {
-    //displayMyParks: false,
     open: false,
   }
 
   componentDidMount = () => {
-    // this.getMyParks();
     this.props.dispatch({ type: 'GET_PARKS', payload: this.props.user.id })
   }
 
-  // getMyParks = () => {
-  //   axios.get('/myparks')
-  //     .then((response) => {
-  //       this.props.dispatch({ type: 'SET_MY_PARKS', payload: response.data })
-  //     }).catch(error => {
-  //       console.log('error in my parks client get request', error);
-  //     });
-  // }
 
   displayParkInfo = (parks_visited_id) => {
     return () => {
       this.props.dispatch({ type: 'FETCH_CURRENT_PARK', payload: parks_visited_id })
       this.setState({
         open: true,
-        currentPark: parks_visited_id,
+        // currentPark: parks_visited_id,
       })
     }
   }
@@ -119,12 +108,11 @@ class ParksProfile extends Component {
   render() {
     let currentParkDisplay;
 
+    // modal display
     if (this.state.open) {
       currentParkDisplay = <div>
         {this.props.parkdisplay[0] &&
           <Modal
-            // aria-labelledby="simple-modal-title"
-            // aria-describedby="simple-modal-description"
             open={this.state.open}
             onClose={this.closeParkDisplay}
           >

@@ -3,7 +3,6 @@ import { connect } from 'react-redux';
 import axios from 'axios';
 import './MyParks.css';
 
-
 // -- Material UI components -- //
 import Card from '@material-ui/core/Card';
 import { CardContent, Divider } from '@material-ui/core';
@@ -14,8 +13,10 @@ import Button from '@material-ui/core/Button';
 import CardMedia from '@material-ui/core/CardMedia';
 import CardActions from '@material-ui/core/CardActions';
 import CardActionArea from '@material-ui/core/CardActionArea';
-//import TextField from '@material-ui/core/TextField';
+
+// -- Allows for desired date formatting -- //
 const moment = require('moment');
+
 let editFormDisplay;
 
 // -- styling for Material UI components -- //
@@ -78,6 +79,7 @@ function getModalStyle() {
 }
 
 let emptyArray = [];
+
 class MyParks extends Component {
   state = {
     open: false,
@@ -90,21 +92,8 @@ class MyParks extends Component {
   }
 
   componentDidMount = () => {
-    //this.getMyParks(this.props.user.id);
-    //console.log ('getting parks for', this.props.user.id)
     this.props.dispatch({ type: 'GET_PARKS', payload: this.props.user.id})
   }
-
-  // retrieves list of parks visited from database and saves the information
-  // in a reducer 
-  // getMyParks = () => {
-  //   axios.get('/myparks')
-  //     .then((response) => {
-  //       this.props.dispatch({ type: 'SET_MY_PARKS', payload: response.data })
-  //     }).catch(error => {
-  //       console.log('error in my parks client get request', error);
-  //     });
-  // }
 
   // determines which park was clicked and retrieves additional information
   // from the database; opens modal
@@ -249,10 +238,6 @@ class MyParks extends Component {
     }
   }
 
-//   { new Date(book.published).getMonth() + 1 } /
-// { new Date(book.published).getDate() } /
-// { new Date(book.published).getFullYear() }
-
   render() {
     const { classes } = this.props;
     let currentParkDisplay;
@@ -262,13 +247,10 @@ class MyParks extends Component {
       currentParkDisplay = <div>
         {this.props.parkdisplay[0] &&
           <Modal
-            // aria-labelledby="simple-modal-title"
-            // aria-describedby="simple-modal-description"
             open={this.state.open}
             onClose={this.closeParkDisplay}
           >
             <div style={getModalStyle()} className={classes.paper}>
-              {/* <Button className="closeModal" onClick={this.closeParkDisplay}><i style={{ fontSize: '1em' }} class="far fa-window-close"></i></Button> */}
               <Typography variant="h5" className="parkName">{this.props.parkdisplay[0].park_full_name}</Typography>
               <Divider className="modalDivider" />
               <Typography className="parkDescription">{this.props.parkdisplay[0].park_description}</Typography>

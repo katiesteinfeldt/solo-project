@@ -44,6 +44,7 @@ const styles = theme => ({
   }
 });
 
+//modal positioniong and style
 function getModalStyle() {
   const top = 50;
   const left = 50;
@@ -62,7 +63,7 @@ class FindAPark extends Component {
     newPark: {
       park_id: 0,
       user_id: this.props.user.id,
-      date_visited_1: '2019-04-01',
+      date_visited_1: '2019-06-01',
       date_visited_2: '',
       date_visited_3: '',
       notes: '',
@@ -120,7 +121,7 @@ class FindAPark extends Component {
     });
   }
 
-  //add park to parks_visited database 
+  //add park to parks_visited table 
   addPark = () => {
     axios({
       method: 'POST',
@@ -226,6 +227,7 @@ class FindAPark extends Component {
       addParkDOMDisplay = null;
     }
 
+    //Displays "Success!" on the DOM after a user successfully adds a new park to parks_visited
     let parkSubmitted
     if (this.state.parkSubmitted) {
       parkSubmitted = <h1>Success!</h1>
