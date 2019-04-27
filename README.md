@@ -16,4 +16,9 @@ Now that the server is running, open a new terminal tab with `cmd + t` and start
 
 ```
 npm run client
+
 ```
+
+### AUTHOR
+- Katie Mangan
+
