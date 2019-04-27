@@ -95,6 +95,16 @@ class MyParks extends Component {
     this.props.dispatch({ type: 'GET_PARKS', payload: this.props.user.id})
   }
 
+  getMyParks = () => {
+    axios({
+      method: 'GET',
+      url: '/myparks/' + this.props.user.id
+    }).then((response) => {
+      console.log(response.data);
+      this.props.dispatch({ type: 'SET_MY_PARKS', payload: response.data });
+    });
+  }
+
   // determines which park was clicked and retrieves additional information
   // from the database; opens modal
   displayParkInfo = (parks_visited_id) => {
@@ -185,7 +195,7 @@ class MyParks extends Component {
         notes: this.state.notes,
       }
     }).then(() => {
-      this.getMyParks();
+      this.props.dispatch({type: 'GET_PARKS'})
     })
   }
 
