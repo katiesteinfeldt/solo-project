@@ -195,7 +195,7 @@ class MyParks extends Component {
         notes: this.state.notes,
       }
     }).then(() => {
-      this.props.dispatch({type: 'GET_PARKS'})
+      this.getMyParks();
     })
   }
 
