@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import './FindAPark.css';
-import './SuccessModal';
+import './SuccessMessage';
+//import { useAlert } from 'react-alert';
+
 
 // -- Material UI Styling -- //
 import Card from '@material-ui/core/Card';
@@ -12,7 +14,7 @@ import Modal from '@material-ui/core/Modal';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import SuccessModal from './SuccessModal';
+import SuccessMessage from './SuccessMessage';
 
 const styles = theme => ({
   paper: {
@@ -59,6 +61,7 @@ function getModalStyle() {
 }
 
 class FindAPark extends Component {
+
   state = {
     parkDisplay: false,
     open: false,
@@ -149,7 +152,8 @@ class FindAPark extends Component {
             notes: '',
           },
         })
-
+        console.log('showing alert')
+        window.alert('Success!');
       })
   }
 
@@ -232,7 +236,7 @@ class FindAPark extends Component {
     //Displays "Success!" on the DOM after a user successfully adds a new park to parks_visited
     let parkSubmitted
     if (this.state.parkSubmitted) {
-      parkSubmitted = <SuccessModal />
+      parkSubmitted = <SuccessMessage />
     }
     else {
       parkSubmitted = null;

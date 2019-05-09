@@ -8,32 +8,14 @@ import { withStyles } from '@material-ui/core/styles';
 
 
 const styles = theme => ({
- 
+   
 });
 
-// //modal positioniong and style
-// function getModalStyle() {
-//     const top = 50;
-//     const left = 50;
-
-//     return {
-//         top: `${top}%`,
-//         left: `${left}%`,
-//         transform: `translate(-${top}%, -${left}%)`,
-//     };
-// }
-
 class SuccessModal extends Component {
-   
-
-
+    
     render() {
-       
-
         return (
-            <div>
-                Success!!!!!
-            </div>
+            <div>COOL DOG</div>
         );
     }
 }
