@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import './FindAPark.css';
-import './SuccessMessage';
 //import { useAlert } from 'react-alert';
 
 
@@ -14,7 +13,6 @@ import Modal from '@material-ui/core/Modal';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
-import SuccessMessage from './SuccessMessage';
 
 const styles = theme => ({
   paper: {
@@ -233,19 +231,8 @@ class FindAPark extends Component {
       addParkDOMDisplay = null;
     }
 
-    //Displays "Success!" on the DOM after a user successfully adds a new park to parks_visited
-    let parkSubmitted
-    if (this.state.parkSubmitted) {
-      parkSubmitted = <SuccessMessage />
-    }
-    else {
-      parkSubmitted = null;
-    }
-
-
     return (
       <div>
-        <div>{parkSubmitted}</div>
         <h1 className="findAPark">Find A Park</h1>
         <div className="container">
         <select
