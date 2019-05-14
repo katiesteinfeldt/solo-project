@@ -150,7 +150,6 @@ class FindAPark extends Component {
             notes: '',
           },
         })
-        console.log('showing alert')
         window.alert('Success!');
       })
   }

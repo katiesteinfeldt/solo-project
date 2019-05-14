@@ -71,7 +71,6 @@ class ParksProfile extends Component {
       this.props.dispatch({ type: 'FETCH_CURRENT_PARK', payload: parks_visited_id })
       this.setState({
         open: true,
-        // currentPark: parks_visited_id,
       })
     }
   }
