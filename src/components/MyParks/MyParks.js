@@ -250,30 +250,27 @@ class MyParks extends Component {
   }
 
   render() {
-    const { classes } = this.props;
-    let currentParkDisplay;
+    const { classes, parkdisplay } = this.props;
+    let currentParkDisplay = null;
   
     // displays the current park information in a modal when the user clicks on the image
     if (this.state.open) {
       currentParkDisplay = <div>
-        {this.props.parkdisplay[0] &&
+        {parkdisplay[0] &&
           <Modal
             open={this.state.open}
             onClose={this.closeParkDisplay}
           >
             <div style={getModalStyle()} className={classes.paper}>
-              <Typography variant="h5" className="parkName">{this.props.parkdisplay[0].park_full_name}</Typography>
+              <Typography variant="h5" className="parkName">{parkdisplay[0].park_full_name}</Typography>
               <Divider className="modalDivider" />
-              <Typography className="parkDescription">{this.props.parkdisplay[0].park_description}</Typography>
-              <img className={classes.modalImage} alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1} />
+              <Typography className="parkDescription">{parkdisplay[0].park_description}</Typography>
+              <img className={classes.modalImage} alt={parkdisplay[0].park_description} src={parkdisplay[0].image_path_1} />
             <div className="editFormDisplay">  {this.displayEditFormDisplay()} </div>
             </div>
           </Modal>
         }
       </div>;
-    }
-    else {
-      currentParkDisplay = null;
     }
 
     return (
