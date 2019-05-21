@@ -83,7 +83,7 @@ class MyParks extends Component {
     edit_notes: '',
     isInEditMode: false,
     editText: '',
-    dateVisited: '04/01/2019',
+    dateVisited: '06/01/2019',
     notes: '',
   }
 

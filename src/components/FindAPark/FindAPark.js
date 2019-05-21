@@ -137,7 +137,7 @@ class FindAPark extends Component {
           newPark: {
             park_id: 0,
             user_id: this.props.user.id,
-            date_visited_1: '2019-03-01',
+            date_visited_1: '2019-06-01',
             date_visited_2: '',
             date_visited_3: '',
             notes: '',
@@ -157,19 +157,19 @@ class FindAPark extends Component {
   }
 
   render() {
-    const { classes } = this.props;
+    const { classes, currentpark } = this.props;
     let parkDOMDisplay
     let addParkDOMDisplay
 
     //displays Material UI card when a park is selected in the dropdown menu
     if (this.state.parkDisplay) {
       parkDOMDisplay = <div className="cardContainer">
-        <Card className={this.props.classes.card}>
+        <Card className={classes.card}>
           <CardContent>
-            <Typography className={this.props.classes.cardTitle} variant="h4">{this.props.currentpark[0].park_full_name}</Typography>
+            <Typography className={classes.cardTitle} variant="h4">{currentpark[0].park_full_name}</Typography>
             <Divider />
-            <img onClick={this.viewParkInfo} className="parkImages" alt={this.props.currentpark[0].park_description} src={this.props.currentpark[0].image_path_1} />
-            <Typography className={classes.parkDescription}>{this.props.currentpark[0].park_description}</Typography>
+            <img onClick={this.viewParkInfo} className="parkImages" alt={currentpark[0].park_description} src={currentpark[0].image_path_1} />
+            <Typography className={classes.parkDescription}>{currentpark[0].park_description}</Typography>
           </CardContent>
           <CardActions>
           <Button variant="contained" color="primary" className={classes.button} onClick={this.addVisit}>Add Visit</Button>
