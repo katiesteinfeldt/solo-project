@@ -17,8 +17,6 @@ import CardActionArea from '@material-ui/core/CardActionArea';
 // -- Allows for desired date formatting -- //
 const moment = require('moment');
 
-let editFormDisplay;
-
 // -- styling for Material UI components -- //
 const styles = theme => ({
   paper: {
@@ -209,6 +207,8 @@ class MyParks extends Component {
 
   //toggles park visited information on the modal between text and input fields for the user to update 
   displayEditFormDisplay = () => {
+    let editFormDisplay;
+
     if (this.state.isInEditMode) {
       editFormDisplay =
         <div className="editForm">
@@ -246,6 +246,7 @@ class MyParks extends Component {
           </div>
         </div>
     }
+    return editFormDisplay;
   }
 
   render() {
@@ -264,9 +265,8 @@ class MyParks extends Component {
               <Typography variant="h5" className="parkName">{this.props.parkdisplay[0].park_full_name}</Typography>
               <Divider className="modalDivider" />
               <Typography className="parkDescription">{this.props.parkdisplay[0].park_description}</Typography>
-              <img className={this.props.classes.modalImage} alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1} />
-              {this.displayEditFormDisplay()}
-              <div className="editFormDisplay"> {editFormDisplay} </div>
+              <img className={classes.modalImage} alt={this.props.parkdisplay[0].park_description} src={this.props.parkdisplay[0].image_path_1} />
+            <div className="editFormDisplay">  {this.displayEditFormDisplay()} </div>
             </div>
           </Modal>
         }
