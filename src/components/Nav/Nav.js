@@ -11,46 +11,30 @@ const Nav = (props) => (
       </div>
     </Link>
     <div className="nav-right">
+
       <Link className="nav-link" to="/myparks">
-        
+
         {/* Show this link if they are logged in or not,
         but call this link 'My Parks' if they are logged in,
         and call this link 'Login / Register' if they are not */}
         {props.user.id ? [<i class="fas fa-mountain"></i>, '  My Parks'] : 'Login / Register'}
       </Link>
-      {/* Show the link to the info page and the logout button if the user is logged in */}
-      {props.user.id && (
-        <>
-          <Link className="nav-link" to="/findpark">
-            <i class="fas fa-search"></i>       Find A Park
-          </Link>
-          
-        </>
-      )}
 
-      {props.user.id && (
-        <>
-          <Link className="nav-link" to="/profile">
-            <i class="fas fa-user"></i>       Profile
-          </Link>
+      {props.user.id && [
+        <Link className="nav-link" to="/findpark">
+          <i class="fas fa-search"></i> Find A Park
+          </Link>,
 
-        </>
-      )}
-      {props.user.id && (
-        <>
-          <Link className="nav-link" to="/map">
-            <i class="fas fa-map-marked"></i>       Map
-          </Link>
+        <Link className="nav-link" to="/profile">
+          <i class="fas fa-user"></i> Profile
+          </Link>,
 
-        </>
-      )}
-      {/* Always show this link since the about page is not protected */}
-      {props.user.id && (
-        <>
-          <LogOutButton className="nav-link" />
-        </>
-      )}
-      {/* <LogOutButton className="nav-link"/> */}
+        <Link className="nav-link" to="/map">
+          <i class="fas fa-map-marked"></i> Map
+          </Link>,
+
+        <LogOutButton className="nav-link" />
+      ]}
     </div>
   </div>
 );
