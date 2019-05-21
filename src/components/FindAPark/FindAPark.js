@@ -4,7 +4,6 @@ import axios from 'axios';
 import './FindAPark.css';
 //import { useAlert } from 'react-alert';
 
-
 // -- Material UI Styling -- //
 import Card from '@material-ui/core/Card';
 import { CardContent, CardActions, Divider } from '@material-ui/core';
@@ -13,16 +12,10 @@ import Modal from '@material-ui/core/Modal';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
+import globalThemes from '../../utils/theme';
 
 const styles = theme => ({
-  paper: {
-    position: 'absolute',
-    width: theme.spacing.unit * 50,
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit * 4,
-    outline: 'none',
-  },
+  ...globalThemes(theme),
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,

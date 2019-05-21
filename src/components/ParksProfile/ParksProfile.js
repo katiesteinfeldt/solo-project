@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import './ParksProfile.css';
+import globalThemes from '../../utils/theme';
+
 
 // -- Material UI components -- //
 import Card from '@material-ui/core/Card';
@@ -14,16 +16,8 @@ import CardMedia from '@material-ui/core/CardMedia';
 //bring in moment js to this component and set it equal to the variable moment
 const moment = require('moment');
 
-let emptyArray = [];
 const styles = theme => ({
-  paper: {
-    position: 'absolute',
-    width: theme.spacing.unit * 70,
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit * 4,
-    outline: 'none',
-  },
+  ...globalThemes(theme),
   cardTitle: {
     padding: 15,
     textAlign: 'center',
@@ -77,7 +71,7 @@ class ParksProfile extends Component {
 
   //closes modal on click of "ok" button or when clicking on the background page
   closeParkDisplay = () => {
-    this.props.dispatch({ type: 'DISPLAY_CURRENT_PARK', payload: emptyArray })
+    this.props.dispatch({ type: 'DISPLAY_CURRENT_PARK', payload: [] })
     this.setState({
       open: false,
     })
@@ -105,7 +99,7 @@ class ParksProfile extends Component {
   }
 
   render() {
-    let currentParkDisplay;
+    let currentParkDisplay = null;
 
     // modal display
     if (this.state.open) {
@@ -134,9 +128,6 @@ class ParksProfile extends Component {
           </Modal>
         }
       </div>;
-    }
-    else {
-      currentParkDisplay = null;
     }
 
     return (
