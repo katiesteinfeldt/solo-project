@@ -76,8 +76,6 @@ function getModalStyle() {
   };
 }
 
-let emptyArray = [];
-
 class MyParks extends Component {
   state = {
     open: false,
@@ -168,7 +166,7 @@ class MyParks extends Component {
   //and also clears current park reducer so that it doesn't lag on the last image
   //when a new park is clicked on
   closeParkDisplay = () => {
-    this.props.dispatch({ type: 'DISPLAY_CURRENT_PARK', payload: emptyArray })
+    this.props.dispatch({ type: 'DISPLAY_CURRENT_PARK', payload: [] })
     this.setState({
       open: false,
     })
